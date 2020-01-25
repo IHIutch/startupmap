@@ -12,7 +12,17 @@
             ></l-tile-layer>
             <l-feature-group ref="features">
               <l-popup>
-                <span>{{ name }}</span>
+                <div>
+                  <h2 class="h5 mb-1">
+                    {{ popup.name }}
+                  </h2>
+                  <div class="mb-1">
+                    <span class="text-muted small font-weight-bold">
+                      {{ popup.type }}</span
+                    >
+                  </div>
+                  <p class="small my-0">{{ popup.description }}</p>
+                </div>
               </l-popup>
             </l-feature-group>
             <l-circle-marker
@@ -23,6 +33,7 @@
               :weight="0"
               :fillOpacity="1"
               fillColor="red"
+              @click="markerClick(point)"
             />
           </l-map>
         </div>
@@ -34,7 +45,17 @@
               v-for="(point, idx) in map.points"
               :key="idx"
             >
-              {{ point.name }}
+              <div>
+                <h2 class="h4 mb-1">
+                  {{ point.name }}
+                </h2>
+                <div class="mb-1">
+                  <span class="text-muted small font-weight-bold">
+                    {{ point.type }}</span
+                  >
+                </div>
+                <p class="small">{{ point.description }}</p>
+              </div>
             </li>
           </ul>
         </div>
@@ -68,18 +89,27 @@ export default {
     return {
       mapboxToken:
         "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
-      name: "",
+      popup: {},
       map: {
         center: [42.8864, -78.8784],
         points: [
           {
-            name: "helm",
-            lat: 42.88,
-            lng: -78.878
+            name: "Helm",
+            type: "Design",
+            description:
+              "Through design-thinking and transparent processes, we deliver software that gets results. On-screen interactions are ongoing and emotionally involving. We'll help you reduce risk, learn continuously, and delight customers.",
+            lat: 42.896338,
+            lng: -78.868961
           }
         ]
       }
     };
+  },
+  methods: {
+    markerClick(info) {
+      this.popup = info;
+      this.$refs.features.mapObject.openPopup([info.lat, info.lng]);
+    }
   }
 };
 </script>
