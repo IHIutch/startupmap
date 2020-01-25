@@ -65,13 +65,12 @@
 </template>
 
 <script>
-import {
-  LMap,
-  LTileLayer,
-  LCircleMarker,
-  LPopup,
-  LFeatureGroup
-} from "vue2-leaflet";
+let Vue2Leaflet = {};
+
+if (process.isClient) {
+  Vue2Leaflet = require("vue2-leaflet");
+}
+
 import "leaflet/dist/leaflet.css";
 
 export default {
@@ -79,11 +78,11 @@ export default {
     title: "Hello, world!"
   },
   components: {
-    LMap,
-    LTileLayer,
-    LCircleMarker,
-    LPopup,
-    LFeatureGroup
+    LMap: Vue2Leaflet.LMap,
+    LTileLayer: Vue2Leaflet.LTileLayer,
+    LCircleMarker: Vue2Leaflet.LCircleMarker,
+    LPopup: Vue2Leaflet.LPopup,
+    LFeatureGroup: Vue2Leaflet.LFeatureGroup
   },
   data() {
     return {
