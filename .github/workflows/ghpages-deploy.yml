@@ -1,4 +1,4 @@
-name: Build and Deploy Gridsome Site to GitHub Pages
+name: Build Deploy to GitHub Pages
 
 on:
   push:
@@ -26,4 +26,5 @@ jobs:
           BRANCH: gh-pages
           FOLDER: dist
           COMMIT_MESSAGE: "Deploy startupmap to github.com/IHIutch/startupmap.git:gh-pages"
+          CLEAN: true
           CLEAN_EXCLUDE: '["CNAME"]'
