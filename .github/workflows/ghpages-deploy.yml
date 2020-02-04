@@ -1,28 +1,29 @@
 name: Build and Deploy Gridsome Site to GitHub Pages
 
-on: 
+on:
   push:
-    branches: 
+    branches:
       - master
 
 jobs:
   build:
-    
     name: Build & Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+
       - name: Build
         run: |
           npm i
           npm run build
-          
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
-        with: 
+        with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: dist
+          COMMIT_MESSAGE: "Deploy startupmap to github.com/IHIutch/startupmap.git:gh-pages"
+          CLEAN_EXCLUDE: '["CNAME"]'
