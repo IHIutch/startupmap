@@ -25,6 +25,6 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: dist
-          COMMIT_MESSAGE: "Deploy startupmap to github.com/IHIutch/startupmap.git:gh-pages"
+          COMMIT_MESSAGE: "Deploy to gh-pages"
           CLEAN: true
           CLEAN_EXCLUDE: '["CNAME"]'
