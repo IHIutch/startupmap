@@ -27,4 +27,3 @@ jobs:
           FOLDER: dist
           COMMIT_MESSAGE: "Deploy to gh-pages"
           CLEAN: true
-          CLEAN_EXCLUDE: '["CNAME"]'
