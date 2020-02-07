@@ -7,10 +7,14 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
+    "@google/maps": "^1.1.0",
+    "gridsome": "^0.7.0",
+    "leaflet": "^1.6.0"
+  },
+  "devDependencies": {
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.3.0",
-    "gridsome": "^0.7.0",
-    "leaflet": "^1.6.0",
+    "gridsome-source-google-sheets": "github:IHIutch/gridsome-source-google-sheets#multiple-sheets",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",
     "vue2-leaflet": "^2.4.2"
