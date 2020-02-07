@@ -14,7 +14,7 @@
               <l-popup>
                 <div>
                   <h2 class="h5 mb-1">
-                    {{ popup.name }}
+                    {{ popup.company }}
                   </h2>
                   <div class="mb-1">
                     <span class="text-muted small font-weight-bold">
@@ -26,7 +26,7 @@
               </l-popup>
             </l-feature-group>
             <l-circle-marker
-              v-for="(point, idx) in map.points"
+              v-for="(point, idx) in points"
               :key="idx"
               :lat-lng="[point.lat, point.lng]"
               :radius="5"
@@ -42,12 +42,12 @@
           <ul class="list-group list-group-flush">
             <li
               class="list-group-item"
-              v-for="(point, idx) in map.points"
+              v-for="(point, idx) in points"
               :key="idx"
             >
               <div>
                 <h2 class="h4 mb-1">
-                  {{ point.name }}
+                  {{ point.company }}
                 </h2>
                 <div class="mb-1">
                   <span class="text-muted small font-weight-bold">
@@ -63,6 +63,25 @@
     </div>
   </Layout>
 </template>
+
+<page-query>
+query {
+  places: allPlaces {
+    edges {
+      node {
+        id,
+        name,
+        address,
+        company,
+        lng,
+        lat,
+        description,
+        email
+      }
+    }
+  }
+}
+</page-query>
 
 <script>
 let Vue2Leaflet = {};
@@ -90,17 +109,7 @@ export default {
         "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
       popup: {},
       map: {
-        center: [42.8864, -78.8784],
-        points: [
-          {
-            name: "Helm",
-            type: "Design",
-            description:
-              "Through design-thinking and transparent processes, we deliver software that gets results. On-screen interactions are ongoing and emotionally involving. We'll help you reduce risk, learn continuously, and delight customers.",
-            lat: 42.896338,
-            lng: -78.868961
-          }
-        ]
+        center: [42.8864, -78.8784]
       }
     };
   },
@@ -108,6 +117,24 @@ export default {
     markerClick(info) {
       this.popup = info;
       this.$refs.features.mapObject.openPopup([info.lat, info.lng]);
+    }
+  },
+  computed: {
+    points() {
+      var arr = [];
+      this.$page.places.edges.forEach(place => {
+        var tmp = place.node;
+        arr.push({
+          name: tmp.name,
+          type: "Design",
+          description: tmp.description,
+          lat: parseFloat(tmp.lat),
+          lng: parseFloat(tmp.lng),
+          company: tmp.company,
+          address: JSON.parse(tmp.address)
+        });
+      });
+      return arr;
     }
   }
 };

@@ -6,7 +6,25 @@
 
 module.exports = {
   siteName: "Gridsome",
-  plugins: []
+  plugins: [
+    {
+      use: "gridsome-source-google-sheets",
+      options: {
+        apiKey: "AIzaSyC2tSkbaL8SIQsSQGlIsQZXn-wHBD3z-Rs",
+        spreadsheets: [
+          {
+            spreadsheetId: "14uU2zJQlJgU7zDniRZ7UUlIKvT4sT2lIWO-Zzo-hJmg",
+            sheets: [
+              {
+                sheetName: "Sheet1",
+                collectionName: "places"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
   // configureWebpack: {
   //   node: {
   //     child_process: "empty",
