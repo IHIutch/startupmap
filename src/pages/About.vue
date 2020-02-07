@@ -43,10 +43,11 @@
               ></b-form-textarea>
             </b-form-group>
 
-            <b-form-group label="Your Address:" label-for="address">
+            <b-form-group label="Your address:" label-for="autocomplete">
               <b-form-input
-                autocomplete="false"
-                id="address"
+                type="search"
+                autocomplete="off"
+                id="autocomplete"
                 required
                 placeholder="Your company's address"
               ></b-form-input>
@@ -103,7 +104,7 @@ export default {
     initAutocomplete() {
       var self = this;
       var autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById("address"),
+        document.getElementById("autocomplete"),
         { types: ["geocode"] }
       );
       autocomplete.setFields(["address_component", "geometry"]);
