@@ -72,7 +72,7 @@ export default {
           src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GRIDSOME_GOOGLE_API_KEY_FE}&libraries=places`,
           async: true,
           defer: true,
-          callback: () => this.initAutocomplete()
+          callback: () => console.log("hey")
         }
       ]
     };
@@ -114,6 +114,7 @@ export default {
       }
     },
     initAutocomplete() {
+      console.log("this");
       var self = this;
       var autocomplete = new google.maps.places.Autocomplete(
         document.getElementById("autocomplete"),
