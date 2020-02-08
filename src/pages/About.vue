@@ -66,16 +66,23 @@
 export default {
   metaInfo() {
     return {
-      title: "About us"
-      // script: [
-      //   {
-      //     src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GRIDSOME_GOOGLE_API_KEY_FE}&libraries=places`,
-      //     async: true,
-      //     defer: true,
-      //     callback: () => this.initAutocomplete()
-      //   }
-      // ]
+      title: "About us",
+      script: [
+        {
+          src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GRIDSOME_GOOGLE_API_KEY_FE}&libraries=places`,
+          async: true,
+          defer: true,
+          callback: () => {
+            this.googleMapsLoaded = true;
+          }
+        }
+      ]
     };
+  },
+  watch: {
+    googleMapsLoaded() {
+      this.initAutocomplete();
+    }
   },
   data() {
     return {
@@ -124,9 +131,6 @@ export default {
         self.getAddressValues(autocomplete);
       });
     }
-  },
-  mounted() {
-    this.initAutocomplete();
   },
   computed: {
     dataToArray() {
