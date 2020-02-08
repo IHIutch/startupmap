@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <b-col cols="6" offset="3">
-          <b-form @submit.prevent="sendFormData">
+          <b-form @submit.prevent="sendFormData" autocomplete="off">
             <b-form-group label="Email address:" label-for="email">
               <b-form-input
                 id="email"
@@ -43,10 +43,14 @@
               ></b-form-textarea>
             </b-form-group>
 
-            <b-form-group label="Your address:" label-for="autocomplete">
+            <b-form-group
+              label="Your company's address:"
+              label-for="autocomplete"
+            >
               <b-form-input
-                type="search"
                 autocomplete="off"
+                name="donotautofill"
+                type="search"
                 id="autocomplete"
                 required
                 placeholder="Your company's address"
