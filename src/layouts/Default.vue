@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <a class="navbar-brand" href="#">Buffalo Startup Map</a>
+      <a class="navbar-brand" href="/">Buffalo Startup Map</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -17,7 +17,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Add Company</a>
+            <a class="nav-link" href="/about/">Add Company</a>
           </li>
         </ul>
       </div>
