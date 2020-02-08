@@ -17,7 +17,7 @@ module.exports = {
     {
       use: "gridsome-source-google-sheets",
       options: {
-        apiKey: process.env.GRIDSOME_GOOGLE_API_KEY_FE,
+        apiKey: "AIzaSyC2tSkbaL8SIQsSQGlIsQZXn-wHBD3z-Rs",
         spreadsheets: [
           {
             spreadsheetId: "14uU2zJQlJgU7zDniRZ7UUlIKvT4sT2lIWO-Zzo-hJmg",

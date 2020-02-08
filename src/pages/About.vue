@@ -107,7 +107,7 @@ export default {
     initAutocomplete() {
       var self = this;
       VueScript2.load(
-        `https://maps.googleapis.com/maps/api/js?key=${process.env.GRIDSOME_GOOGLE_API_KEY_FE}&libraries=places`
+        `https://maps.googleapis.com/maps/api/js?key=${"AIzaSyC2tSkbaL8SIQsSQGlIsQZXn-wHBD3z-Rs"}&libraries=places`
       ).then(function() {
         var autocomplete = new google.maps.places.Autocomplete(
           document.getElementById("autocomplete"),
