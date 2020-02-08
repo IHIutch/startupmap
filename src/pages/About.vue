@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <b-col cols="6" offset="3">
-          <b-form @submit.prevent="sendFormData">
+          <b-form @submit.prevent="sendFormData" autocomplete="off">
             <b-form-group label="Email address:" label-for="email">
               <b-form-input
                 id="email"
@@ -43,10 +43,14 @@
               ></b-form-textarea>
             </b-form-group>
 
-            <b-form-group label="Your address:" label-for="autocomplete">
+            <b-form-group
+              label="Your company's address:"
+              label-for="autocomplete"
+            >
               <b-form-input
-                type="search"
                 autocomplete="off"
+                name="donotautofill"
+                type="search"
                 id="autocomplete"
                 required
                 placeholder="Your company's address"
@@ -55,7 +59,7 @@
 
             <b-button type="submit" variant="primary">Submit</b-button>
           </b-form>
-          <b-button @click="testJWT()"></b-button>
+          <!-- <b-button @click="testJWT()"></b-button> -->
         </b-col>
       </b-row>
     </b-container>
@@ -63,23 +67,14 @@
 </template>
 
 <script>
+import VueScript2 from "vue-script2";
+
 export default {
-  metaInfo() {
-    return {
-      title: "About us",
-      script: [
-        {
-          src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GRIDSOME_GOOGLE_API_KEY_FE}&libraries=places`,
-          async: true,
-          defer: true,
-          callback: () => this.initAutocomplete()
-        }
-      ]
-    };
+  metaInfo: {
+    title: "About us"
   },
   data() {
     return {
-      googleMapsLoaded: false,
       url:
         "https://script.google.com/macros/s/AKfycbyvH8XfNF_skvR011XKIgKwSS25Ks5GsBWkpHSIzcsfaJ1MrW0/exec",
       form: {
@@ -115,15 +110,22 @@ export default {
     },
     initAutocomplete() {
       var self = this;
-      var autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById("autocomplete"),
-        { types: ["geocode"] }
-      );
-      autocomplete.setFields(["address_component", "geometry"]);
-      autocomplete.addListener("place_changed", function() {
-        self.getAddressValues(autocomplete);
+      VueScript2.load(
+        `https://maps.googleapis.com/maps/api/js?key=${"AIzaSyC2tSkbaL8SIQsSQGlIsQZXn-wHBD3z-Rs"}&libraries=places`
+      ).then(function() {
+        var autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById("autocomplete"),
+          { types: ["geocode"] }
+        );
+        autocomplete.setFields(["address_component", "geometry"]);
+        autocomplete.addListener("place_changed", function() {
+          self.getAddressValues(autocomplete);
+        });
       });
     }
+  },
+  mounted() {
+    this.initAutocomplete();
   },
   computed: {
     dataToArray() {
