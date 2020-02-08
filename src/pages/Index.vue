@@ -14,93 +14,90 @@
               <l-popup>
                 <div>
                   <h2 class="h4 mb-1">
-	                  Helm Experience & Design
-<!--                     {{ popup.company }} -->
+                    {{ popup.company }}
                   </h2>
                   <h3 class="h6">
-<!-- 	                  {{ popup.description }} -->
-
-				  	640 Ellicott St. Buffalo NY 140203
+                    {{ popup.description }}
                   </h3>
                   <ul>
-	                  <li>
-		                  <span class="label">Ind:</span>	                  
-	                      {{ popup.type }}
-	                   </li>
-	                  <li>
-		                  <span class="label">Est:</span>
-		                  2010
-	                  </li>
-	                  <li>
-		                  <span class="label">Size:</span>
-		                  10
-	                  </li>
-	                  <li>
-	                  	<button class="btn btn-sm btn-text">View</button>
-	                  </li>
+                    <li>
+                      <span class="label">Ind:</span>
+                      {{ popup.type }}
+                    </li>
+                    <li>
+                      <span class="label">Est:</span>
+                      2010
+                    </li>
+                    <li>
+                      <span class="label">Size:</span>
+                      10
+                    </li>
+                    <li>
+                      <button class="btn btn-sm btn-text">View</button>
+                    </li>
                   </ul>
-                  
                 </div>
               </l-popup>
             </l-feature-group>
-            <l-circle-marker
-              v-for="(point, idx) in points"
-              :key="idx"
-              :lat-lng="[point.lat, point.lng]"
-              :radius="5"
-              :weight="0"
-              :fillOpacity="1"
-              fillColor="red"
-              @click="markerClick(point)"
-            />
+            <template v-for="(point, idx) in points">
+              <l-circle-marker
+                v-if="point.lat && point.lng"
+                :key="idx"
+                :lat-lng="[point.lat, point.lng]"
+                :radius="5"
+                :weight="0"
+                :fillOpacity="1"
+                fillColor="red"
+                @click="markerClick(point)"
+              />
+            </template>
           </l-map>
         </div>
         <div class="col-xs-12 col-md-4 listings">
           <ul class="list-group list-group-flush">
-            <li
-              class="list-group-item"
-              v-for="(point, idx) in points"
-              :key="idx"
-            >
-              <div>
-	            <h2 class="h4 mb-1">
-					{{ point.company }}
+            <template v-for="(point, idx) in points">
+              <li
+                class="list-group-item"
+                v-if="point.lat && point.lng"
+                :key="idx"
+              >
+                <div>
+                  <h2 class="h4 mb-1">
+                    {{ point.company }}
                   </h2>
                   <h3 class="h6">
-<!-- 	                  {{ point.description }} -->
-
-				  	640 Ellicott St. Buffalo NY 140203
+                    <div>
+                      {{ point.address.street_number }}
+                      {{ point.address.route }}
+                    </div>
+                    <div>
+                      {{ point.address.locality }}
+                      {{ point.address.administrative_area_level_1 }}
+                      {{ point.address.postal_code }}
+                    </div>
                   </h3>
                   <ul>
-	                  <li>
-		                  <span class="label">Ind:</span>	                  
-	                      {{ point.type }}
-	                   </li>
-	                  <li>
-		                  <span class="label">Est:</span>
-		                  2010
-	                  </li>
-	                  <li>
-		                  <span class="label">Size:</span>
-		                  10
-	                  </li>
-	                  <li>
-	                  	<button class="btn btn-sm btn-primary" href="#">View</button>
-	                  </li>
+                    <li>
+                      <span class="label">Ind:</span>
+                      {{ point.type }}
+                    </li>
+                    <li>
+                      <span class="label">Est:</span>
+                      2010
+                    </li>
+                    <li>
+                      <span class="label">Size:</span>
+                      10
+                    </li>
+                    <li>
+                      <button class="btn btn-sm btn-primary" href="#">
+                        View
+                      </button>
+                    </li>
                   </ul>
-  
-                <h2 class="h4 mb-1">
-                 
-                </h2>
-              </div>
-            </li>
-            
-            
-            
-            
-            
-            
-            
+                </div>
+              </li>
+            </template>
           </ul>
         </div>
       </div>
@@ -165,20 +162,18 @@ export default {
   },
   computed: {
     points() {
-      var arr = [];
-      this.$page.places.edges.forEach(place => {
-        var tmp = place.node;
-        arr.push({
-          name: tmp.name,
+      return this.$page.places.edges.map(place => {
+        var node = place.node;
+        return {
+          name: node.name,
           type: "Design",
-          description: tmp.description,
-          lat: parseFloat(tmp.lat),
-          lng: parseFloat(tmp.lng),
-          company: tmp.company,
-          address: JSON.parse(tmp.address)
-        });
+          description: node.description,
+          lat: parseFloat(node.lat),
+          lng: parseFloat(node.lng),
+          company: node.company,
+          address: JSON.parse(node.address)
+        };
       });
-      return arr;
     }
   }
 };
