@@ -55,7 +55,7 @@
 
             <b-button type="submit" variant="primary">Submit</b-button>
           </b-form>
-          <b-button @click="testJWT()"></b-button>
+          <!-- <b-button @click="testJWT()"></b-button> -->
         </b-col>
       </b-row>
     </b-container>
@@ -114,7 +114,6 @@ export default {
       }
     },
     initAutocomplete() {
-      console.log("this");
       var self = this;
       var autocomplete = new google.maps.places.Autocomplete(
         document.getElementById("autocomplete"),

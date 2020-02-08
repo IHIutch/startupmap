@@ -5,7 +5,14 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: "Gridsome",
+  siteName: "Buffalo Startup Map",
+  siteUrl: "https://buffalostartupmap.com",
+  siteDescription: "This is a great description!",
+  // icon: {
+  //   favicon: "./src/assets/images/meta/favicon.png",
+  //   touchicon: "./src/assets/images/meta/favicon.png"
+  // },
+  titleTemplate: "%s | Buffalo Startup Map",
   plugins: [
     {
       use: "gridsome-source-google-sheets",
