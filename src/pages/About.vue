@@ -124,6 +124,9 @@ export default {
       });
     }
   },
+  mounted() {
+    this.initAutocomplete();
+  },
   computed: {
     dataToArray() {
       return Object.keys(this.form).map(key =>
