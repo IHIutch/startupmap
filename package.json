@@ -8,12 +8,13 @@
   },
   "dependencies": {
     "@google/maps": "^1.1.0",
+    "bootstrap-vue": "^2.3.0",
     "gridsome": "^0.7.0",
+    "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.6.0"
   },
   "devDependencies": {
     "bootstrap": "^4.4.1",
-    "bootstrap-vue": "^2.3.0",
     "gridsome-source-google-sheets": "github:IHIutch/gridsome-source-google-sheets#multiple-sheets",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",

@@ -25,7 +25,7 @@
 
             <b-form-group label="Your Company:" label-for="company">
               <b-form-input
-                id="name"
+                id="company"
                 v-model="form.company"
                 required
                 placeholder="Enter company name"
@@ -34,7 +34,7 @@
 
             <b-form-group label="Your Description:" label-for="description">
               <b-form-textarea
-                id="descrtiption"
+                id="description"
                 v-model="form.description"
                 required
                 placeholder="Describe your company"
@@ -55,6 +55,7 @@
 
             <b-button type="submit" variant="primary">Submit</b-button>
           </b-form>
+          <b-button @click="testJWT()"></b-button>
         </b-col>
       </b-row>
     </b-container>
@@ -63,11 +64,22 @@
 
 <script>
 export default {
-  metaInfo: {
-    title: "About us"
+  metaInfo() {
+    return {
+      title: "About us",
+      script: [
+        {
+          src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GRIDSOME_GOOGLE_API_KEY_FE}&libraries=places`,
+          async: true,
+          defer: true,
+          callback: () => this.initAutocomplete()
+        }
+      ]
+    };
   },
   data() {
     return {
+      googleMapsLoaded: false,
       url:
         "https://script.google.com/macros/s/AKfycbyvH8XfNF_skvR011XKIgKwSS25Ks5GsBWkpHSIzcsfaJ1MrW0/exec",
       form: {
@@ -112,9 +124,6 @@ export default {
         self.getAddressValues(autocomplete);
       });
     }
-  },
-  mounted() {
-    this.initAutocomplete();
   },
   computed: {
     dataToArray() {

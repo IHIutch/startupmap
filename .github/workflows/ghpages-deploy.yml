@@ -18,6 +18,9 @@ jobs:
         run: |
           npm i
           npm run build
+        env:
+          GRIDSOME_GOOGLE_API_KEY_FE: ${{ secrets.GRIDSOME_GOOGLE_API_KEY_FE}}
+          GOOGLE_API_KEY_BE: ${{ secrets.GOOGLE_API_KEY_BE }}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
