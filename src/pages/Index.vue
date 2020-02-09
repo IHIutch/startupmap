@@ -61,6 +61,7 @@
             </template>
           </l-map>
         </div>
+<!--
         <div class="col-xs-12 col-md-4 listings">
           <ul class="list-group list-group-flush">
             <template v-for="(point, idx) in points">
@@ -108,6 +109,7 @@
             </template>
           </ul>
         </div>
+-->
         <!-- Listings column------>
       </div>
     </div>
