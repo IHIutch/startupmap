@@ -16,7 +16,7 @@ nav.navbar{
 .navbar-brand{
 	margin-left: 50px;
 	font-weight: 900;
-	font-size: 52px;
+	font-size: 54px;
 	line-height: 48px;
 	color:#0000EE !important;
 	white-space:normal !important;
@@ -29,6 +29,12 @@ nav.navbar{
 	color:#fff !important;
 	font-weight: 900;
 }
+
+.nav-item .btn{
+	position: absolute;
+	right: 15px;
+    top: 15px;
+}	
 
 
 .btn-sm{
@@ -43,7 +49,7 @@ nav.navbar{
 .listings{
 	position: absolute;
 	right:0px;
-	top:70px;
+	top:80px;
 	z-index: 999;
 	height: 100vh;
 	overflow-y: scroll;
@@ -114,13 +120,21 @@ a.leaflet-popup-close-button{
 
 
 .navbar-brand{
-	font-size: 42px;
-    text-align: center;
-    line-height: 38px;
+    font-size: 42px;
+    line-height: 32px;
     margin-left: 0px;
     margin-right: 0px;
-    padding:10px 20px;
+    padding: 5px 70px 0px 0px;
+
 }
-	
+
+.btn-primary{
+	border-radius: 100px;
+	padding:5px 10px !important;
+	color:#fff !important;
+	font-weight: 900;
+	font-size: 12px;
+}
+
   
 }

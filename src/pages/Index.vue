@@ -3,7 +3,7 @@
     <div class="container-fluid" style="height: 100vh;">
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
 		<a class="navbar-brand" href="/">Buffalo Startup Map</a>
-		<ul class="nav navbar-nav ml-auto">
+		<ul class="nav navbar-nav">
 			<li class="nav-item">
 				<a class="nav-link btn btn-primary" href="/about/">Add Company</a>
 			</li>
