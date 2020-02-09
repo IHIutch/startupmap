@@ -15,6 +15,14 @@ module.exports = {
   titleTemplate: "%s | Buffalo Startup Map",
   plugins: [
     {
+      use: "gridsome-plugin-gtm",
+      options: {
+        id: "GTM-KDV75B3",
+        enabled: process.env.NODE_ENV === "production" ? true : false,
+        debug: false
+      }
+    },
+    {
       use: "gridsome-source-google-sheets",
       options: {
         apiKey: "AIzaSyC2tSkbaL8SIQsSQGlIsQZXn-wHBD3z-Rs",

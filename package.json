@@ -10,6 +10,7 @@
     "@google/maps": "^1.1.0",
     "bootstrap-vue": "^2.3.0",
     "gridsome": "^0.7.0",
+    "gridsome-plugin-gtm": "^0.1.1",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.6.0",
     "vue-script2": "^2.1.0"
