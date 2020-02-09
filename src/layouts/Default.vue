@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <a class="navbar-brand" href="#">Buffalo Startup Map</a>
+      <a class="navbar-brand" href="/">Buffalo Startup Map</a>
       <button
         class="navbar-toggler"
         type="button"
