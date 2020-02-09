@@ -1,4 +1,42 @@
-nav{
+
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Nunito', sans-serif !important;
+	font-weight: 900 !important;
+	color: #0000EE;
+}
+
+nav.navbar{
+	position: absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	z-index: 9999;
+}
+
+.navbar-brand{
+	margin-left: 60px;
+	font-weight: 900;
+	font-size: 46px;
+	line-height: 46px;
+	color:#0000EE !important;
+}
+
+.btn-primary{
+	background-color:#0000EE !important;
+	border-radius: 100px;
+	padding:10px 20px 10px 20px !important;
+	color:#fff !important;
+	font-weight: 900;
+}
+
+
+.btn-sm{
+	padding:3px 13px !important;
+	
+}
+
+.bg-light {
+    background-color: transparent !important;
 }
 
 .listings{
@@ -23,6 +61,7 @@ ul{
 	list-style: none;
 	margin-left: 0px;
 	padding-left: 0px;
+	color:#0000EE !important;
 	
 	li{
 		padding-right: 20px;
@@ -49,6 +88,14 @@ padding:10px;
 }
 
 
+a.leaflet-popup-close-button{
+	width: 21px !important;
+    height: 35px !important;
+    padding: 10px 30px 33px 20px !important;
+    font: 22px/14px Tahoma, Verdana, sans-serif !important;
+    color: #c3c3c3;
+}
+
 
 /*------MEDIA QUERIES-----------*/
 
@@ -63,4 +110,11 @@ padding:10px;
 	height: 40vh;
 	overflow-y: scroll;
   }
+
+  .navbar-brand{
+	width:100%;
+}
+
+	
+  
 }

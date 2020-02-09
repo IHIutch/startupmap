@@ -1,6 +1,14 @@
 <template>
   <Layout>
     <div class="container-fluid" style="height: 100vh;">
+	<nav class="navbar navbar-expand-sm navbar-light bg-light">
+		<a class="navbar-brand" href="/">Buffalo Startup Map</a>
+		<ul class="nav navbar-nav ml-auto">
+			<li class="nav-item">
+				<a class="nav-link btn btn-primary" href="/about/">Add Company</a>
+			</li>
+		</ul>
+	</nav>
       <div class="row h-100">
         <div class="col-12 h-100 px-0">
           <l-map class="h-100" :zoom="13" :center="map.center">
@@ -33,7 +41,7 @@
                       10
                     </li>
                     <li>
-                      <button class="btn btn-sm btn-text">View</button>
+                      <button class="btn btn-sm btn-primary btn-text">View</button>
                     </li>
                   </ul>
                 </div>
@@ -44,15 +52,16 @@
                 v-if="point.lat && point.lng"
                 :key="idx"
                 :lat-lng="[point.lat, point.lng]"
-                :radius="5"
+                :radius="10"
                 :weight="0"
-                :fillOpacity="1"
-                fillColor="red"
+                :fillOpacity=".9"
+                fillColor="#0000EE"
                 @click="markerClick(point)"
               />
             </template>
           </l-map>
         </div>
+<!--
         <div class="col-xs-12 col-md-4 listings">
           <ul class="list-group list-group-flush">
             <template v-for="(point, idx) in points">
@@ -100,6 +109,8 @@
             </template>
           </ul>
         </div>
+-->
+        <!-- Listings column------>
       </div>
     </div>
   </Layout>
