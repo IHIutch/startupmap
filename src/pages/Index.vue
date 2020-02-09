@@ -14,8 +14,7 @@
               <l-popup>
                 <div>
                   <h2 class="h4 mb-1">
-	                  Helm Experience & Design
-<!--                     {{ popup.company }} -->
+                    {{ popup.company }}
                   </h2>
                   <h3 class="h6">
 <!-- 	                  {{ popup.description }} -->
@@ -47,14 +46,15 @@
               v-for="(point, idx) in points"
               :key="idx"
               :lat-lng="[point.lat, point.lng]"
-              :radius="5"
+              :radius="10"
               :weight="0"
-              :fillOpacity="1"
+              :fillOpacity="0.9"
               fillColor="red"
               @click="markerClick(point)"
             />
           </l-map>
         </div>
+<!--
         <div class="col-xs-12 col-md-4 listings">
           <ul class="list-group list-group-flush">
             <li
@@ -67,7 +67,7 @@
 					{{ point.company }}
                   </h2>
                   <h3 class="h6">
-<!-- 	                  {{ point.description }} -->
+	                  {{ point.description }}
 
 				  	640 Ellicott St. Buffalo NY 140203
                   </h3>
@@ -93,16 +93,10 @@
                  
                 </h2>
               </div>
-            </li>
-            
-            
-            
-            
-            
-            
-            
+            </li>   
           </ul>
         </div>
+-->
       </div>
     </div>
   </Layout>
