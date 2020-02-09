@@ -1,50 +1,35 @@
 <template>
   <Layout>
     <b-container>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+		<a class="navbar-brand" href="/">Buffalo Startup Map</a>
+		<ul class="nav navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link btn btn-secondary small" href="/">Cancel</a>
+			</li>
+		</ul>
+	</nav>
+    <b-row>
+    	<b-col class="col-md-6 offset-md-3 mt-5 pt-5 pb-4">
+    	<h1 class="mt-5">Add a Startup</h1>
+    	<p>Enter the business information to plot them on the Buffalo Startup Map!</p>
+    	</b-col>
+    </b-row>
       <b-row>
-        <b-col cols="6" offset="3">
+        <b-col class="col-md-6 offset-md-3">
           <b-form @submit.prevent="sendFormData" autocomplete="off">
-            <b-form-group label="Email address:" label-for="email">
-              <b-form-input
-                id="email"
-                v-model="form.email"
-                type="email"
-                required
-                placeholder="Enter email"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group label="Your Name:" label-for="name">
-              <b-form-input
-                id="name"
-                v-model="form.name"
-                required
-                placeholder="Enter name"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group label="Your Company:" label-for="company">
+            <b-form-group label="Company Name" label-for="company">
               <b-form-input
                 id="company"
                 v-model="form.company"
                 required
-                placeholder="Enter company name"
+                placeholder="Startup business name... "
+				autofocus
               ></b-form-input>
             </b-form-group>
-
-            <b-form-group label="Your Description:" label-for="description">
-              <b-form-textarea
-                id="description"
-                v-model="form.description"
-                required
-                placeholder="Describe your company"
-                rows="3"
-                no-resize
-              ></b-form-textarea>
-            </b-form-group>
-
-            <b-form-group
-              label="Your company's address:"
+            
+             <b-form-group
+              label="Company Address:"
               label-for="autocomplete"
             >
               <b-form-input
@@ -53,11 +38,40 @@
                 type="search"
                 id="autocomplete"
                 required
-                placeholder="Your company's address"
+                placeholder="Startup headquarters..."
               ></b-form-input>
             </b-form-group>
+			<b-form-group label="Description:" label-for="description">
+              <b-form-textarea
+                id="description"
+                v-model="form.description"
+                required
+                placeholder="Briefly describe the startup..."
+                rows="3"
+                no-resize
+              ></b-form-textarea>
+            </b-form-group>
 
-            <b-button type="submit" variant="primary">Submit</b-button>
+            <b-form-group label="Your Email:" label-for="email">
+              <b-form-input
+                id="email"
+                v-model="form.email"
+                type="email"
+                required
+                placeholder="Best email for contact..."
+              ></b-form-input>
+            </b-form-group>
+            <b-form-group label="Your Name:" label-for="name">
+              <b-form-input
+                id="name"
+                v-model="form.name"
+                required
+                placeholder="First and last please..."
+              ></b-form-input>
+            </b-form-group>
+            <div class="text-center mb-5">
+            	<b-button type="submit" variant="primary" class="mt-3 mb-5">Submit</b-button>
+            </div>
           </b-form>
           <!-- <b-button @click="testJWT()"></b-button> -->
         </b-col>
