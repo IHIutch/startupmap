@@ -29,7 +29,7 @@
             </b-form-group>
             
              <b-form-group
-              label="Company Address:"
+              label="Company Address"
               label-for="autocomplete"
             >
               <b-form-input
@@ -41,7 +41,15 @@
                 placeholder="Startup headquarters..."
               ></b-form-input>
             </b-form-group>
-			<b-form-group label="Description:" label-for="description">
+            <b-form-group label="Website" label-for="website">
+              <b-form-input
+                id="website"
+                v-model="form.website"
+                required
+                placeholder="Startup website... "
+              ></b-form-input>
+            </b-form-group>
+			<b-form-group label="Description" label-for="description">
               <b-form-textarea
                 id="description"
                 v-model="form.description"
@@ -52,21 +60,21 @@
               ></b-form-textarea>
             </b-form-group>
 
-            <b-form-group label="Your Email:" label-for="email">
+            <b-form-group label="Your Email" label-for="email">
               <b-form-input
                 id="email"
                 v-model="form.email"
                 type="email"
                 required
-                placeholder="Best email for contact..."
+                placeholder="Best email for verification..."
               ></b-form-input>
             </b-form-group>
-            <b-form-group label="Your Name:" label-for="name">
+            <b-form-group label="Your Name" label-for="name">
               <b-form-input
                 id="name"
                 v-model="form.name"
                 required
-                placeholder="First and last please..."
+                placeholder="First and last..."
               ></b-form-input>
             </b-form-group>
             <div class="text-center mb-5">
