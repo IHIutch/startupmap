@@ -63,7 +63,7 @@
                 :lat-lng="[point.lat, point.lng]"
                 :radius="10"
                 :weight="0"
-                :fillOpacity="0.9"
+                :fillOpacity="0.7"
                 fillColor="#0000EE"
                 @click="markerClick(point)"
               />
