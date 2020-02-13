@@ -70,7 +70,7 @@
               ></b-form-input>
             </b-form-group>
             <div class="text-center mb-5">
-            	<b-button type="submit" variant="primary" class="mt-3 mb-5">Submit</b-button>
+            	<b-button type="submit" variant="primary" class="mt-3 mb-5" href="/Thanks/">Submit</b-button>
             </div>
           </b-form>
           <!-- <b-button @click="testJWT()"></b-button> -->
