@@ -14,14 +14,14 @@
     	<h1 class="mt-5">Push it forward.</h1>
     	<br/>
 		<p><b>BEFORE THE LISTING GOES LIVE</b> you must pass this link on to <b>10</b> of your peers. C'mon, give your plot an extra push! Share now, and come back tomorrow to boost your Buffalo Startup. </p>
-		<br/>
-		<p>Now is the time. Some call our loyalty to one another based on the call as City of Good Neighbors. Some say it's BuffaLOVE. A comeback. A rising. However it motivates you, it's happening. Here. We're bringing it together each day and pushing it forward.</p>
+
+		<a class="btn btn-primary mt-3 mr-2" href="#">Share The Map ...</a>
+		<a class="btn btn-secondary mt-3 mb-5" href="/About/">Add Another Startup</a>
+		<p><b>NOW IS THE TIME.</b> Some call our loyalty to one another based on the call as City of Good Neighbors. Some say it's BuffaLOVE. A comeback. A rising. However it motivates you, it's happening. Here. We're bringing it together each day and pushing it forward.</p>
 		<br/>
 
 		<p>Let's be heard. Let's be counted. Let's go.</p>
 
-		<a class="btn btn-primary mt-3 mr-2" href="#">Share The Map ...</a>
-		<a class="btn btn-secondary mt-3" href="/About/">Add Another Startup</a>
     	</b-col>
     </b-row>
     <b-row>
