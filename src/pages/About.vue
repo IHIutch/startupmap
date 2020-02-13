@@ -97,7 +97,7 @@ import VueScript2 from "vue-script2";
 
 export default {
   metaInfo: {
-    title: "About us"
+    title: "About"
   },
   data() {
     return {

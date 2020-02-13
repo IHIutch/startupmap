@@ -155,7 +155,7 @@ import "leaflet/dist/leaflet.css";
 
 export default {
   metaInfo: {
-    title: "Hello, world!"
+    title: "Home"
   },
   components: {
     LMap: Vue2Leaflet.LMap,
