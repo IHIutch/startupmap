@@ -18,7 +18,7 @@ module.exports = {
       use: "gridsome-plugin-gtm",
       options: {
         id: "GTM-KDV75B3",
-        enabled: process.env.NODE_ENV === "production" ? true : false,
+        enabled: process.env.NODE_ENV === "production",
         debug: false
       }
     },
