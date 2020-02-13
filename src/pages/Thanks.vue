@@ -12,9 +12,17 @@
     <b-row>
     	<b-col class="col-md-6 offset-md-3 mt-5 pt-5 pb-4">
     	<h1 class="mt-5">Thank You!</h1>
-    	<p>See the listing you've added now. Shout! - and call your peers to list a company. The map team will review your submission for accuracy and clarity. </p>
-		<a class="btn btn-primary mt-3 mr-2" href="/About/">Add Another Startup</a>
-		<a class="btn btn-secondary mt-3" href="#">Share Your Plot ...</a>
+    	<p>Come back tomorrow to see if your listing arrived!</p> 
+    	<br/>
+		<p><b>BEFORE THE LISTING GOES LIVE</b> you must pass on this link to <b>10</b> of your peers. C'mon, give your plot an extra push! </p>
+		<br/>
+		<p> Some call our loyalty to one another based on the call as City of Good Neighbors. Some say it's BuffaLOVE. A comeback. A rising. However it motivates you, it's happening. Here. We're bringing it together each day and pushing it forward.</p>
+		<br/>
+
+		<p>Let's be heard. Let's be counted. Let's go.</p>
+
+		<a class="btn btn-primary mt-3 mr-2" href="#">Share The Map ...</a>
+		<a class="btn btn-secondary mt-3" href="/About/">Add Another Startup</a>
     	</b-col>
     </b-row>
     <b-row>
