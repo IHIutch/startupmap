@@ -40,6 +40,12 @@ nav.navbar{
 	line-height: 48px;
 	color:#0000EE !important;
 	white-space:normal !important;
+	font-family: "Nunito", sans-serif;
+    font-size: 68px !important;
+    line-height: 44px;
+    letter-spacing: -3px;
+    font-style: italic;
+    
 }
 
 .btn-primary{
@@ -155,7 +161,8 @@ a.leaflet-popup-close-button{
 
 
 .navbar-brand{
-    font-size: 38px;
+    font-size: 48px !important;
+    line-height: 44px;
     line-height: 32px;
     margin-left: 0px;
     margin-right: 0px;
