@@ -2,7 +2,7 @@ name: Build & Deploy to GitHub Pages
 
 on:
   schedule:
-    - cron: "0 3 * * *"
+    - cron: "0 8 * * *"
   push:
     branches:
       - master
