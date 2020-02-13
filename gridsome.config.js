@@ -7,7 +7,7 @@
 module.exports = {
   siteName: "Buffalo Startup Map",
   siteUrl: "https://buffalostartupmap.com",
-  siteDescription: "This is a great description!",
+  // siteDescription: "This is a great description!",
   // icon: {
   //   favicon: "./src/assets/images/meta/favicon.png",
   //   touchicon: "./src/assets/images/meta/favicon.png"
@@ -40,13 +40,4 @@ module.exports = {
       }
     }
   ]
-  // configureWebpack: {
-  //   node: {
-  //     child_process: "empty",
-  //     fs: "empty",
-  //     crypto: "empty",
-  //     net: "empty",
-  //     tls: "empty"
-  //   }
-  // }
 };
