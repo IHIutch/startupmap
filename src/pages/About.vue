@@ -1,20 +1,25 @@
 <template>
   <Layout>
     <b-container>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-		<a class="navbar-brand" href="/">Buffalo Startup Map</a>
-		<ul class="nav navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link btn btn-secondary small" href="/">Cancel</a>
-			</li>
-		</ul>
-	</nav>
-    <b-row>
-    	<b-col class="col-md-6 offset-md-3 mt-5 pt-5 pb-4">
-    	<h1 class="mt-5">Add a Startup</h1>
-    	<p>Enter the business information to plot them on the Buffalo Startup Map!</p>
-    	</b-col>
-    </b-row>
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <g-link class="navbar-brand" to="/">Buffalo Startup Map</g-link>
+        <ul class="nav navbar-nav">
+          <li class="nav-item">
+            <g-link class="nav-link btn btn-secondary small" to="/"
+              >Cancel</g-link
+            >
+          </li>
+        </ul>
+      </nav>
+      <b-row>
+        <b-col class="col-md-6 offset-md-3 mt-5 pt-5 pb-4">
+          <h1 class="mt-5">Add a Startup</h1>
+          <p>
+            Enter the business information to plot them on the Buffalo Startup
+            Map!
+          </p>
+        </b-col>
+      </b-row>
       <b-row>
         <b-col class="col-md-6 offset-md-3">
           <b-form @submit.prevent="sendFormData" autocomplete="off">
@@ -24,14 +29,11 @@
                 v-model="form.company"
                 required
                 placeholder="Startup business name... "
-				autofocus
+                autofocus
               ></b-form-input>
             </b-form-group>
-            
-             <b-form-group
-              label="Company Address"
-              label-for="autocomplete"
-            >
+
+            <b-form-group label="Company Address" label-for="autocomplete">
               <b-form-input
                 autocomplete="off"
                 name="donotautofill"
@@ -49,7 +51,7 @@
                 placeholder="Startup website... "
               ></b-form-input>
             </b-form-group>
-			<b-form-group label="Description" label-for="description">
+            <b-form-group label="Description" label-for="description">
               <b-form-textarea
                 id="description"
                 v-model="form.description"
@@ -78,7 +80,9 @@
               ></b-form-input>
             </b-form-group>
             <div class="text-center mb-5">
-            	<b-button type="submit" variant="primary" class="mt-3 mb-5" href="/Thanks/">Submit</b-button>
+              <b-button type="submit" variant="primary" class="mt-3 mb-5"
+                >Submit</b-button
+              >
             </div>
           </b-form>
           <!-- <b-button @click="testJWT()"></b-button> -->
@@ -119,6 +123,10 @@ export default {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(this.dataToArray)
+      }).then(() => {
+        this.$router.push({
+          path: "/thanks"
+        });
       });
     },
     getAddressValues(autocomplete) {

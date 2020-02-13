@@ -5,8 +5,8 @@
         <a class="navbar-brand" href="/">Buffalo Startup Map</a>
         <ul class="nav navbar-nav">
           <li class="nav-item">
-            <a class="nav-link btn btn-primary small" href="/about/"
-              >Add a Startup</a
+            <g-link class="nav-link btn btn-primary small" to="/about"
+              >Add a Startup</g-link
             >
           </li>
         </ul>
