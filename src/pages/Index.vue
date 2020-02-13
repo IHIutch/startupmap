@@ -5,13 +5,13 @@
 		<a class="navbar-brand" href="/">Buffalo Startup Map</a>
 		<ul class="nav navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link btn btn-primary" href="/about/">Add Company</a>
+				<a class="nav-link btn btn-primary small" href="/about/">Add a Startup</a>
 			</li>
 		</ul>
 	</nav>
       <div class="row h-100">
         <div class="col-12 h-100 px-0">
-          <l-map class="h-100" :zoom="13" :center="map.center">
+          <l-map class="h-100" :zoom="13" :center="map.center" :options="{zoomControl: false}">
             <l-tile-layer
               :url="
                 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' +
