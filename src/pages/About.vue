@@ -32,7 +32,6 @@
                 autofocus
               ></b-form-input>
             </b-form-group>
-
             <b-form-group label="Company Address" label-for="autocomplete">
               <b-form-input
                 autocomplete="off"
@@ -43,6 +42,30 @@
                 placeholder="Startup headquarters..."
               ></b-form-input>
             </b-form-group>
+            <div class="row">
+	            <div class="col-6">
+					<b-form-group id="category" label="Category" label-for="category">
+						<b-form-input
+						id="category"
+						v-model="form.category"
+						placeholder="Ex: Healthcare ..."
+						required
+						></b-form-input>
+					</b-form-group>		            
+	            </div>
+	            <div class="col-6">
+					<b-form-group label="Stage" label-for="stage">
+						<b-form-select
+						id="stage"
+						v-model="form.stage"
+						:options="{ '1': 'Idea', '2': 'Seed', '3': 'Series A', '4': 'Series B', '5': 'Series C', '6': 'Series D', '7': 'Series E+' }"
+						required
+						>
+						</b-form-select>
+						
+					</b-form-group>        
+	            </div>
+            </div>
             <b-form-group label="Website" label-for="website">
               <b-form-input
                 id="website"
@@ -69,14 +92,6 @@
                 type="email"
                 required
                 placeholder="Best email for verification..."
-              ></b-form-input>
-            </b-form-group>
-            <b-form-group label="Your Name" label-for="name">
-              <b-form-input
-                id="name"
-                v-model="form.name"
-                required
-                placeholder="First and last..."
               ></b-form-input>
             </b-form-group>
             <div class="text-center mb-5">
