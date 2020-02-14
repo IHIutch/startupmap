@@ -43,28 +43,36 @@
               ></b-form-input>
             </b-form-group>
             <div class="row">
-	            <div class="col-6">
-					<b-form-group id="category" label="Category" label-for="category">
-						<b-form-input
-						id="category"
-						v-model="form.category"
-						placeholder="Ex: Healthcare ..."
-						required
-						></b-form-input>
-					</b-form-group>		            
-	            </div>
-	            <div class="col-6">
-					<b-form-group label="Stage" label-for="stage">
-						<b-form-select
-						id="stage"
-						v-model="form.stage"
-						:options="{ '1': 'Idea', '2': 'Seed', '3': 'Series A', '4': 'Series B', '5': 'Series C', '6': 'Series D', '7': 'Series E+' }"
-						required
-						>
-						</b-form-select>
-						
-					</b-form-group>        
-	            </div>
+              <div class="col-6">
+                <b-form-group
+                  id="category"
+                  label="Category"
+                  label-for="category"
+                >
+                  <b-form-input
+                    id="category"
+                    v-model="form.category"
+                    placeholder="Ex: Healthcare ..."
+                    required
+                  ></b-form-input>
+                </b-form-group>
+              </div>
+              <div class="col-6">
+                <b-form-group label="Stage" label-for="stage">
+                  <b-form-select
+                    id="stage"
+                    v-model="form.stage"
+                    :options="stages"
+                    required
+                  >
+                    <template v-slot:first>
+                      <b-select-option :value="null" disabled=""
+                        >-- Select a Stage --</b-select-option
+                      >
+                    </template>
+                  </b-form-select>
+                </b-form-group>
+              </div>
             </div>
             <b-form-group label="Website" label-for="website">
               <b-form-input
@@ -120,13 +128,23 @@ export default {
         "https://script.google.com/macros/s/AKfycbyvH8XfNF_skvR011XKIgKwSS25Ks5GsBWkpHSIzcsfaJ1MrW0/exec",
       form: {
         email: "",
-        name: "",
         company: "",
         description: "",
         address: {},
         lng: "",
-        lat: ""
-      }
+        lat: "",
+        stage: null,
+        category: ""
+      },
+      stages: [
+        "Idea",
+        "Seed",
+        "Series A",
+        "Series B",
+        "Series C",
+        "Series D",
+        "Series E+"
+      ]
     };
   },
   methods: {
