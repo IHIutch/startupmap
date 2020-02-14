@@ -32,23 +32,21 @@
                     {{ popup.company }}
                   </h2>
                   <h3 class="h6">
-                    {{ popup.description }}
+					640 Ellicott St. #108
                   </h3>
+                  <p>{{ popup.description }}</p>
                   <ul>
                     <li>
-                      <span class="label">Ind:</span>
+                      <span class="label">Category:</span>
                       {{ popup.type }}
                     </li>
                     <li>
-                      <span class="label">Est:</span>
-                      2010
+                      <span class="label">Stage:</span>
+                      Seed
                     </li>
+                    
                     <li>
-                      <span class="label">Size:</span>
-                      10
-                    </li>
-                    <li>
-                      <button class="btn btn-sm btn-primary btn-text">
+                      <button class="btn btn-sm btn-primary btn-text mt-3">
                         View
                       </button>
                     </li>

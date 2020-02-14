@@ -17,9 +17,18 @@ h1, h2, h3, h4, h5, h6{
 	letter-spacing: -1px;
 }
 
+.h6{
+	font-style: italic;
+    font-weight: 400 !important;
+}
+
 p{
-	font-size: 16px;
+	font-size: 14px;
 	color: #0000EE;	
+}
+
+.leaflet-popup-content p{
+	margin: 18px 0px 16px !important;
 }
 
 label{
@@ -103,6 +112,7 @@ nav.navbar{
 
 span.label{
 	text-transform: uppercase;
+	font-size: 12px;
 }
 
 ul{
@@ -111,6 +121,8 @@ ul{
 	margin-left: 0px;
 	padding-left: 0px;
 	color:#0000EE !important;
+	font-size: 16px;
+
 	
 	li{
 		padding-right: 20px;
