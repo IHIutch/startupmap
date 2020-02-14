@@ -32,7 +32,7 @@
                     {{ popup.company }}
                   </h2>
                   <h3 class="h6">
-					640 Ellicott St. #108
+					{{ popup.autocomplete }}
                   </h3>
                   <p>{{ popup.description }}</p>
                   <ul>
@@ -42,7 +42,7 @@
                     </li>
                     <li>
                       <span class="label">Stage:</span>
-                      Seed
+                      {{ popup.stage }}
                     </li>
                     
                     <li>
