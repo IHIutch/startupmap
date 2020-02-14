@@ -155,7 +155,8 @@ import "leaflet/dist/leaflet.css";
 
 export default {
   metaInfo: {
-    title: "Home"
+    title: "Home",
+    titleTemplate: 'Buffalo Startup Map'
   },
   components: {
     LMap: Vue2Leaflet.LMap,
