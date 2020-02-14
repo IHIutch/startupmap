@@ -7,7 +7,8 @@
 module.exports = {
   siteName: "Buffalo Startup Map",
   siteUrl: "https://buffalostartupmap.com",
-  // siteDescription: "Buffalo Startup Map - Every startup headquartered in Buffalo, New York plotted onto a map. Buffalo's best startup directory.",
+  siteDescription:
+    "Every startup headquartered in Buffalo, New York plotted onto a map. Buffalo's best startup directory.",
   // icon: {
   //   favicon: "./src/assets/images/meta/favicon.png",
   //   touchicon: "./src/assets/images/meta/favicon.png"
