@@ -32,7 +32,7 @@
                     {{ popup.company }}
                   </h2>
                   <h3 class="h6">
-					{{ popup.autocomplete }}
+                    {{ popup.autocomplete }}
                   </h3>
                   <p>{{ popup.description }}</p>
                   <ul>
@@ -44,7 +44,7 @@
                       <span class="label">Stage:</span>
                       {{ popup.stage }}
                     </li>
-                    
+
                     <li>
                       <button class="btn btn-sm btn-primary btn-text mt-3">
                         View
@@ -129,13 +129,15 @@ query {
     edges {
       node {
         id,
-        name,
-        address,
+        email,
         company,
+        description,
+        address,
         lng,
         lat,
-        description,
-        email
+        stage,
+        category,
+        website
       }
     }
   }
