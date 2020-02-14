@@ -2,7 +2,7 @@
   <Layout>
     <div class="container-fluid" style="height: 100vh;">
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <a class="navbar-brand" href="/">Buffalo Startup Map</a>
+        <g-link class="navbar-brand" href="/">Buffalo Startup Map</g-link>
         <ul class="nav navbar-nav">
           <li class="nav-item">
             <g-link class="nav-link btn btn-primary small" to="/about"
@@ -193,12 +193,12 @@ export default {
       return this.$page.places.edges.map(place => {
         var node = place.node;
         return {
-          name: node.name,
-          type: "Design",
           description: node.description,
           lat: parseFloat(node.lat),
           lng: parseFloat(node.lng),
           company: node.company,
+          category: node.category,
+          stage: node.stage,
           address: JSON.parse(node.address)
         };
       });
