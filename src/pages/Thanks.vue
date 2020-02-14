@@ -22,10 +22,10 @@
           </p>
 
           <a class="btn btn-primary mt-3 mr-2" href="#">Share The Map ...</a>
-          <g-link class="btn btn-secondary mt-3 mb-5" to="/about"
+          <g-link class="btn btn-secondary mt-3" to="/about"
             >Add Another Startup</g-link
           >
-          <p>
+          <p class="mt-5">
             <b>NOW IS THE TIME.</b> Some call our loyalty to one another based
             on the call as City of Good Neighbors. Some say it's BuffaLOVE. A
             comeback. A rising. However it motivates you, it's happening. Here.
