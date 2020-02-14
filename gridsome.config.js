@@ -9,11 +9,7 @@ module.exports = {
   siteUrl: "https://buffalostartupmap.com",
   siteDescription:
     "Every startup headquartered in Buffalo, New York plotted onto a map. Buffalo's best startup directory.",
-  // icon: {
-  //   favicon: "./src/assets/images/meta/favicon.png",
-  //   touchicon: "./src/assets/images/meta/favicon.png"
-  // },
-  titleTemplate: "%s | Buffalo Startup Map",
+  titleTemplate: "%s - Buffalo Startup Map",
   plugins: [
     {
       use: "gridsome-plugin-gtm",

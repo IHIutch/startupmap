@@ -103,12 +103,20 @@
               ></b-form-input>
             </b-form-group>
             <div class="text-center mb-5">
-              <b-button type="submit" variant="primary" class="mt-3 mb-5"
-                >Submit</b-button
+              <b-button
+                type="submit"
+                variant="primary"
+                class="mt-3 mb-5"
+                :disabled="loading"
               >
+                <span v-if="loading">
+                  <b-spinner small></b-spinner>
+                  Saving...
+                </span>
+                <span v-else>Submit</span>
+              </b-button>
             </div>
           </b-form>
-          <!-- <b-button @click="testJWT()"></b-button> -->
         </b-col>
       </b-row>
     </b-container>
@@ -137,6 +145,7 @@ export default {
         category: ""
       },
       stages: [
+        "n/a",
         "Idea",
         "Seed",
         "Series A",
@@ -144,11 +153,13 @@ export default {
         "Series C",
         "Series D",
         "Series E+"
-      ]
+      ],
+      loading: false
     };
   },
   methods: {
     sendFormData() {
+      this.loading = true;
       fetch(this.url, {
         method: "POST",
         mode: "no-cors",
