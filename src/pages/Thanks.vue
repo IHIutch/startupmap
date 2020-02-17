@@ -21,7 +21,7 @@
             now, and come back tomorrow to boost your Buffalo Startup.
           </p>
 
-          <a class="btn btn-primary mt-3 mr-2" href="#">Share The Map ...</a>
+<!--           <a class="btn btn-primary mt-3 mr-2" href="#">Share The Map ...</a> -->
           <g-link class="btn btn-secondary mt-3" to="/about"
             >Add Another Startup</g-link
           >
