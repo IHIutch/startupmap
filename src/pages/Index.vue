@@ -44,11 +44,10 @@
                       <span class="label">Stage:</span>
                       {{ popup.stage }}
                     </li>
-
                     <li>
-                      <button class="btn btn-sm btn-primary btn-text mt-3">
+                      <a :href="popup.website" target="_blank" class="btn btn-sm btn-primary btn-text mt-3">
                         View
-                      </button>
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -199,7 +198,8 @@ export default {
           company: node.company,
           category: node.category,
           stage: node.stage,
-          address: JSON.parse(node.address)
+          address: JSON.parse(node.address),
+          website: new RegExp("^https?://").test(node.website) ? node.website : "http://" + node.website
         };
       });
     }
