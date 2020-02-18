@@ -15,7 +15,7 @@
         <div class="col-12 h-100 px-0">
           <l-map
             class="h-100"
-            :zoom="13"
+            :zoom="12"
             :center="map.center"
             :options="{ zoomControl: false }"
           >
@@ -38,18 +38,15 @@
                   <ul>
                     <li>
                       <span class="label">Category:</span>
-                      {{ popup.type }}
+                      {{ popup.category }}
                     </li>
                     <li>
                       <span class="label">Stage:</span>
                       {{ popup.stage }}
                     </li>
-
-                    <li>
-                      <button class="btn btn-sm btn-primary btn-text mt-3">
-                        View
-                      </button>
-                    </li>
+	                  <a class="btn btn-sm btn-primary btn-text mt-2" href="#">
+	                    Visit {{ popup.website }}
+	                  </a>
                   </ul>
                 </div>
               </l-popup>
@@ -185,7 +182,7 @@ export default {
     },
     markerClick(info) {
       this.popup = info;
-      this.$refs.features.mapObject.openPopup([info.lat, info.lng]);
+      this.$refs.features.mapObject.openPopup([info.lat, info.lng, info.category]);
       this.gtmTrackEvent(info);
     }
   },

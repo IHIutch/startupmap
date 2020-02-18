@@ -39,6 +39,15 @@ p{
 	margin: 18px 0px 16px !important;
 	font-size: 14px;
 }
+
+.leaflet-container a {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+ }
+    
+
+
 .linkfixed{
 	position: absolute;
 	bottom:5px;
@@ -144,6 +153,7 @@ ul{
 	
 	li{
 		padding-right: 20px;
+		max-width: 130px;
 	}
 }
 
