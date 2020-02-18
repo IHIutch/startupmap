@@ -120,6 +120,7 @@
         <!-- Listings column------>
       </div>
     </div>
+    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank">Built with &#x2665;</a>
   </Layout>
 </template>
 

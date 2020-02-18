@@ -22,13 +22,29 @@ h1, h2, h3, h4, h5, h6{
     font-weight: 400 !important;
 }
 
+a{
+	color: #0000EE !important;
+}
+
 p{
-	font-size: 14px;
+	font-size: 16px;
 	color: #0000EE;	
+}
+
+.lightgrey{
+	color:#aaa !important;
 }
 
 .leaflet-popup-content p{
 	margin: 18px 0px 16px !important;
+	font-size: 14px;
+}
+.linkfixed{
+	position: absolute;
+	bottom:5px;
+	left:8px;
+	z-index: 9999;
+	font-size: 14px;
 }
 
 label{

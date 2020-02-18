@@ -21,7 +21,8 @@
             now, and come back tomorrow to boost your Buffalo Startup.
           </p>
 
-<!--           <a class="btn btn-primary mt-3 mr-2" href="#">Share The Map ...</a> -->
+<!--           <a class="btn btn-primary mt-3 mr-2" target="_blank" href="https://www.linkedin.com/shareArticle?&url=buffalostartupmap.com&title=Buffalo%20Startup%20Map&summary=Help%20create%20Buffalo's%20best%20startup%20directory%20by%20plotting%20all%20of%20the%20startups%20in%20Buffalo,%20NY.%20%20Post%20a%20company%20to%20add%20a%20listing%20to%20the%20map&source=https%3A//buffalostartupmap.com/">Share The Map ...</a> -->
+
           <g-link class="btn btn-secondary mt-3" to="/about"
             >Add Another Startup</g-link
           >
@@ -36,6 +37,7 @@
           <p>Let's be heard. Let's be counted. Let's go.</p>
         </b-col>
       </b-row>
+      <a class="linkfixed" href="https://www.helmux.com/work" target="_blank">Built with &#x2665;</a>
     </b-container>
   </Layout>
 </template>

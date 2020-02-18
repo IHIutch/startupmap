@@ -115,9 +115,15 @@
                 </span>
                 <span v-else>Submit</span>
               </b-button>
+              <p class="lightgrey">By clicking Submit you agree that the information listed above is true to the best of your knowledge. You're also saying it's cool if we email you. We won't spam you so don't worry, be happy. Now, submit your Startup already.</p>
+              <br/>
+			  <a href="https://docs.google.com/forms/d/e/1FAIpQLScA9hirfSieN7Wii81gPZGP3_zvJAzg9K4Ye51MTT9M8-Ybmg/viewform?usp=sf_link" target="_blank">Feedback?</a>
+
             </div>
           </b-form>
         </b-col>
+   
+          
       </b-row>
     </b-container>
   </Layout>
