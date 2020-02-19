@@ -15,7 +15,7 @@
         <div class="col-12 h-100 px-0">
           <l-map
             class="h-100"
-            :zoom="12"
+            :zoom="13"
             :center="map.center"
             :options="{ zoomControl: false }"
           >
@@ -38,15 +38,17 @@
                   <ul>
                     <li>
                       <span class="label">Category:</span>
-                      {{ popup.category }}
+                      {{ popup.type }}
                     </li>
                     <li>
                       <span class="label">Stage:</span>
                       {{ popup.stage }}
                     </li>
-	                  <a class="btn btn-sm btn-primary btn-text mt-2" href="#">
-	                    Visit {{ popup.website }}
-	                  </a>
+                    <li>
+                      <a :href="popup.website" target="_blank" class="btn btn-sm btn-primary btn-text mt-3">
+                        View
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </l-popup>
@@ -117,7 +119,6 @@
         <!-- Listings column------>
       </div>
     </div>
-    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank">Built with &#x2665;</a>
   </Layout>
 </template>
 
@@ -182,7 +183,7 @@ export default {
     },
     markerClick(info) {
       this.popup = info;
-      this.$refs.features.mapObject.openPopup([info.lat, info.lng, info.category]);
+      this.$refs.features.mapObject.openPopup([info.lat, info.lng]);
       this.gtmTrackEvent(info);
     }
   },
@@ -197,7 +198,8 @@ export default {
           company: node.company,
           category: node.category,
           stage: node.stage,
-          address: JSON.parse(node.address)
+          address: JSON.parse(node.address),
+          website: new RegExp("^https?://").test(node.website) ? node.website : "http://" + node.website
         };
       });
     }
