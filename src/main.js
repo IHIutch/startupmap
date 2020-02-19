@@ -13,7 +13,7 @@ require("typeface-nunito");
 
 const siteUrl = "https://buffalostartupmap.com/";
 const siteName = "Buffalo Startup Map";
-const metaImage = siteUrl + "assets/img/meta-img.png";
+const metaImage = siteUrl + "meta/meta-img.png";
 const siteDesc =
   "Every startup headquartered in Buffalo, New York plotted onto a map. Buffalo's best startup directory.";
 
