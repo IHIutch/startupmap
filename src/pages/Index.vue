@@ -38,7 +38,7 @@
                   <ul>
                     <li>
                       <span class="label">Category:</span>
-                      {{ popup.type }}
+                      {{ popup.category }}
                     </li>
                     <li>
                       <span class="label">Stage:</span>
@@ -119,6 +119,7 @@
         <!-- Listings column------>
       </div>
     </div>
+    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank">Built with &#x2665;</a>
   </Layout>
 </template>
 
@@ -183,7 +184,7 @@ export default {
     },
     markerClick(info) {
       this.popup = info;
-      this.$refs.features.mapObject.openPopup([info.lat, info.lng]);
+      this.$refs.features.mapObject.openPopup([info.lat, info.lng, info.category]);
       this.gtmTrackEvent(info);
     }
   },
