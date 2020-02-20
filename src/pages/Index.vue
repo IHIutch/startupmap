@@ -76,7 +76,7 @@
                 :key="idx"
               >
                 <div>
-                  <h2 class="h4 mb-1">
+                  <h2 class="h4 mb-0">
                     {{ point.company }}
                     
                   </h2>
@@ -85,7 +85,7 @@
                       {{ point.address.street_number }}
                       {{ point.address.route }}
                     </div>
-                    <div class="h6 mt-2">
+                    <div class="h6 mt-3">
 		                {{ point.description }} 
 	                </div>
                   </h3>

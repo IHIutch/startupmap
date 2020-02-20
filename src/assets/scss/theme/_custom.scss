@@ -128,7 +128,7 @@ nav.navbar{
 	right:0px;
 	top:80px;
 	z-index: 999;
-	height: 100vh;
+	height: 95vh;
 	overflow-y: scroll;
 	-webkit-mask-image: -webkit-gradient(linear, left 75%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
 
@@ -229,6 +229,16 @@ a.leaflet-popup-close-button{
 	color:#0000EE !important;
 	font-weight: 900;
 	font-size: 14px;
+}
+
+
+.linkfixed{
+	position: absolute;
+	bottom:5px;
+	left:8px;
+	z-index: 9999;
+	font-size: 14px;
+	opacity: 0;
 }
 
   
