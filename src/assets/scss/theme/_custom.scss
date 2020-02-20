@@ -128,9 +128,9 @@ nav.navbar{
 	right:0px;
 	top:80px;
 	z-index: 999;
-	height: 95vh;
+	height: 98vh;
 	overflow-y: scroll;
-	-webkit-mask-image: -webkit-gradient(linear, left 75%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
+	-webkit-mask-image: -webkit-gradient(linear, left 80%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
 
 }
 
@@ -199,9 +199,9 @@ a.leaflet-popup-close-button{
 	  
 	position: absolute;
 	right:0px;
-	top:400px;
+	top: 60vh;
 	z-index: 999;
-	height: 34vh;
+	height: 40vh;
 	overflow-y: scroll;
   }
 

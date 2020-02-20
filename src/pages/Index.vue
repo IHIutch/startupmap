@@ -15,7 +15,7 @@
         <div class="col-12 h-100 px-0">
           <l-map
             class="h-100"
-            :zoom="12"
+            :zoom="11"
             :center="map.center"
             :options="{ zoomControl: false }"
           >
@@ -26,6 +26,7 @@
               "
             ></l-tile-layer>
             <l-feature-group ref="features">
+<!--
               <l-popup>
                 <div>
                   <h2 class="h4 mb-1">
@@ -52,6 +53,16 @@
                   </ul>
                 </div>
               </l-popup>
+-->	
+			  <l-popup>
+                <div>
+                  <h2 class="h4 mb-1">
+                    {{ popup.company }}
+                  </h2>
+                  
+                </div>
+              </l-popup>
+			
             </l-feature-group>
             <template v-for="(point, idx) in points">
               <l-circle-marker
@@ -69,7 +80,7 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 listings">
           <ul class="list-group list-group-flush">
-            <template v-for="(point, idx) in points">
+            <template v-for="(point, idx) in filteredPoints">
               <li
                 class="list-group-item"
                 v-if="point.lat && point.lng"
@@ -163,8 +174,9 @@ export default {
       mapboxToken:
         "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
       popup: {},
+      filteredPoints: {},
       map: {
-        center: [42.8764, -78.846804]
+        center: [42.8764, -78.876804]
       }
     };
   },
@@ -178,9 +190,13 @@ export default {
     markerClick(info) {
       this.popup = info;
       this.$refs.features.mapObject.openPopup([info.lat, info.lng, info.category]);
+      this.filteredPoints = this.points.filter(point => {
+		   return point.lng == info.lng && point.lat == info.lat
+		})
       this.gtmTrackEvent(info);
     }
   },
+  
   computed: {
     points() {
       return this.$page.places.edges.map(place => {
