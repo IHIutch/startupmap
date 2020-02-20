@@ -164,7 +164,7 @@ export default {
         "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
       popup: {},
       map: {
-        center: [42.8864, -78.8784]
+        center: [42.8764, -78.846804]
       }
     };
   },
