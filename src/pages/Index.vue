@@ -15,7 +15,7 @@
         <div class="col-12 h-100 px-0">
           <l-map
             class="h-100"
-            :zoom="13"
+            :zoom="12"
             :center="map.center"
             :options="{ zoomControl: false }"
           >
@@ -67,8 +67,7 @@
             </template>
           </l-map>
         </div>
-        <!--
-        <div class="col-xs-12 col-md-4 listings">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 listings">
           <ul class="list-group list-group-flush">
             <template v-for="(point, idx) in points">
               <li
@@ -79,35 +78,30 @@
                 <div>
                   <h2 class="h4 mb-1">
                     {{ point.company }}
+                    
                   </h2>
-                  <h3 class="h6">
-                    <div>
+                  <h3 class="h6 mb-3">
+                    <div>          
                       {{ point.address.street_number }}
                       {{ point.address.route }}
                     </div>
-                    <div>
-                      {{ point.address.locality }}
-                      {{ point.address.administrative_area_level_1 }}
-                      {{ point.address.postal_code }}
-                    </div>
+                    <div class="h6 mt-2">
+		                {{ point.description }} 
+	                </div>
                   </h3>
                   <ul>
                     <li>
-                      <span class="label">Ind:</span>
-                      {{ point.type }}
+                      <span class="label">Category:</span>
+                      {{ point.category }}
                     </li>
                     <li>
-                      <span class="label">Est:</span>
-                      2010
+                      <span class="label">Stage:</span>
+                      {{ point.stage }}
                     </li>
                     <li>
-                      <span class="label">Size:</span>
-                      10
-                    </li>
-                    <li>
-                      <button class="btn btn-sm btn-primary" href="#">
+                      <a :href="popup.website" target="_blank" class="btn btn-sm btn-primary btn-text mt-3 fixed-bottom-right">
                         View
-                      </button>
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -115,7 +109,6 @@
             </template>
           </ul>
         </div>
--->
         <!-- Listings column------>
       </div>
     </div>
