@@ -45,7 +45,10 @@
                       {{ popup.stage }}
                     </li>
                     <li>
-                      <a :href="popup.website" target="_blank" class="btn btn-sm btn-primary btn-text mt-3">
+                      <a
+                        :href="popup.website"
+                        class="btn btn-sm btn-primary btn-text mt-3"
+                      >
                         View
                       </a>
                     </li>
@@ -119,7 +122,9 @@
         <!-- Listings column------>
       </div>
     </div>
-    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank">Built with &#x2665;</a>
+    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank"
+      >Built with &#x2665;</a
+    >
   </Layout>
 </template>
 
@@ -156,7 +161,7 @@ import "leaflet/dist/leaflet.css";
 export default {
   metaInfo: {
     title: "Home",
-    titleTemplate: 'Buffalo Startup Map'
+    titleTemplate: "Buffalo Startup Map"
   },
   components: {
     LMap: Vue2Leaflet.LMap,
@@ -176,16 +181,17 @@ export default {
     };
   },
   methods: {
-    gtmTrackEvent(data) {
+    markerClick(info) {
       this.$gtm.trackEvent({
         event: "mapPointClick",
-        companyName: data.company
+        companyName: info.company
       });
-    },
-    markerClick(info) {
       this.popup = info;
-      this.$refs.features.mapObject.openPopup([info.lat, info.lng, info.category]);
-      this.gtmTrackEvent(info);
+      this.$refs.features.mapObject.openPopup([
+        info.lat,
+        info.lng,
+        info.category
+      ]);
     }
   },
   computed: {
@@ -200,7 +206,9 @@ export default {
           category: node.category,
           stage: node.stage,
           address: JSON.parse(node.address),
-          website: new RegExp("^https?://").test(node.website) ? node.website : "http://" + node.website
+          website: new RegExp("^https?://").test(node.website)
+            ? node.website
+            : "http://" + node.website
         };
       });
     }

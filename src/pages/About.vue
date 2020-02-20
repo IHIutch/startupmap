@@ -177,7 +177,15 @@ export default {
     };
   },
   methods: {
+    gtmTrackFormSubmit() {
+      this.$gtm.trackEvent({
+        event: "formSubmit",
+        companyName: this.form.company,
+        date: new Date()
+      });
+    },
     sendFormData() {
+      this.gtmTrackFormSubmit();
       if (!Object.keys(this.form.address).length) {
         this.validation = false;
         return;
