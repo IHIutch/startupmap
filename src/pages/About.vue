@@ -38,9 +38,9 @@
                 name="donotautofill"
                 type="search"
                 id="autocomplete"
+                ref="address"
                 required
                 placeholder="Startup headquarters..."
-                @input="validation = null"
                 :state="validation"
               ></b-form-input>
               <b-form-invalid-feedback :state="validation">
@@ -187,7 +187,8 @@ export default {
     sendFormData() {
       this.gtmTrackFormSubmit();
       if (!Object.keys(this.form.address).length) {
-        this.validation = false;
+        this.$refs.address.focus();
+        // this.validation = false;
         return;
       }
       this.loading = true;
@@ -225,12 +226,19 @@ export default {
         autocomplete.setFields(["address_component", "geometry"]);
         autocomplete.addListener("place_changed", function() {
           self.getAddressValues(autocomplete);
+          self.validation = null;
         });
       });
     }
   },
   mounted() {
+    let self = this;
     this.initAutocomplete();
+    document
+      .getElementById("autocomplete")
+      .addEventListener("input", function() {
+        self.form.address = {};
+      });
   },
   computed: {
     dataToArray() {
