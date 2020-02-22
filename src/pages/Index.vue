@@ -94,7 +94,11 @@
                       10
                     </li> -->
                     <li>
-                      <a class="btn btn-sm btn-primary" :href="point.website">
+                      <a
+                        class="btn btn-sm btn-primary"
+                        :href="point.website"
+                        target="_blank"
+                      >
                         View
                       </a>
                     </li>
