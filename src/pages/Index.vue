@@ -32,14 +32,12 @@
                     <span v-if="Object.keys(popup).length">
                       {{ popup.address.street_number }}
                       {{ popup.address.route }}
+                      <sup class="ml-1">
+	                      <span v-if="filteredPoints.length == 1"></span>
+	                      <span v-else>({{ filteredPoints.length }})</span>
+                      </sup>
                     </span>
                   </h2>
-                  <div class="text-blue font-nunito">
-                    <i>
-                      <span v-if="filteredPoints.length == 1">1 company</span>
-                      <span v-else>{{ filteredPoints.length }} companies</span>
-                    </i>
-                  </div>
                 </div>
               </l-popup>
             </l-feature-group>
@@ -48,9 +46,9 @@
                 v-if="point.lat && point.lng"
                 :key="idx"
                 :lat-lng="[point.lat, point.lng]"
-                :radius="10"
+                :radius="11"
                 :weight="0"
-                :fillOpacity="0.7"
+                :fillOpacity="0.6"
                 fillColor="#0000EE"
                 @click="markerClick(point)"
               />
@@ -69,19 +67,16 @@
                   <h2 class="h4 mb-1">
                     {{ point.company }}
                   </h2>
-                  <h3 class="h6">
+                  <h3 class="h6 mt-0">
+
                     <div>
-                      {{ point.address.street_number }}
-                      {{ point.address.route }}
+                    {{ point.description }}
                     </div>
-                    <div>
-                      {{ point.address.locality }}
-                      {{ point.address.administrative_area_level_1 }}
-                      {{ point.address.postal_code }}
-                    </div>
+
                   </h3>
                   <ul>
                     <li>
+<<<<<<< HEAD
                       <span class="label">Ind:</span>
                       {{ point.type }}
                     </li>
@@ -99,6 +94,17 @@
                         :href="point.website"
                         target="_blank"
                       >
+=======
+                      <span class="label">Type:</span>
+                      {{ point.category }}
+                    </li>
+                    <li>
+                      <span class="label">Stage:</span>
+                      {{ point.stage }}
+                    </li>
+                    <li>
+                      <button class="btn btn-sm btn-primary fixed-bottom-right" href="#">
+>>>>>>> 640346b1741645a18b69a12d26bcdd1b7a21ac83
                         View
                       </a>
                     </li>
@@ -166,7 +172,7 @@ export default {
       popup: {},
       filteredPoints: {},
       map: {
-        center: [42.8764, -78.846804]
+        center: [42.8964, -78.846804]
       }
     };
   },
