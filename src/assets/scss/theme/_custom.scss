@@ -129,7 +129,7 @@ nav.navbar {
   padding-top: 80px;
   z-index: 999;
   height: 98vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   -webkit-mask-image: -webkit-gradient(
     linear,
     left 80%,
@@ -195,7 +195,7 @@ a.leaflet-popup-close-button {
     top: 60vh;
     z-index: 999;
     height: 40vh;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   .navbar-brand {
