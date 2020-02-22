@@ -42,9 +42,9 @@
                 v-if="point.lat && point.lng"
                 :key="idx"
                 :lat-lng="[point.lat, point.lng]"
-                :radius="10"
+                :radius="13"
                 :weight="0"
-                :fillOpacity="0.7"
+                :fillOpacity="0.6"
                 fillColor="#0000EE"
                 @click="markerClick(point)"
               />
@@ -63,29 +63,21 @@
                   <h2 class="h4 mb-1">
                     {{ point.company }}
                   </h2>
-                  <h3 class="h6">
+                  <h3 class="h6 mt-0">
+
                     <div>
-                      {{ point.address.street_number }}
-                      {{ point.address.route }}
+                    {{ point.description }}
                     </div>
-                    <div>
-                      {{ point.address.locality }}
-                      {{ point.address.administrative_area_level_1 }}
-                      {{ point.address.postal_code }}
-                    </div>
+
                   </h3>
                   <ul>
                     <li>
-                      <span class="label">Ind:</span>
-                      {{ point.type }}
+                      <span class="label">Type:</span>
+                      {{ point.category }}
                     </li>
                     <li>
-                      <span class="label">Est:</span>
-                      2010
-                    </li>
-                    <li>
-                      <span class="label">Size:</span>
-                      10
+                      <span class="label">Stage:</span>
+                      {{ point.stage }}
                     </li>
                     <li>
                       <button class="btn btn-sm btn-primary" href="#">
