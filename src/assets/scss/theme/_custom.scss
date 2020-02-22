@@ -167,8 +167,10 @@ ul {
 
 .list-group-item {
   margin-bottom: 10px;
-  padding: 15px 25px;
-  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.2) p {
+  padding: 15px 25px !important;
+  box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.3) !important;
+  
+  p {
     color: red;
   }
 }
