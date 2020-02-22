@@ -15,7 +15,7 @@
         <div class="col-12 h-100 px-0">
           <l-map
             class="h-100"
-            :zoom="11"
+            :zoom="12"
             :center="map.center"
             :options="{ zoomControl: false }"
           >
