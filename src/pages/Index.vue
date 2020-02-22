@@ -34,8 +34,12 @@
                       {{ popup.address.route }}
                     </span>
                   </h2>
-                  <span v-if="filteredPoints.length == 1">1 company</span>
-                  <span v-else>{{ filteredPoints.length }} companies</span>
+                  <div class="text-blue font-nunito">
+                    <i>
+                      <span v-if="filteredPoints.length == 1">1 company</span>
+                      <span v-else>{{ filteredPoints.length }} companies</span>
+                    </i>
+                  </div>
                 </div>
               </l-popup>
             </l-feature-group>
