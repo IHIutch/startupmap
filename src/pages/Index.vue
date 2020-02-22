@@ -84,9 +84,9 @@
                       {{ point.stage }}
                     </li>
                     <li>
-                      <button class="btn btn-sm btn-primary fixed-bottom-right" href="#">
+                      <a :href="point.website" class="btn btn-sm btn-primary fixed-bottom-right" href="#">
                         View
-                      </button>
+                      </a>
                     </li>
                   </ul>
                 </div>
