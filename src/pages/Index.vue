@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div class="container-fluid" style="height: 100vh;">
+    <div class="container-fluid vh-100">
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <g-link class="navbar-brand" href="/">Buffalo Startup Map</g-link>
         <ul class="nav navbar-nav">
