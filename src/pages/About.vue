@@ -22,7 +22,7 @@
       </b-row>
       <b-row>
         <b-col class="col-md-6 offset-md-3">
-          <b-form @submit.prevent="sendFormData" autocomplete="off">
+          <b-form @submit.stop.prevent="sendFormData" autocomplete="off">
             <b-form-group label="Company Name" label-for="company">
               <b-form-input
                 id="company"
@@ -38,9 +38,14 @@
                 name="donotautofill"
                 type="search"
                 id="autocomplete"
+                ref="address"
                 required
                 placeholder="Startup headquarters..."
+                :state="validation"
               ></b-form-input>
+              <b-form-invalid-feedback :state="validation">
+                Please select an address from the dropdown
+              </b-form-invalid-feedback>
             </b-form-group>
             <div class="row">
               <div class="col-6">
@@ -115,15 +120,22 @@
                 </span>
                 <span v-else>Submit</span>
               </b-button>
-              <p class="lightgrey">By clicking Submit you agree that the information listed above is true to the best of your knowledge. You're also saying it's cool if we email you. We won't spam you so don't worry, be happy. Now, submit your Startup already.</p>
-              <br/>
-			  <a href="https://docs.google.com/forms/d/e/1FAIpQLScA9hirfSieN7Wii81gPZGP3_zvJAzg9K4Ye51MTT9M8-Ybmg/viewform?usp=sf_link" target="_blank">Feedback?</a>
-
+              <p class="lightgrey">
+                By clicking Submit you agree that the information listed above
+                is true to the best of your knowledge. You're also saying it's
+                cool if we email you. We won't spam you so don't worry, be
+                happy. Now, submit your Startup already.
+              </p>
+              <br />
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLScA9hirfSieN7Wii81gPZGP3_zvJAzg9K4Ye51MTT9M8-Ybmg/viewform?usp=sf_link"
+                target="_blank"
+              >
+                Feedback?
+              </a>
             </div>
           </b-form>
         </b-col>
-   
-          
       </b-row>
     </b-container>
   </Layout>
@@ -138,6 +150,7 @@ export default {
   },
   data() {
     return {
+      validation: null,
       url:
         "https://script.google.com/macros/s/AKfycbyvH8XfNF_skvR011XKIgKwSS25Ks5GsBWkpHSIzcsfaJ1MrW0/exec",
       form: {
@@ -164,7 +177,20 @@ export default {
     };
   },
   methods: {
+    gtmTrackFormSubmit() {
+      this.$gtm.trackEvent({
+        event: "formSubmit",
+        companyName: this.form.company,
+        date: new Date()
+      });
+    },
     sendFormData() {
+      this.gtmTrackFormSubmit();
+      if (!Object.keys(this.form.address).length) {
+        this.$refs.address.focus();
+        // this.validation = false;
+        return;
+      }
       this.loading = true;
       fetch(this.url, {
         method: "POST",
@@ -200,12 +226,19 @@ export default {
         autocomplete.setFields(["address_component", "geometry"]);
         autocomplete.addListener("place_changed", function() {
           self.getAddressValues(autocomplete);
+          self.validation = null;
         });
       });
     }
   },
   mounted() {
+    let self = this;
     this.initAutocomplete();
+    document
+      .getElementById("autocomplete")
+      .addEventListener("input", function() {
+        self.form.address = {};
+      });
   },
   computed: {
     dataToArray() {

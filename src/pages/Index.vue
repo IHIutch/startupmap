@@ -15,7 +15,7 @@
         <div class="col-12 h-100 px-0">
           <l-map
             class="h-100"
-            :zoom="12"
+            :zoom="13"
             :center="map.center"
             :options="{ zoomControl: false }"
           >
@@ -26,7 +26,6 @@
               "
             ></l-tile-layer>
             <l-feature-group ref="features">
-<!--
               <l-popup>
                 <div>
                   <h2 class="h4 mb-1">
@@ -46,23 +45,16 @@
                       {{ popup.stage }}
                     </li>
                     <li>
-                      <a :href="popup.website" target="_blank" class="btn btn-sm btn-primary btn-text mt-3">
+                      <a
+                        :href="popup.website"
+                        class="btn btn-sm btn-primary btn-text mt-3"
+                      >
                         View
                       </a>
                     </li>
                   </ul>
                 </div>
               </l-popup>
--->	
-			  <l-popup>
-                <div>
-                  <h2 class="h4 mb-1">
-                    {{ popup.company }}
-                  </h2>
-                  
-                </div>
-              </l-popup>
-			
             </l-feature-group>
             <template v-for="(point, idx) in points">
               <l-circle-marker
@@ -78,41 +70,47 @@
             </template>
           </l-map>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 listings">
+        <!--
+        <div class="col-xs-12 col-md-4 listings">
           <ul class="list-group list-group-flush">
-            <template v-for="(point, idx) in filteredPoints">
+            <template v-for="(point, idx) in points">
               <li
                 class="list-group-item"
                 v-if="point.lat && point.lng"
                 :key="idx"
               >
                 <div>
-                  <h2 class="h4 mb-0">
+                  <h2 class="h4 mb-1">
                     {{ point.company }}
-                    
                   </h2>
-                  <h3 class="h6 mb-3">
-                    <div>          
+                  <h3 class="h6">
+                    <div>
                       {{ point.address.street_number }}
                       {{ point.address.route }}
                     </div>
-                    <div class="h6 mt-3">
-		                {{ point.description }} 
-	                </div>
+                    <div>
+                      {{ point.address.locality }}
+                      {{ point.address.administrative_area_level_1 }}
+                      {{ point.address.postal_code }}
+                    </div>
                   </h3>
                   <ul>
                     <li>
-                      <span class="label">Category:</span>
-                      {{ point.category }}
+                      <span class="label">Ind:</span>
+                      {{ point.type }}
                     </li>
                     <li>
-                      <span class="label">Stage:</span>
-                      {{ point.stage }}
+                      <span class="label">Est:</span>
+                      2010
                     </li>
                     <li>
-                      <a :href="popup.website" target="_blank" class="btn btn-sm btn-primary btn-text mt-3 fixed-bottom-right">
+                      <span class="label">Size:</span>
+                      10
+                    </li>
+                    <li>
+                      <button class="btn btn-sm btn-primary" href="#">
                         View
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -120,10 +118,13 @@
             </template>
           </ul>
         </div>
+-->
         <!-- Listings column------>
       </div>
     </div>
-    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank">Built with &#x2665;</a>
+    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank"
+      >Built with &#x2665;</a
+    >
   </Layout>
 </template>
 
@@ -160,7 +161,7 @@ import "leaflet/dist/leaflet.css";
 export default {
   metaInfo: {
     title: "Home",
-    titleTemplate: 'Buffalo Startup Map'
+    titleTemplate: "Buffalo Startup Map"
   },
   components: {
     LMap: Vue2Leaflet.LMap,
@@ -174,29 +175,25 @@ export default {
       mapboxToken:
         "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
       popup: {},
-      filteredPoints: {},
       map: {
-        center: [42.8764, -78.876804]
+        center: [42.8864, -78.8784]
       }
     };
   },
   methods: {
-    gtmTrackEvent(data) {
+    markerClick(info) {
       this.$gtm.trackEvent({
         event: "mapPointClick",
-        companyName: data.company
+        companyName: info.company
       });
-    },
-    markerClick(info) {
       this.popup = info;
-      this.$refs.features.mapObject.openPopup([info.lat, info.lng, info.category]);
-      this.filteredPoints = this.points.filter(point => {
-		   return point.lng == info.lng && point.lat == info.lat
-		})
-      this.gtmTrackEvent(info);
+      this.$refs.features.mapObject.openPopup([
+        info.lat,
+        info.lng,
+        info.category
+      ]);
     }
   },
-  
   computed: {
     points() {
       return this.$page.places.edges.map(place => {
@@ -209,7 +206,9 @@ export default {
           category: node.category,
           stage: node.stage,
           address: JSON.parse(node.address),
-          website: new RegExp("^https?://").test(node.website) ? node.website : "http://" + node.website
+          website: new RegExp("^https?://").test(node.website)
+            ? node.website
+            : "http://" + node.website
         };
       });
     }
