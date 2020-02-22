@@ -27,11 +27,10 @@
             ></l-tile-layer>
             <l-feature-group ref="features">
               <l-popup>
-                <div>
+                <div v-if="Object.keys(popup).length">
                   <h2 class="h4 mb-1">
-                    {{ popup.company }}
+                    {{ popup.address.street_number }} {{ popup.address.route }}
                   </h2>
-                  
                   </ul>
                 </div>
               </l-popup>
@@ -172,7 +171,6 @@ export default {
       this.$refs.features.mapObject.openPopup([
         info.lat,
         info.lng,
-        info.category
       ]);
     }
   },
