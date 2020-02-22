@@ -32,14 +32,12 @@
                     <span v-if="Object.keys(popup).length">
                       {{ popup.address.street_number }}
                       {{ popup.address.route }}
+                      <sup class="ml-1">
+	                      <span v-if="filteredPoints.length == 1"></span>
+	                      <span v-else>({{ filteredPoints.length }})</span>
+                      </sup>
                     </span>
                   </h2>
-                  <div class="text-blue font-nunito">
-                    <i>
-                      <span v-if="filteredPoints.length == 1">1 company</span>
-                      <span v-else>{{ filteredPoints.length }} companies</span>
-                    </i>
-                  </div>
                 </div>
               </l-popup>
             </l-feature-group>
@@ -48,7 +46,7 @@
                 v-if="point.lat && point.lng"
                 :key="idx"
                 :lat-lng="[point.lat, point.lng]"
-                :radius="13"
+                :radius="11"
                 :weight="0"
                 :fillOpacity="0.6"
                 fillColor="#0000EE"
