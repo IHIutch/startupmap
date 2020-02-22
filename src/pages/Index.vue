@@ -33,8 +33,7 @@
                       {{ popup.address.street_number }}
                       {{ popup.address.route }}
                       <sup class="ml-1">
-	                      <span v-if="filteredPoints.length == 1"></span>
-	                      <span v-else>({{ filteredPoints.length }})</span>
+                        <span>({{ filteredPoints.length }})</span>
                       </sup>
                     </span>
                   </h2>
@@ -68,11 +67,9 @@
                     {{ point.company }}
                   </h2>
                   <h3 class="h6 mt-1 mb-2">
-
                     <div>
-                    {{ point.description }}
+                      {{ point.description }}
                     </div>
-
                   </h3>
                   <ul>
                     <li>
