@@ -66,32 +66,26 @@
                   <h2 class="h4 mb-1">
                     {{ point.company }}
                   </h2>
-                  <h3 class="h6 mt-0">
+                  <h3 class="h6 mt-1 mb-2">
                     <div>
                       {{ point.description }}
                     </div>
                   </h3>
                   <ul>
                     <li>
-                      <span class="label">Ind:</span>
+                      <span class="label">Type:</span>
                       {{ point.category }}
                     </li>
-                    <!-- <li>
-                      <span class="label">Est:</span>
-                      2010
+                    <li>
+                      <span class="label">Stage:</span>
+                      {{ point.stage }}
                     </li>
                     <li>
-                      <span class="label">Size:</span>
-                      10
-                    </li> -->
-                    <li>
-                      <a
-                        class="btn btn-sm btn-primary"
+                     <a
+                        class="btn btn-sm btn-primary fixed-bottom-right"
                         :href="point.website"
                         target="_blank"
-                      >
-                        View
-                      </a>
+                      >View</a>
                     </li>
                   </ul>
                 </div>
