@@ -15,7 +15,7 @@
         <div class="col-12 h-100 px-0">
           <l-map
             class="h-100"
-            :zoom="13"
+            :zoom="12"
             :center="map.center"
             :options="{ zoomControl: false }"
           >
@@ -31,27 +31,7 @@
                   <h2 class="h4 mb-1">
                     {{ popup.company }}
                   </h2>
-                  <h3 class="h6">
-                    {{ popup.autocomplete }}
-                  </h3>
-                  <p>{{ popup.description }}</p>
-                  <ul>
-                    <li>
-                      <span class="label">Category:</span>
-                      {{ popup.category }}
-                    </li>
-                    <li>
-                      <span class="label">Stage:</span>
-                      {{ popup.stage }}
-                    </li>
-                    <li>
-                      <a
-                        :href="popup.website"
-                        class="btn btn-sm btn-primary btn-text mt-3"
-                      >
-                        View
-                      </a>
-                    </li>
+                  
                   </ul>
                 </div>
               </l-popup>
@@ -70,10 +50,9 @@
             </template>
           </l-map>
         </div>
-        <!--
         <div class="col-xs-12 col-md-4 listings">
           <ul class="list-group list-group-flush">
-            <template v-for="(point, idx) in points">
+            <template v-for="(point, idx) in filteredPoints">
               <li
                 class="list-group-item"
                 v-if="point.lat && point.lng"
@@ -118,7 +97,6 @@
             </template>
           </ul>
         </div>
--->
         <!-- Listings column------>
       </div>
     </div>
@@ -175,8 +153,9 @@ export default {
       mapboxToken:
         "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
       popup: {},
+      filteredPoints: {},
       map: {
-        center: [42.8864, -78.8784]
+        center: [42.8764, -78.846804]
       }
     };
   },
@@ -187,6 +166,9 @@ export default {
         companyName: info.company
       });
       this.popup = info;
+      this.filteredPoints = this.points.filter(point => {
+		   return point.lng == info.lng && point.lat == info.lat
+		})
       this.$refs.features.mapObject.openPopup([
         info.lat,
         info.lng,
