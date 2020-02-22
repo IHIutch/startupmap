@@ -84,7 +84,7 @@
                       {{ point.stage }}
                     </li>
                     <li>
-                      <button class="btn btn-sm btn-primary" href="#">
+                      <button class="btn btn-sm btn-primary fixed-bottom-right" href="#">
                         View
                       </button>
                     </li>
@@ -152,7 +152,7 @@ export default {
       popup: {},
       filteredPoints: {},
       map: {
-        center: [42.8764, -78.846804]
+        center: [42.8964, -78.846804]
       }
     };
   },
