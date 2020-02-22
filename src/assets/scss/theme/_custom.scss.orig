@@ -119,6 +119,21 @@ nav.navbar {
   padding: 3px 13px !important;
 }
 
+<<<<<<< HEAD
+ul{
+	display: flex;
+	list-style: none;
+	margin-left: 0px;
+	padding-left: 0px;
+	color:#0000EE !important;
+	font-size: 16px;
+
+	
+	li{
+		padding-right: 20px;
+		line-height: 18px;
+	}
+=======
 .bg-light {
   background-color: transparent !important;
 }
@@ -157,6 +172,7 @@ ul {
   li {
     padding-right: 20px;
   }
+>>>>>>> a928bd28f8411e3390acab4e6113a9aae520b872
 }
 
 .list-group-item {
@@ -189,6 +205,17 @@ a.leaflet-popup-close-button {
 /*------MEDIA QUERIES-----------*/
 
 @media only screen and (max-width: 764px) {
+<<<<<<< HEAD
+  .listings{
+	  
+	position: absolute;
+	right:0px;
+	top:65vh;
+	z-index: 999;
+	height: 35vh;
+	overflow-y: scroll;
+	
+=======
   .listings {
     position: absolute;
     right: 0px;
@@ -196,6 +223,7 @@ a.leaflet-popup-close-button {
     z-index: 999;
     height: 40vh;
     overflow-y: scroll;
+>>>>>>> a928bd28f8411e3390acab4e6113a9aae520b872
   }
 
   .navbar-brand {

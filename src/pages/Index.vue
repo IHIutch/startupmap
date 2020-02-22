@@ -29,11 +29,17 @@
               <l-popup>
                 <div>
                   <h2 class="h4 mb-1">
-                    <span v-if="Object.keys(popup).length"
-                      >{{ popup.address.street_number }}
-                      {{ popup.address.route }}</span
-                    >
+                    <span v-if="Object.keys(popup).length">
+                      {{ popup.address.street_number }}
+                      {{ popup.address.route }}
+                    </span>
                   </h2>
+                  <div class="text-blue font-nunito">
+                    <i>
+                      <span v-if="filteredPoints.length == 1">1 company</span>
+                      <span v-else>{{ filteredPoints.length }} companies</span>
+                    </i>
+                  </div>
                 </div>
               </l-popup>
             </l-feature-group>
