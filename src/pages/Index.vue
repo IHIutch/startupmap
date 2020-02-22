@@ -33,8 +33,7 @@
                       {{ popup.address.street_number }}
                       {{ popup.address.route }}
                       <sup class="ml-1">
-	                      <span v-if="filteredPoints.length == 1"></span>
-	                      <span v-else>({{ filteredPoints.length }})</span>
+                        <span>({{ filteredPoints.length }})</span>
                       </sup>
                     </span>
                   </h2>
@@ -68,15 +67,12 @@
                     {{ point.company }}
                   </h2>
                   <h3 class="h6 mt-0">
-
                     <div>
-                    {{ point.description }}
+                      {{ point.description }}
                     </div>
-
                   </h3>
                   <ul>
                     <li>
-<<<<<<< HEAD
                       <span class="label">Ind:</span>
                       {{ point.type }}
                     </li>
@@ -94,17 +90,6 @@
                         :href="point.website"
                         target="_blank"
                       >
-=======
-                      <span class="label">Type:</span>
-                      {{ point.category }}
-                    </li>
-                    <li>
-                      <span class="label">Stage:</span>
-                      {{ point.stage }}
-                    </li>
-                    <li>
-                      <button class="btn btn-sm btn-primary fixed-bottom-right" href="#">
->>>>>>> 640346b1741645a18b69a12d26bcdd1b7a21ac83
                         View
                       </a>
                     </li>
