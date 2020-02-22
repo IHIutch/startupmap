@@ -80,25 +80,25 @@
                       {{ point.address.postal_code }}
                     </div>
                   </h3>
-                  <!-- <ul>
+                  <ul>
                     <li>
                       <span class="label">Ind:</span>
                       {{ point.type }}
                     </li>
-                    <li>
+                    <!-- <li>
                       <span class="label">Est:</span>
                       2010
                     </li>
                     <li>
                       <span class="label">Size:</span>
                       10
+                    </li> -->
+                    <li>
+                      <a class="btn btn-sm btn-primary" :href="point.website">
+                        View
+                      </a>
                     </li>
-                    <li> -->
-                  <a class="btn btn-sm btn-primary" :href="point.website">
-                    View
-                  </a>
-                  <!-- </li>
-                  </ul> -->
+                  </ul>
                 </div>
               </li>
             </template>
