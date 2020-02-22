@@ -27,11 +27,13 @@
             ></l-tile-layer>
             <l-feature-group ref="features">
               <l-popup>
-                <div v-if="Object.keys(popup).length">
+                <div>
                   <h2 class="h4 mb-1">
-                    {{ popup.address.street_number }} {{ popup.address.route }}
+                    <span v-if="Object.keys(popup).length"
+                      >{{ popup.address.street_number }}
+                      {{ popup.address.route }}</span
+                    >
                   </h2>
-                  </ul>
                 </div>
               </l-popup>
             </l-feature-group>
@@ -166,12 +168,9 @@ export default {
       });
       this.popup = info;
       this.filteredPoints = this.points.filter(point => {
-		   return point.lng == info.lng && point.lat == info.lat
-		})
-      this.$refs.features.mapObject.openPopup([
-        info.lat,
-        info.lng,
-      ]);
+        return point.lng == info.lng && point.lat == info.lat;
+      });
+      this.$refs.features.mapObject.openPopup([info.lat, info.lng]);
     }
   },
   computed: {
