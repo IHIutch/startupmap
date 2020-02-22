@@ -76,6 +76,25 @@
                   </h3>
                   <ul>
                     <li>
+<<<<<<< HEAD
+                      <span class="label">Ind:</span>
+                      {{ point.type }}
+                    </li>
+                    <!-- <li>
+                      <span class="label">Est:</span>
+                      2010
+                    </li>
+                    <li>
+                      <span class="label">Size:</span>
+                      10
+                    </li> -->
+                    <li>
+                      <a
+                        class="btn btn-sm btn-primary"
+                        :href="point.website"
+                        target="_blank"
+                      >
+=======
                       <span class="label">Type:</span>
                       {{ point.category }}
                     </li>
@@ -84,7 +103,8 @@
                       {{ point.stage }}
                     </li>
                     <li>
-                      <a :href="point.website" class="btn btn-sm btn-primary fixed-bottom-right" href="#">
+                      <button class="btn btn-sm btn-primary fixed-bottom-right" href="#">
+>>>>>>> 640346b1741645a18b69a12d26bcdd1b7a21ac83
                         View
                       </a>
                     </li>
