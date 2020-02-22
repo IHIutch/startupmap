@@ -74,7 +74,7 @@
                   <ul>
                     <li>
                       <span class="label">Ind:</span>
-                      {{ point.type }}
+                      {{ point.category }}
                     </li>
                     <!-- <li>
                       <span class="label">Est:</span>
