@@ -12,6 +12,9 @@ module.exports = {
   titleTemplate: "%s - Buffalo Startup Map",
   plugins: [
     {
+      use: '@gridsome/plugin-sitemap',
+    },
+    {
       use: "gridsome-plugin-gtm",
       options: {
         id: "GTM-KDV75B3",

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@google/maps": "^1.1.0",
+    "@gridsome/plugin-sitemap": "^0.2.3",
     "bootstrap-vue": "^2.3.0",
     "gridsome": "^0.7.0",
     "gridsome-plugin-gtm": "^0.1.1",
