@@ -7,10 +7,9 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
-    "@google/maps": "^1.1.0",
     "@gridsome/plugin-sitemap": "^0.2.3",
-    "bootstrap-vue": "^2.10.1",
-    "gridsome": "^0.7.13",
+    "bootstrap-vue": "^2.15.0",
+    "gridsome": "^0.7.19",
     "gridsome-plugin-gtm": "^0.1.1",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.6.0",
@@ -20,9 +19,9 @@
     "vue-script2": "^2.1.0"
   },
   "devDependencies": {
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^4.5.0",
     "gridsome-source-google-sheets": "github:IHIutch/gridsome-source-google-sheets#multiple-sheets",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "vue2-leaflet": "^2.5.2"
   },
