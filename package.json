@@ -7,8 +7,6 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
-    "@fontsource/dosis": "^4.2.2",
-    "@fontsource/maven-pro": "^4.2.2",
     "@fontsource/nunito": "^4.2.2",
     "@gridsome/plugin-sitemap": "^0.2.3",
     "bootstrap-vue": "^2.15.0",

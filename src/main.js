@@ -7,9 +7,10 @@ import { BootstrapVue } from "bootstrap-vue";
 import DefaultLayout from "~/layouts/Default.vue";
 
 // Add fonts
-require("typeface-dosis");
-require("typeface-maven-pro");
-require("typeface-nunito");
+import("@fontsource/nunito/900.css");
+import("@fontsource/nunito/900-italic.css");
+import("@fontsource/nunito/400.css");
+import("@fontsource/nunito/400-italic.css");
 
 const siteUrl = "https://buffalostartupmap.com/";
 const siteName = "Buffalo Startup Map";
@@ -25,51 +26,51 @@ export default function(Vue, { router, head, isClient }) {
   // Add extra meta tags
   head.meta.push({
     property: "og:type",
-    content: "website"
+    content: "website",
   });
   head.meta.push({
     property: "og:title",
-    content: siteName
+    content: siteName,
   });
   head.meta.push({
     property: "og:site_name",
-    content: siteName
+    content: siteName,
   });
   head.meta.push({
     property: "og:url",
-    content: siteUrl
+    content: siteUrl,
   });
   head.meta.push({
     property: "og:description",
-    content: siteDesc
+    content: siteDesc,
   });
   head.meta.push({
     property: "og:image",
-    content: metaImage
+    content: metaImage,
   });
   head.meta.push({
     name: "twitter:card",
-    content: "summary_large_image"
+    content: "summary_large_image",
   });
   head.meta.push({
     name: "twitter:title",
-    content: siteName
+    content: siteName,
   });
   head.meta.push({
     name: "twitter:url",
-    content: siteUrl
+    content: siteUrl,
   });
   head.meta.push({
     name: "twitter:description",
-    content: siteDesc
+    content: siteDesc,
   });
   head.meta.push({
     name: "twitter:image",
-    content: metaImage
+    content: metaImage,
   });
   // Google Search Console
   head.meta.push({
     name: "google-site-verification",
-    content: "bLOQwgU2NzWGPGeL0JJVed9CcZBGPUu09l3I1Usuf90"
+    content: "bLOQwgU2NzWGPGeL0JJVed9CcZBGPUu09l3I1Usuf90",
   });
 }

@@ -12,18 +12,18 @@ module.exports = {
   titleTemplate: "%s - Buffalo Startup Map",
   plugins: [
     {
-      use: '@gridsome/plugin-sitemap',
+      use: "@gridsome/plugin-sitemap",
     },
     {
       use: "gridsome-plugin-gtm",
       options: {
         id: "GTM-KDV75B3",
         enabled: process.env.NODE_ENV === "production",
-        debug: false
-      }
+        debug: false,
+      },
     },
     {
-      use: "gridsome-source-google-sheets",
+      use: "gridsome-source-google-sheets-v2",
       options: {
         apiKey: "AIzaSyC2tSkbaL8SIQsSQGlIsQZXn-wHBD3z-Rs",
         spreadsheets: [
@@ -32,12 +32,12 @@ module.exports = {
             sheets: [
               {
                 sheetName: "Sheet1",
-                collectionName: "places"
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
+                collectionName: "places",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
 };
