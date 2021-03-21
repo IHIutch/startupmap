@@ -143,6 +143,10 @@ nav.navbar {
     from(rgba(0, 0, 0, 1)),
     to(rgba(0, 0, 0, 0))
   );
+  
+  mask-image: linear-gradient(
+    to top, transparent 0%, black 5%
+  );
 }
 
 span.label {
