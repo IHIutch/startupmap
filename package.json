@@ -9,20 +9,24 @@
   "dependencies": {
     "@fontsource/nunito": "^4.2.2",
     "@gridsome/plugin-sitemap": "^0.2.3",
+    "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.15.0",
-    "gridsome": "^0.7.19",
+    "gridsome": "^0.7.23",
     "gridsome-plugin-gtm": "^0.1.1",
     "gridsome-source-google-sheets-v2": "^1.0.4",
     "leaflet": "^1.6.0",
     "vue-script2": "^2.1.0",
-    "bootstrap": "^4.5.0",
     "vue2-leaflet": "^2.5.2"
   },
   "devDependencies": {
-    "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2"
   },
   "vue": {
     "devtools": true
+  },
+  "overrides": {
+    "gridsome": {
+      "sharp": "^0.30.7"
+    }
   }
 }
