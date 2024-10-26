@@ -5,9 +5,7 @@
         <g-link class="navbar-brand" href="/">Buffalo Startup Map</g-link>
         <ul class="nav navbar-nav">
           <li class="nav-item">
-            <g-link class="nav-link btn btn-primary small" to="/about"
-              >Add a Startup</g-link
-            >
+            <g-link class="nav-link btn btn-primary small" to="/about">Add a Startup</g-link>
           </li>
         </ul>
       </nav>
@@ -20,10 +18,7 @@
             :options="{ zoomControl: false }"
           >
             <l-tile-layer
-              :url="
-                'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' +
-                  mapboxToken
-              "
+              :url="'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' + mapboxToken"
             ></l-tile-layer>
             <l-feature-group ref="features">
               <l-popup>
@@ -55,6 +50,24 @@
           </l-map>
         </div>
         <div class="col-xs-12 col-md-4 listings">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              v-model="searchQuery"
+              placeholder="Search Buffalo Startups..."
+              class="form-control"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn"
+                type="button"
+                @click="clearSearch"
+                v-if="searchQuery"
+              >
+                &times;
+              </button>
+            </div>
+          </div>
           <ul class="list-group list-group-flush">
             <template v-for="(point, idx) in filteredPoints">
               <li
@@ -81,7 +94,7 @@
                       {{ point.stage }}
                     </li>
                     <li>
-                     <a
+                      <a
                         class="btn btn-sm btn-primary fixed-bottom-right"
                         :href="point.website"
                         target="_blank"
@@ -93,12 +106,9 @@
             </template>
           </ul>
         </div>
-        <!-- Listings column------>
       </div>
     </div>
-    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank"
-      >Built with &#x2665;</a
-    >
+    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank">Built with &#x2665;</a>
   </Layout>
 </template>
 
@@ -149,7 +159,7 @@ export default {
       mapboxToken:
         "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
       popup: {},
-      filteredPoints: {},
+      searchQuery: "",
       map: {
         center: [42.8964, -78.846804]
       }
@@ -163,9 +173,12 @@ export default {
       });
       this.popup = info;
       this.filteredPoints = this.points.filter(point => {
-        return point.lng == info.lng && point.lat == info.lat;
+        return point.lng === info.lng && point.lat === info.lat;
       });
       this.$refs.features.mapObject.openPopup([info.lat, info.lng]);
+    },
+    clearSearch() {
+      this.searchQuery = "";
     }
   },
   computed: {
@@ -184,6 +197,21 @@ export default {
             ? node.website
             : "http://" + node.website
         };
+      });
+    },
+    filteredPoints() {
+      return this.points.filter(point => {
+        const matchesSearch = (
+          point.company.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          point.description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          point.category.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          point.stage.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+        const matchesLocation = (
+          this.popup.lat === undefined || 
+          (point.lat === this.popup.lat && point.lng === this.popup.lng)
+        );
+        return matchesSearch && matchesLocation;
       });
     }
   }
