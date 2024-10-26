@@ -5,17 +5,17 @@
         <g-link class="navbar-brand" href="/">Buffalo Startup Map</g-link>
         <ul class="nav navbar-nav">
           <li class="nav-item">
-            <g-link class="nav-link btn btn-primary small" to="/about">Add a Startup</g-link>
+            <g-link class="nav-link btn btn-primary small" to="/about">Add Startup</g-link>
           </li>
         </ul>
       </nav>
       <div class="row h-100">
         <div class="col-12 h-100 px-0">
           <div class="filter-buttons">
-            <b-button variant="sm" @click="toggleTypeFilter">
+            <b-button :class="{ selected: showTypeFilter }" variant="sm" @click="toggleTypeFilter">
               Types ({{ selectedTypes.length }})
             </b-button>
-            <b-button variant="sm" @click="toggleStageFilter">
+            <b-button :class="{ selected: showStageFilter }" variant="sm" @click="toggleStageFilter">
               Stages ({{ selectedStages.length }})
             </b-button>
 
@@ -44,6 +44,10 @@
             
             <div :class="{ 'd-none': !showTypeFilter }" class="filter-options">
               <div class="row">
+                <div class="col-12">
+                  <h3>Types</h3>
+                  <button @click="clearFilters('type')" class="btn btn-link">[ Clear All Types ]</button>
+                </div>
                 <div class="col-4" v-for="type in uniqueTypes" :key="type">
                   <b-form-checkbox :value="type" v-model="selectedTypes">{{ type }}</b-form-checkbox>
                 </div>
@@ -51,6 +55,10 @@
             </div>
             <div :class="{ 'd-none': !showStageFilter }" class="filter-options">
               <div class="row">
+                <div class="col-12">
+                  <h3>Stages</h3>
+                  <button @click="clearFilters('stage')" class="btn btn-link">[ Clear All Stages]</button>
+                </div>
                 <div class="col-6" v-for="stage in uniqueStages" :key="stage">
                   <b-form-checkbox :value="stage" v-model="selectedStages">{{ stage }}</b-form-checkbox>
                 </div>
@@ -90,14 +98,13 @@
                 :radius="11"
                 :weight="0"
                 :fillOpacity="0.6"
-                fillColor="#0000EE"
+                :fillColor="getFillColor(point)"
                 @click="markerClick(point)"
               />
             </template>
           </l-map>
         </div>
         <div class="col-xs-12 col-md-4 listings">
-          
           <ul class="list-group list-group-flush">
             <template v-for="(point, idx) in filteredPoints">
               <li
@@ -135,6 +142,8 @@
               </li>
             </template>
           </ul>
+          <button @click="showAllPoints" class="btn btn-sm white full-width">Show All</button>
+
         </div>
       </div>
     </div>
@@ -198,7 +207,8 @@ export default {
       showStageFilter: false,
       map: {
         center: [42.8964, -78.846804]
-      }
+      },
+      selectedMarker: null
     };
   },
   methods: {
@@ -208,6 +218,7 @@ export default {
         companyName: info.company
       });
       this.popup = info;
+      this.selectedMarker = info; // Set the selected marker
       this.filteredPoints = this.points.filter(point => {
         return point.lng === info.lng && point.lat === info.lat;
       });
@@ -223,6 +234,24 @@ export default {
     toggleStageFilter() {
       this.showStageFilter = !this.showStageFilter;
       this.showTypeFilter = false; // Ensure only one filter is open at a time
+    },
+    clearFilters(filterType) {
+      if (filterType === 'type') {
+        this.selectedTypes = [];
+      } else if (filterType === 'stage') {
+        this.selectedStages = [];
+      }
+    },
+    showAllPoints() {
+      this.popup = {};
+      this.filteredPoints = this.points; // Reset to show all points
+      this.selectedMarker = null; // Reset the selected marker
+    },
+    getFillColor(point) {
+      // Change fill color if the point is the selected marker
+      return this.selectedMarker && this.selectedMarker.lat === point.lat && this.selectedMarker.lng === point.lng
+        ? "#ee00ff" //  color for selected marker
+        : "#0000EE"; // Default color
     }
   },
   computed: {
@@ -244,7 +273,7 @@ export default {
       });
     },
     uniqueTypes() {
-      return [...new Set(this.points.map(point => point.category))];
+      return [...new Set(this.points.map(point => point.category))].sort();
     },
     uniqueStages() {
       return [...new Set(this.points.map(point => point.stage))];
@@ -269,3 +298,4 @@ export default {
   }
 };
 </script>
+

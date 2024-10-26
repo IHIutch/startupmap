@@ -115,31 +115,74 @@ nav.navbar {
 }
 
 .btn.btn-sm{
-  background-color: #ffffff !important;
   color:#0000ee;
   border-radius: 100px;
   padding: 5px 13px !important;
   font-weight: 900;
   font-size: 14px;
 
+  &.selected{
+    background-color: #0000ee !important;
+    color:#ffffff;
+  }
+
+  &.white{
+    background-color: #ffffff;
+    color: #0000ee;
+  }
+
 }
 
+.full-width{
+  width: 100%;
+}
 
 .btn-sm:hover{
   color:#0000ee;
 }
 
+.btn.btn-link{
+  font-size: 14px;
+  color:#0000ee;
+}
+
+.filters .btn.btn-link{
+  position: absolute;
+    right: 10px;
+    top: 0px;
+}
 
 .input-group input{
-  border-radius:30px;
+
+}
+
+.input-group-append{
+  position: absolute;
+  right: 0px;
+  top:0.5px;
+  z-index: 9999;
+
+  .btn{
+    margin-right: 0px;
+  }
 
 }
 
 .input-group-append .btn{
-  background-color: #0000ee;
+  background-color: #0000ee !important;
   color:#fff;
+  border-radius: 33px;
+  padding:4px 12px;
+  
 }
 
+.input-group:not(.has-validation) > .form-control:not(:last-child), .input-group:not(.has-validation) > .custom-select:not(:last-child), .input-group:not(.has-validation) > .custom-file:not(:last-child) .custom-file-label, .input-group:not(.has-validation) > .custom-file:not(:last-child) .custom-file-label::after{
+  border-radius:30px;
+}
+
+.input-group > .input-group-append > .btn, .input-group > .input-group-append > .input-group-text, .input-group > .input-group-prepend:not(:first-child) > .btn, .input-group > .input-group-prepend:not(:first-child) > .input-group-text, .input-group > .input-group-prepend:first-child > .btn:not(:first-child), .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child){
+  border-radius:30px;
+}
 
 
 
@@ -215,27 +258,36 @@ ul {
 
 .filters{
   color: #0000ee;
-  padding:20px 30px;
+  padding:0px 30px 20px 30px;
   position:fixed;
-  top:100px;
+  top:125px;
   z-index: 9999;
 
 }
 
+.filters h3{
+  width:70%;
+  margin-bottom: 20px;
+}
+
 .filter-buttons{
   position: absolute;
-  top:75px;
+  top:80px;
   left:0px;
   padding-left:30px;
   min-width:100%;
   z-index: 999;
+
+    button.btn-sm{
+      background-color: #ffffff !important;
+      margin-right: 10px;
+    }
 
     button, .input-group{
       float:left;
     }
 
     .btn{
-      margin-right:10px;
       font-family: "Nunito", sans-serif;
       font-weight: bold;
     }
@@ -267,6 +319,7 @@ ul {
   max-width:700px;
   min-width: 200px;
   margin: 0px auto 0px auto;
+  overflow-y: scroll;
 }
 
 .filters .filter-options .custom-control{
