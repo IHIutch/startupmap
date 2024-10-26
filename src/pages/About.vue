@@ -95,6 +95,7 @@
                 placeholder="Briefly describe the startup..."
                 rows="3"
                 no-resize
+                maxlength="200"
               ></b-form-textarea>
             </b-form-group>
 
@@ -255,3 +256,4 @@ export default {
   }
 };
 </script>
+
