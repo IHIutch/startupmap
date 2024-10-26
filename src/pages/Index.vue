@@ -147,7 +147,7 @@
         </div>
       </div>
     </div>
-    <a class="linkfixed" href="https://www.helmux.com/work" target="_blank">Built with &#x2665;</a>
+    <a class="linkfixed" href="https://www.helmux.com/" target="_blank">Built with &#x2665;</a>
   </Layout>
 </template>
 
@@ -252,11 +252,18 @@ export default {
       return this.selectedMarker && this.selectedMarker.lat === point.lat && this.selectedMarker.lng === point.lng
         ? "#ee00ff" //  color for selected marker
         : "#0000EE"; // Default color
+    },
+    shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
   },
   computed: {
     points() {
-      return this.$page.places.edges.map(place => {
+      const shuffledPoints = this.$page.places.edges.map(place => {
         var node = place.node;
         return {
           description: node.description,
@@ -271,6 +278,7 @@ export default {
             : "http://" + node.website
         };
       });
+      return this.shuffleArray(shuffledPoints);
     },
     uniqueTypes() {
       return [...new Set(this.points.map(point => point.category))].sort();

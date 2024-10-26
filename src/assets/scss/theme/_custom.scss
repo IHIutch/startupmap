@@ -258,11 +258,12 @@ ul {
 
 .filters{
   color: #0000ee;
-  padding:0px 30px 20px 30px;
+  padding:0px 30px 150px 30px;
   position:fixed;
   top:125px;
   z-index: 9999;
-
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .filters h3{
@@ -387,6 +388,10 @@ a.leaflet-popup-close-button {
   color: #c3c3c3;
 }
 
+
+.leaflet-control-attribution{
+  display: none;
+}
 /*------MEDIA QUERIES-----------*/
 
 @media only screen and (max-width: 764px) {
@@ -396,17 +401,19 @@ a.leaflet-popup-close-button {
     top: 60vh;
     padding-top: 0px;
     z-index: 999;
-    height: 40vh;
+    height: 37vh;
     overflow-y: auto;
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%);
+    mask-image: linear-gradient(to top, transparent 0%, black 15%);
   }
 
   .navbar-brand {
-    font-size: 32px !important;
+    font-size: 29px !important;
     line-height: 44px;
     line-height: 32px;
     margin-left: 0px;
     margin-right: 0px;
-    padding: 5px 130px 0px 0px;
+    padding: 5px 100px 0px 0px;
   
   }
 
@@ -448,15 +455,25 @@ a.leaflet-popup-close-button {
   }
 
   .filter-buttons .input-group{
-    width:45%;
+    width:42%;
   }
 
   .filter-buttons{
     top:60px;
     right:0px;
-    padding-left:20px;
+    padding-left:15px;
+  
+    & button.btn-sm{
+      margin-right: 5px;
+    }
+
   }
   
 
-}//END MEDIA QUERY
+}
+
+
+
+//END MEDIA QUERY
+
 
