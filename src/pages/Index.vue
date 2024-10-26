@@ -11,6 +11,53 @@
       </nav>
       <div class="row h-100">
         <div class="col-12 h-100 px-0">
+          <div class="filter-buttons">
+            <b-button variant="sm" @click="toggleTypeFilter">
+              Types ({{ selectedTypes.length }})
+            </b-button>
+            <b-button variant="sm" @click="toggleStageFilter">
+              Stages ({{ selectedStages.length }})
+            </b-button>
+
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                v-model="searchQuery"
+                placeholder="Filter & Search Buffalo Startups..."
+                class="form-control"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn"
+                  type="button"
+                  @click="clearSearch"
+                  v-if="searchQuery"
+                >
+                  &times;
+                </button>
+              </div>
+            </div>
+
+          </div>
+          <!-- Filters -->
+          <div class="filters mb-3">
+            
+            <div :class="{ 'd-none': !showTypeFilter }" class="filter-options">
+              <div class="row">
+                <div class="col-4" v-for="type in uniqueTypes" :key="type">
+                  <b-form-checkbox :value="type" v-model="selectedTypes">{{ type }}</b-form-checkbox>
+                </div>
+              </div>
+            </div>
+            <div :class="{ 'd-none': !showStageFilter }" class="filter-options">
+              <div class="row">
+                <div class="col-6" v-for="stage in uniqueStages" :key="stage">
+                  <b-form-checkbox :value="stage" v-model="selectedStages">{{ stage }}</b-form-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Map component -->
           <l-map
             class="h-100"
             :zoom="12"
@@ -50,24 +97,7 @@
           </l-map>
         </div>
         <div class="col-xs-12 col-md-4 listings">
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              v-model="searchQuery"
-              placeholder="Search Buffalo Startups..."
-              class="form-control"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn"
-                type="button"
-                @click="clearSearch"
-                v-if="searchQuery"
-              >
-                &times;
-              </button>
-            </div>
-          </div>
+          
           <ul class="list-group list-group-flush">
             <template v-for="(point, idx) in filteredPoints">
               <li
@@ -141,6 +171,7 @@ if (process.isClient) {
 }
 
 import "leaflet/dist/leaflet.css";
+import { BButton, BFormCheckbox } from "bootstrap-vue";
 
 export default {
   metaInfo: {
@@ -152,14 +183,19 @@ export default {
     LTileLayer: Vue2Leaflet.LTileLayer,
     LCircleMarker: Vue2Leaflet.LCircleMarker,
     LPopup: Vue2Leaflet.LPopup,
-    LFeatureGroup: Vue2Leaflet.LFeatureGroup
+    LFeatureGroup: Vue2Leaflet.LFeatureGroup,
+    BButton,
+    BFormCheckbox
   },
   data() {
     return {
-      mapboxToken:
-        "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
+      mapboxToken: "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
       popup: {},
       searchQuery: "",
+      selectedTypes: [],
+      selectedStages: [],
+      showTypeFilter: false,
+      showStageFilter: false,
       map: {
         center: [42.8964, -78.846804]
       }
@@ -179,6 +215,14 @@ export default {
     },
     clearSearch() {
       this.searchQuery = "";
+    },
+    toggleTypeFilter() {
+      this.showTypeFilter = !this.showTypeFilter;
+      this.showStageFilter = false; // Ensure only one filter is open at a time
+    },
+    toggleStageFilter() {
+      this.showStageFilter = !this.showStageFilter;
+      this.showTypeFilter = false; // Ensure only one filter is open at a time
     }
   },
   computed: {
@@ -199,6 +243,12 @@ export default {
         };
       });
     },
+    uniqueTypes() {
+      return [...new Set(this.points.map(point => point.category))];
+    },
+    uniqueStages() {
+      return [...new Set(this.points.map(point => point.stage))];
+    },
     filteredPoints() {
       return this.points.filter(point => {
         const matchesSearch = (
@@ -211,7 +261,9 @@ export default {
           this.popup.lat === undefined || 
           (point.lat === this.popup.lat && point.lng === this.popup.lng)
         );
-        return matchesSearch && matchesLocation;
+        const matchesType = this.selectedTypes.length === 0 || this.selectedTypes.includes(point.category);
+        const matchesStage = this.selectedStages.length === 0 || this.selectedStages.includes(point.stage);
+        return matchesSearch && matchesLocation && matchesType && matchesStage;
       });
     }
   }
