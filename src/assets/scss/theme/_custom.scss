@@ -114,6 +114,78 @@ nav.navbar {
   font-weight: 900;
 }
 
+.btn.btn-sm{
+  color:#0000ee;
+  border-radius: 100px;
+  padding: 5px 13px !important;
+  font-weight: 900;
+  font-size: 14px;
+
+  &.selected{
+    background-color: #0000ee !important;
+    color:#ffffff;
+  }
+
+  &.white{
+    background-color: #ffffff;
+    color: #0000ee;
+  }
+
+}
+
+.full-width{
+  width: 100%;
+}
+
+.btn-sm:hover{
+  color:#0000ee;
+}
+
+.btn.btn-link{
+  font-size: 14px;
+  color:#0000ee;
+}
+
+.filters .btn.btn-link{
+  position: absolute;
+    right: 10px;
+    top: 0px;
+}
+
+.input-group input{
+
+}
+
+.input-group-append{
+  position: absolute;
+  right: 0px;
+  top:0.5px;
+  z-index: 9999;
+
+  .btn{
+    margin-right: 0px;
+  }
+
+}
+
+.input-group-append .btn{
+  background-color: #0000ee !important;
+  color:#fff;
+  border-radius: 33px;
+  padding:4px 12px;
+  
+}
+
+.input-group:not(.has-validation) > .form-control:not(:last-child), .input-group:not(.has-validation) > .custom-select:not(:last-child), .input-group:not(.has-validation) > .custom-file:not(:last-child) .custom-file-label, .input-group:not(.has-validation) > .custom-file:not(:last-child) .custom-file-label::after{
+  border-radius:30px;
+}
+
+.input-group > .input-group-append > .btn, .input-group > .input-group-append > .input-group-text, .input-group > .input-group-prepend:not(:first-child) > .btn, .input-group > .input-group-prepend:not(:first-child) > .input-group-text, .input-group > .input-group-prepend:first-child > .btn:not(:first-child), .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child){
+  border-radius:30px;
+}
+
+
+
 .nav-item .btn {
   position: absolute;
   right: 15px;
@@ -184,6 +256,119 @@ ul {
 	box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.3) !important;
 }
 
+.filters{
+  color: #0000ee;
+  padding:0px 30px 150px 30px;
+  position:fixed;
+  top:125px;
+  z-index: 9999;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.filters h3{
+  width:70%;
+  margin-bottom: 20px;
+}
+
+.filter-buttons{
+  position: absolute;
+  top:80px;
+  left:0px;
+  padding-left:30px;
+  min-width:100%;
+  z-index: 999;
+
+    button.btn-sm{
+      background-color: #ffffff !important;
+      margin-right: 10px;
+    }
+
+    button, .input-group{
+      float:left;
+    }
+
+    .btn{
+      font-family: "Nunito", sans-serif;
+      font-weight: bold;
+    }
+
+    .input-group{
+        width:40%;
+
+        input{
+          padding:0px 15px;
+          margin:0px 0px;
+          height:35px;
+          border: none;
+        }
+
+        input::placeholder{
+          font-size: 14px;
+          font-family: "Nunito", sans-serif;
+        }
+    }
+
+}
+
+.filters .filter-options {
+  padding: 20px 30px; // Adjusted padding for smaller size
+  background-color: #fff;
+  box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.2) !important;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  max-width:700px;
+  min-width: 200px;
+  margin: 0px auto 0px auto;
+  overflow-y: scroll;
+}
+
+.filters .filter-options .custom-control{
+  font-size: 10px;
+  text-transform: uppercase;
+
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  line-height: 12px;
+}
+
+.custom-control-label{
+  padding-top:1px;
+}
+
+.custom-control-label::before, .custom-control-label::after{
+top:0px;
+}
+
+.custom-checkbox{
+  vertical-align: middle;
+
+  .label{
+    flex-grow: 1;
+  }
+
+}
+
+
+.text-blue {
+  color: #0000ee;
+}
+
+.font-nunito {
+  font-family: "Nunito", sans-serif !important;
+}
+
+
+
+
+.d-none {
+  display: none !important;
+}
+
+
+
+
 /*------POPOVER SYTLES-----------*/
 
 .leaflet-popup-content-wrapper {
@@ -203,6 +388,10 @@ a.leaflet-popup-close-button {
   color: #c3c3c3;
 }
 
+
+.leaflet-control-attribution{
+  display: none;
+}
 /*------MEDIA QUERIES-----------*/
 
 @media only screen and (max-width: 764px) {
@@ -212,17 +401,20 @@ a.leaflet-popup-close-button {
     top: 60vh;
     padding-top: 0px;
     z-index: 999;
-    height: 40vh;
+    height: 37vh;
     overflow-y: auto;
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%);
+    mask-image: linear-gradient(to top, transparent 0%, black 15%);
   }
 
   .navbar-brand {
-    font-size: 48px !important;
+    font-size: 29px !important;
     line-height: 44px;
     line-height: 32px;
     margin-left: 0px;
     margin-right: 0px;
-    padding: 5px 160px 0px 0px;
+    padding: 5px 100px 0px 0px;
+  
   }
 
   .btn-primary.small {
@@ -248,12 +440,40 @@ a.leaflet-popup-close-button {
     font-size: 14px;
     opacity: .8;
   }
+
+  .filters{
+    top:90px;
+    padding:15px 15px;
+
+    .filter-options {
+      max-height: 380px;
+      overflow-y: scroll;
+      padding:15px 20px;
+      
+    }
+
+  }
+
+  .filter-buttons .input-group{
+    width:42%;
+  }
+
+  .filter-buttons{
+    top:60px;
+    right:0px;
+    padding-left:15px;
+  
+    & button.btn-sm{
+      margin-right: 5px;
+    }
+
+  }
+  
+
 }
 
-.text-blue {
-  color: #0000ee;
-}
 
-.font-nunito {
-  font-family: "Nunito", sans-serif !important;
-}
+
+//END MEDIA QUERY
+
+
