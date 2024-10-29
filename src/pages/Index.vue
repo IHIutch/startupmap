@@ -273,7 +273,7 @@ export default {
           category: node.category,
           stage: node.stage,
           address: JSON.parse(node.address),
-          website: new RegExp("^https?://").test(node.website)
+          website: node.website.startsWith("http")
             ? node.website
             : "http://" + node.website
         };
