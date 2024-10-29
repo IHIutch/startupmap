@@ -110,7 +110,7 @@
               <li
                 class="list-group-item"
                 v-if="point.lat && point.lng"
-                :key="idx"
+                :key="point.company"
               >
                 <div>
                   <h2 class="h4 mb-1">
