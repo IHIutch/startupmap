@@ -149,14 +149,14 @@
                       <span class="label">Stage:</span>
                       {{ point.stage }}
                     </li>
-                    <li>
+                    <!-- <li>
                       <a
                         class="btn btn-sm btn-primary fixed-bottom-right"
                         :href="point.website"
                         target="_blank"
                         >View</a
                       >
-                    </li>
+                    </li> -->
                   </ul>
                 </div>
               </li>
