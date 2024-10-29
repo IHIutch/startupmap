@@ -125,39 +125,14 @@
         </div>
         <div class="col-xs-12 col-md-4 listings">
           <ul class="list-group list-group-flush">
-            <template v-for="(point, idx) in filteredPoints">
+            <template v-for="point in filteredPoints">
               <li
                 class="list-group-item"
                 v-if="point.lat && point.lng"
-                :key="point.company"
+                :key="point.id"
               >
                 <div>
-                  <h2 class="h4 mb-1">
-                    {{ point.company }}
-                  </h2>
-                  <h3 class="h6 mt-1 mb-2">
-                    <div>
-                      {{ point.description }}
-                    </div>
-                  </h3>
-                  <ul>
-                    <li>
-                      <span class="label">Type:</span>
-                      {{ point.category }}
-                    </li>
-                    <li>
-                      <span class="label">Stage:</span>
-                      {{ point.stage }}
-                    </li>
-                    <!-- <li>
-                      <a
-                        class="btn btn-sm btn-primary fixed-bottom-right"
-                        :href="point.website"
-                        target="_blank"
-                        >View</a
-                      >
-                    </li> -->
-                  </ul>
+                  <pre>{{ JSON.stringify(point, null, 2) }}</pre>
                 </div>
               </li>
             </template>
@@ -292,6 +267,7 @@ export default {
       const shuffledPoints = this.$page.places.edges.map((place) => {
         var node = place.node;
         return {
+          id: node.id,
           description: node.description,
           lat: parseFloat(node.lat),
           lng: parseFloat(node.lng),
@@ -299,7 +275,7 @@ export default {
           category: node.category,
           stage: node.stage,
           address: JSON.parse(node.address),
-          website: node.website.startsWith("http")
+          website: new RegExp("^https?://").test(node.website)
             ? node.website
             : "http://" + node.website,
         };
