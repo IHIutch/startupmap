@@ -132,33 +132,7 @@
                 :key="point.id"
               >
                 <div>
-                  <h2 class="h4 mb-1">
-                    {{ point.company }}
-                  </h2>
-                  <h3 class="h6 mt-1 mb-2">
-                    <div>
-                      {{ point.description }}
-                    </div>
-                  </h3>
-                  <ul>
-                    <li>
-                      <span class="label">Type:</span>
-                      {{ point.category }}
-                    </li>
-                    <li>
-                      <span class="label">Stage:</span>
-                      {{ point.stage }}
-                    </li>
-                    <li>
-                      <a
-                        class="btn btn-sm btn-primary fixed-bottom-right"
-                        :key="point.id"
-                        :href="point.website"
-                        target="_blank"
-                        >View</a
-                      >
-                    </li>
-                  </ul>
+                  <pre>{{ JSON.stringify(point, null, 2) }}</pre>
                 </div>
               </li>
             </template>
