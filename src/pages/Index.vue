@@ -93,7 +93,7 @@
             <template v-for="(point, idx) in points">
               <l-circle-marker
                 v-if="point.lat && point.lng"
-                :key="idx"
+                :key="point.company"
                 :lat-lng="[point.lat, point.lng]"
                 :radius="11"
                 :weight="0"
