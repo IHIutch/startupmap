@@ -113,9 +113,9 @@ function Home() {
 
             <div className="input-group mb-3">
               <input
-                type="text"
+                type="search"
                 placeholder="Filter & Search Buffalo Startups..."
-                className="form-control"
+                className="form-control rounded-pill"
                 onChange={(e) => navigate({
                   replace: true,
                   to: Route.fullPath,
@@ -125,17 +125,6 @@ function Home() {
                   })
                 })}
               />
-              <div className="input-group-append">
-                {searchParams.search
-                  ? (
-                    <button
-                      className="btn"
-                      type="button"
-                    >
-                      &times;
-                    </button>)
-                  : null}
-              </div>
             </div>
           </div>
 
