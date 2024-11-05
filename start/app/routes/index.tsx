@@ -3,6 +3,7 @@ import { createFileRoute, Link, stripSearchParams, useNavigate } from '@tanstack
 import { getAllStartups } from '../../utils/air-table'
 import { Map, Marker } from 'pigeon-maps'
 import { z } from 'zod'
+import { incomingDataSchema } from '../../utils/schemas'
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA'
 
@@ -15,9 +16,14 @@ const searchSchema = z.object({
 
 export const Route = createFileRoute('/')({
   component: Home,
-  loader: async () => ({
-    allStartups: await getAllStartups()
-  }),
+  loader: async () => {
+    const allStartups = await getAllStartups()
+    // Throws error if invalid
+    const parsedData = z.array(incomingDataSchema).parse(allStartups)
+    return {
+      allStartups: parsedData
+    }
+  },
   search: {
     middlewares: [
       stripSearchParams({
@@ -268,7 +274,7 @@ function Home() {
                     })}
                     style={{
                       display: "block",
-                      backgroundColor: searchParams.company === d.company ? '#ee00ff' : 'blue',
+                      backgroundColor: searchParams.company === d.company ? '#EE00FF' : '#0000EE',
                       height: '22px',
                       width: '22px',
                       borderRadius: '99rem',

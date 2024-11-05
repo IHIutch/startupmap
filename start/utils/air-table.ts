@@ -1,6 +1,5 @@
 import Airtable from "airtable";
-import { z } from "zod";
-import { startupSchema } from "./schemas";
+import { StartupType } from "./schemas";
 
 Airtable.configure({
   apiKey:
@@ -12,13 +11,17 @@ const table = base("tblplgOs6uzvz3Kaq");
 
 export const getAllStartups = async () => {
   const records = await table.select().all();
-  const data = records.map((d, idx) => ({
-    id: String(idx),
+  return records.map((d) => ({
+    id: d.id,
     ...d.fields,
   }))
+}
 
-  // Throws error if invalid
-  const parsedData = z.array(startupSchema).parse(data)
-
-  return parsedData
+export const createStartup = async (payload: StartupType) => {
+  return await table.create({
+    ...payload,
+    address: JSON.stringify(payload.address)
+  }, {
+    typecast: true
+  })
 }
