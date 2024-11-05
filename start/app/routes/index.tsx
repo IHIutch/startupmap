@@ -4,24 +4,21 @@ import { getAllStartups } from '../../utils/air-table'
 import { Map, Marker } from 'pigeon-maps'
 import { z } from 'zod'
 import { incomingDataSchema } from '../../utils/schemas'
+import { env } from '../../env'
+import { createServerFn } from '@tanstack/start'
 
-const MAPBOX_TOKEN = 'pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA'
-
-const searchSchema = z.object({
-  search: z.string().optional(),
-  company: z.string().optional(),
-  types: z.string().array().optional(),
-  stages: z.string().array().optional(),
+export const serverGetAllStartups = createServerFn('GET', async () => {
+  const allStartups = await getAllStartups()
+  // Throws error if invalid
+  const parsedData = z.array(incomingDataSchema).parse(allStartups)
+  return parsedData
 })
 
 export const Route = createFileRoute('/')({
   component: Home,
   loader: async () => {
-    const allStartups = await getAllStartups()
-    // Throws error if invalid
-    const parsedData = z.array(incomingDataSchema).parse(allStartups)
     return {
-      allStartups: parsedData
+      allStartups: await serverGetAllStartups()
     }
   },
   search: {
@@ -34,7 +31,12 @@ export const Route = createFileRoute('/')({
       }),
     ],
   },
-  validateSearch: searchSchema
+  validateSearch: z.object({
+    search: z.string().optional(),
+    company: z.string().optional(),
+    types: z.string().array().optional(),
+    stages: z.string().array().optional(),
+  })
 })
 
 function Home() {
@@ -245,7 +247,7 @@ function Home() {
             }}
           >
             <Map
-              provider={(x, y, z) => `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/${z}/${x}/${y}@2x?access_token=${MAPBOX_TOKEN}`}
+              provider={(x, y, z) => `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/${z}/${x}/${y}@2x?access_token=${env.PUBLIC_MAPBOX_KEY}`}
               defaultCenter={[42.8964, -78.846804]}
               defaultZoom={12}
             >

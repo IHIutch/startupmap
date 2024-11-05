@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { APIProvider, useMapsLibrary } from '@vis.gl/react-google-maps';
 import { AddressType } from '../utils/schemas';
+import { env } from '../env';
 
 type Place = {
   address: AddressType,
@@ -70,12 +71,9 @@ export const GeocoderInput = ({ onPlaceSelect, ...inputProps }: GeocoderInputPro
   );
 };
 
-
-const GOOGLE_API_KEY = "AIzaSyC2tSkbaL8SIQsSQGlIsQZXn-wHBD3z-Rs"
-
 const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <APIProvider apiKey={GOOGLE_API_KEY}>
+    <APIProvider apiKey={env.PUBLIC_GOOGLE_AUTOCOMPLETE_KEY}>
       {children}
     </APIProvider>
   )
