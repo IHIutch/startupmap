@@ -21,6 +21,9 @@ export const Route = createRootRoute({
       title: 'TanStack Start Starter',
     },
   ],
+  links: () => [{ "rel":"stylesheet", href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+
+  }],
   component: RootComponent,
   notFoundComponent: () => <div><h1>Not found</h1></div>
 })
