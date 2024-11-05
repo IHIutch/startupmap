@@ -9,10 +9,10 @@ function RouteComponent() {
   return (
     <div className="container">
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
-        <Link className="navbar-brand" to="/">Buffalo Startup Map</Link>
+        <Link to="/" className="navbar-brand" >Buffalo Startup Map</Link>
         <ul className="nav navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link btn btn-primary small" to="/"
+            <Link to="/" className="nav-link btn btn-primary small"
             >View Map</Link>
           </li>
         </ul>
@@ -27,7 +27,7 @@ function RouteComponent() {
 
           {/* <!--           <a className="btn btn-primary mt-3 mr-2" target="_blank" href="https://www.linkedin.com/shareArticle?&url=buffalostartupmap.com&title=Buffalo%20Startup%20Map&summary=Help%20create%20Buffalo's%20best%20startup%20directory%20by%20plotting%20all%20of%20the%20startups%20in%20Buffalo,%20NY.%20%20Post%20a%20company%20to%20add%20a%20listing%20to%20the%20map&source=https%3A//buffalostartupmap.com/">Share The Map ...</a> --> */}
 
-          <Link className="btn btn-secondary mt-3" to="/about"
+          <Link to="/about" className="btn btn-secondary mt-3"
           >Add Another Startup</Link>
           <p className="mt-5">
             <b>NOW IS THE TIME.</b> Are you a Buffalo backer? A citizen of the City of Good Neighbors? A spreader of BuffaLOVE. Some call it a

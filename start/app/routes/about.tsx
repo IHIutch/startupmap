@@ -3,7 +3,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/start'
 import { GeocoderInput } from '../../components/geocoder-input'
 import { createStartup } from '../../utils/air-table'
-import { startupSchema } from '../../utils/schemas'
+import { stageOptions, startupSchema } from '../../utils/schemas'
 
 const handleSubmit = createServerFn('POST', async (formData: FormData) => {
   const company = formData.get('company')
@@ -47,10 +47,10 @@ function RouteComponent() {
   return (
     <div className="container">
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
-        <Link className="navbar-brand" to="/">Buffalo Startup Map</Link>
+        <Link to="/" className="navbar-brand">Buffalo Startup Map</Link>
         <ul className="nav navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link btn btn-secondary small" to="/">Cancel</Link>
+            <Link to="/" className="nav-link btn btn-secondary small">Cancel</Link>
           </li>
         </ul>
       </nav>
@@ -67,8 +67,6 @@ function RouteComponent() {
         <div className="col col-md-6 offset-md-3">
           <form
             action={handleSubmit.url} method="POST" encType="multipart/form-data"
-
-            // @submit.stop.prevent="sendFormData" 
             autoComplete="off"
           >
             <div className="mt-3">
@@ -79,7 +77,6 @@ function RouteComponent() {
                 name="company"
                 required
                 placeholder="Startup business name... "
-              // autoFocus
               />
             </div>
             <div className="mt-3" >
@@ -119,7 +116,6 @@ function RouteComponent() {
                     id="category"
                     name="category"
                     className="form-control"
-                    // v-model="form.category"
                     placeholder="Ex: Healthcare ..."
                     required
                   />
@@ -132,25 +128,13 @@ function RouteComponent() {
                     id="stage"
                     name="stage"
                     className="form-select"
-                    // v-model="form.stage"
-                    // :options="stages"
                     defaultValue=""
                     required
                   >
                     <option value="" disabled>-- Select a Stage --</option>
-                    <option value="n/a">n/a</option>
-                    <option value="Idea">Idea</option>
-                    <option value="Seed">Seed</option>
-                    <option value="Series A">Series A</option>
-                    <option value="Series B">Series B</option>
-                    <option value="Series C">Series C</option>
-                    <option value="Series D">Series D</option>
-                    <option value="Series E">Series E+</option>
-                    {/* <template v-slot:first>
-                      <div className="select"-option :value="null" disabled=""
-                        >-- Select a Stage --</divn
-                      >
-                    </template> */}
+                    {stageOptions.map(opt => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
                   </select>
                 </div>
               </div>

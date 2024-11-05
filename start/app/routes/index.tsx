@@ -79,10 +79,10 @@ function Home() {
   return (
     <div className="container-fluid vh-100">
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
-        <a href="/" className="navbar-brand">Buffalo Startup Map</a>
+        <Link to="/" className="navbar-brand">Buffalo Startup Map</Link>
         <ul className="nav navbar-nav">
           <li className="nav-item">
-            <a href="/about" className="nav-link btn btn-primary small">Add Startup</a>
+            <Link to="/about" className="nav-link btn btn-primary small">Add Startup</Link>
           </li>
         </ul>
       </nav>

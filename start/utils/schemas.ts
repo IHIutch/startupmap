@@ -1,5 +1,16 @@
 import { z } from "zod";
 
+export const stageOptions = [
+  "n/a",
+  "Idea",
+  "Seed",
+  "Series A",
+  "Series B",
+  "Series C",
+  "Series D",
+  "Series E",
+]
+
 const addressSchema = z.object({
   street_number: z.string().optional(),
   route: z.string().optional(),
@@ -10,7 +21,6 @@ const addressSchema = z.object({
   country: z.string().optional(),
   postal_code: z.string().optional(),
 })
-
 
 export const startupSchema = z.object({
   lat: z.number(),

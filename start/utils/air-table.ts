@@ -1,12 +1,10 @@
 import Airtable from "airtable";
 import { StartupType } from "./schemas";
 
-Airtable.configure({
-  apiKey:
-    "patM0GvoSe90Tiqxg.bf4d165ad267485e2debbfe4051ca613c106e04db7dc5fad488f45fa96657be0",
-});
+const base = new Airtable({
+  apiKey: 'patM0GvoSe90Tiqxg.bf4d165ad267485e2debbfe4051ca613c106e04db7dc5fad488f45fa96657be0'
+}).base('appBdAZ8jmgQvqFxz');
 
-const base = Airtable.base("appBdAZ8jmgQvqFxz");
 const table = base("tblplgOs6uzvz3Kaq");
 
 export const getAllStartups = async () => {
