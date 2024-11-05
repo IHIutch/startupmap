@@ -149,14 +149,14 @@
                       <span class="label">Stage:</span>
                       {{ point.stage }}
                     </li>
-                    <!-- <li>
+                    <li>
                       <a
                         class="btn btn-sm btn-primary fixed-bottom-right"
                         :href="point.website"
                         target="_blank"
                         >View</a
                       >
-                    </li> -->
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -279,17 +279,10 @@ export default {
         ? "#ee00ff" //  color for selected marker
         : "#0000EE"; // Default color
     },
-    shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    },
   },
   computed: {
     points() {
-      const shuffledPoints = this.$page.places.edges.map((place) => {
+      return this.$page.places.edges.map((place) => {
         var node = place.node;
         return {
           description: node.description,
@@ -304,7 +297,6 @@ export default {
             : "http://" + node.website,
         };
       });
-      return this.shuffleArray([...shuffledPoints]);
     },
     uniqueTypes() {
       return [...new Set(this.points.map((point) => point.category))].sort();
