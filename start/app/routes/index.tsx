@@ -117,6 +117,7 @@ function Home() {
                 placeholder="Filter & Search Buffalo Startups..."
                 className="form-control"
                 onChange={(e) => navigate({
+                  replace: true,
                   to: Route.fullPath,
                   search: (prev) => ({
                     ...prev,
@@ -148,6 +149,7 @@ function Home() {
                       <button
                         className="btn btn-link"
                         onClick={() => navigate({
+                          replace: true,
                           to: Route.fullPath,
                           search: (prev) => ({
                             ...prev,
@@ -167,6 +169,7 @@ function Home() {
                             type="checkbox"
                             checked={!!searchParams.types?.includes(ut)}
                             onChange={() => navigate({
+                              replace: true,
                               to: Route.fullPath,
                               search: (prev) => ({
                                 ...prev,
@@ -198,6 +201,7 @@ function Home() {
                       <button
                         className="btn btn-link"
                         onClick={() => navigate({
+                          replace: true,
                           to: Route.fullPath,
                           search: (prev) => ({
                             ...prev,
@@ -217,6 +221,7 @@ function Home() {
                             type="checkbox"
                             checked={!!searchParams.stages?.includes(us)}
                             onChange={() => navigate({
+                              replace: true,
                               to: Route.fullPath,
                               search: (prev) => ({
                                 ...prev,
@@ -266,6 +271,7 @@ function Home() {
                 >
                   <button
                     onClick={() => navigate({
+                      replace: true,
                       to: Route.fullPath,
                       search: (prev) => ({
                         ...prev,
@@ -330,6 +336,7 @@ function Home() {
             type="button"
             className="btn btn-sm white full-width"
             onClick={() => navigate({
+              replace: true,
               search: (prev) => ({
                 ...prev,
                 company: ''
