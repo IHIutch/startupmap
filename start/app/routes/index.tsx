@@ -50,9 +50,6 @@ function Home() {
   const uniqueTypes = [...new Set(allStartups.map((as) => as.category))].sort();
   const uniqueStages = [...new Set(allStartups.map((as) => as.stage))];
 
-  const mapStartups = (searchParams.stages || searchParams.types) ? allStartups.filter(as => {
-    return searchParams.stages?.includes(as.stage) || searchParams.types?.includes(as.category)
-  }) : allStartups
 
   return (
     <div className="container-fluid vh-100">
@@ -233,7 +230,7 @@ function Home() {
           defaultCenter={[42.8964, -78.846804]}
           defaultZoom={12}
         >
-          {mapStartups.map((d) => (
+          {allStartups.map((d) => (
             <Marker
               key={d.id}
               anchor={[d.lat, d.lng]}
@@ -281,28 +278,25 @@ const SidebarList = () => {
   const navigate = useNavigate({ from: Route.fullPath })
 
   const activeCompany = allStartups.find(s => s.company === searchParams.company)
-  const sidebarStartups = (activeCompany || searchParams.search)
-    ? allStartups.filter(as => {
-      const lowerCaseSearch = searchParams.search?.toLowerCase()
-      const matchesLocation = activeCompany === undefined || (
-        as.lat === activeCompany.lat && as.lng === activeCompany.lng
-      )
-      const matchesSearch = lowerCaseSearch === undefined || (
-        as.company
-          .toLowerCase()
-          .includes(lowerCaseSearch) ||
-        as.description
-          .toLowerCase()
-          .includes(lowerCaseSearch) ||
-        as.category
-          .toLowerCase()
-          .includes(lowerCaseSearch) ||
-        as.stage
-          .toLowerCase()
-          .includes(lowerCaseSearch)
-      )
-      return matchesLocation && matchesSearch
-    }) : allStartups
+
+  const sidebarStartups = allStartups.filter(as => {
+    const lowerCaseSearch = searchParams.search?.toLowerCase()
+
+    const matchesLocation = !activeCompany || (as.lat === activeCompany.lat && as.lng === activeCompany.lng)
+    const matchesSearch = !lowerCaseSearch || [
+      as.company,
+      as.description,
+      as.category,
+      as.stage
+    ].some(field => field.toLowerCase().includes(lowerCaseSearch))
+
+    const matchesStageOrType = (!searchParams.stages && !searchParams.types)
+      || searchParams.stages?.includes(as.stage)
+      || searchParams.types?.includes(as.category)
+
+    return matchesLocation && matchesSearch && matchesStageOrType;
+  })
+
 
   return (
     <>
