@@ -21,6 +21,7 @@ export const Route = createFileRoute('/')({
       allStartups: await serverGetAllStartups()
     }
   },
+  shouldReload: false,
   search: {
     middlewares: [
       stripSearchParams({
