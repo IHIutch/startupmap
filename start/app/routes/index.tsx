@@ -50,32 +50,8 @@ function Home() {
   const uniqueTypes = [...new Set(allStartups.map((as) => as.category))].sort();
   const uniqueStages = [...new Set(allStartups.map((as) => as.stage))];
 
-  const activeCompany = allStartups.find(s => s.company === searchParams.company)
-
-  const filteredStartups = (searchParams.stages || searchParams.types) ? allStartups.filter(as => {
+  const mapStartups = (searchParams.stages || searchParams.types) ? allStartups.filter(as => {
     return searchParams.stages?.includes(as.stage) || searchParams.types?.includes(as.category)
-  }) : allStartups
-
-  const sidebarStartups = (activeCompany || searchParams.search) ? allStartups.filter(as => {
-    const lowerCaseSearch = searchParams.search?.toLowerCase()
-    const matchesLocation = activeCompany === undefined || (
-      as.lat === activeCompany.lat && as.lng === activeCompany.lng
-    )
-    const matchesSearch = lowerCaseSearch === undefined || (
-      as.company
-        .toLowerCase()
-        .includes(lowerCaseSearch) ||
-      as.description
-        .toLowerCase()
-        .includes(lowerCaseSearch) ||
-      as.category
-        .toLowerCase()
-        .includes(lowerCaseSearch) ||
-      as.stage
-        .toLowerCase()
-        .includes(lowerCaseSearch)
-    )
-    return matchesLocation && matchesSearch
   }) : allStartups
 
   return (
@@ -89,8 +65,8 @@ function Home() {
         </ul>
       </nav>
 
-      <div className="row h-100">
-        <div className="col-12 h-100 px-0">
+      <div className="row">
+        <div className="col-12 px-0">
           <div className="filter-buttons">
             <button
               className={`btn btn-sm ${isTypesMenuOpen ? 'selected' : null}`}
@@ -118,6 +94,7 @@ function Home() {
                 type="search"
                 placeholder="Filter & Search Buffalo Startups..."
                 className="form-control rounded-pill"
+                defaultValue={searchParams.search || ''}
                 onChange={(e) => navigate({
                   replace: true,
                   to: Route.fullPath,
@@ -181,8 +158,8 @@ function Home() {
                     ))}
                   </div>
                 </div>
-              )
-              : null}
+              ) : null}
+
             {isStagesMenuOpen
               ? (
                 <div className="filter-options">
@@ -233,114 +210,150 @@ function Home() {
                     ))}
                   </div>
                 </div>
-              )
-              : null}
-          </div>
-
-          <div
-            style={{
-              position: "fixed",
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-            }}
-          >
-            <Map
-              provider={(x, y, z) => `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/${z}/${x}/${y}@2x?access_token=${env.PUBLIC_MAPBOX_KEY}`}
-              defaultCenter={[42.8964, -78.846804]}
-              defaultZoom={12}
-            >
-              {filteredStartups.map((d) => (
-                <Marker
-                  key={d.id}
-                  anchor={[d.lat, d.lng]}
-                  style={{
-                    pointerEvents: 'auto',
-                    filter: 'none'
-                  }}
-                >
-                  <button
-                    onClick={() => navigate({
-                      replace: true,
-                      to: Route.fullPath,
-                      search: (prev) => ({
-                        ...prev,
-                        company: d.company
-                      })
-                    })}
-                    style={{
-                      display: "block",
-                      backgroundColor: searchParams.company === d.company ? '#EE00FF' : '#0000EE',
-                      height: '22px',
-                      width: '22px',
-                      borderRadius: '99rem',
-                      border: 0,
-                      opacity: 0.6
-                    }}
-                  >
-                    <span className="visually-hidden">{d.company}</span>
-                  </button>
-                </Marker>
-              ))}
-            </Map>
+              ) : null}
           </div>
         </div>
 
         <div className="col-xs-12 col-md-4 listings">
-          <ul className="list-group list-group-flush">
-            {sidebarStartups.map(ss => (
-              <li
-                key={ss.id}
-                className="list-group-item"
-              >
-                <div>
-                  <h2 className="h4 mb-1">
-                    {ss.company}
-                  </h2>
-                  <h3 className="h6 mt-1 mb-2">
-                    <div>
-                      {ss.description}
-                    </div>
-                  </h3>
-                  <ul>
-                    <li>
-                      <span className="label">Type:</span>
-                      {ss.category}
-                    </li>
-                    <li>
-                      <span className="label">Stage:</span>
-                      {ss.stage}
-                    </li>
-                    <li>
-                      <a
-                        className="btn btn-sm btn-primary fixed-bottom-right"
-                        href={new RegExp("^https?://").test(ss.website) ? ss.website : "https://" + ss.website}
-                        target="_blank">View</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <button
-            type="button"
-            className="btn btn-sm white full-width"
-            onClick={() => navigate({
-              replace: true,
-              search: (prev) => ({
-                ...prev,
-                company: ''
-              })
-            })}
-          >
-            Show All
-          </button>
+          <SidebarList />
         </div>
+      </div>
+
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+        }}
+      >
+        <Map
+          provider={(x, y, z) => `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/${z}/${x}/${y}@2x?access_token=${env.PUBLIC_MAPBOX_KEY}`}
+          defaultCenter={[42.8964, -78.846804]}
+          defaultZoom={12}
+        >
+          {mapStartups.map((d) => (
+            <Marker
+              key={d.id}
+              anchor={[d.lat, d.lng]}
+              style={{
+                pointerEvents: 'auto',
+                filter: 'none'
+              }}
+            >
+              <button
+                onClick={() => navigate({
+                  replace: true,
+                  to: Route.fullPath,
+                  search: (prev) => ({
+                    ...prev,
+                    company: d.company
+                  })
+                })}
+                style={{
+                  display: "block",
+                  backgroundColor: searchParams.company === d.company ? '#EE00FF' : '#0000EE',
+                  height: '22px',
+                  width: '22px',
+                  borderRadius: '99rem',
+                  border: 0,
+                  opacity: 0.6
+                }}
+              >
+                <span className="visually-hidden">{d.company}</span>
+              </button>
+            </Marker>
+          ))}
+        </Map>
       </div>
 
       <a className="linkfixed" href="https://www.helmux.com/" target="_blank"
       >Built with &#x2665;</a>
     </div >
+  )
+}
+
+
+const SidebarList = () => {
+  const { allStartups } = Route.useLoaderData()
+  const searchParams = Route.useSearch()
+  const navigate = useNavigate({ from: Route.fullPath })
+
+  const activeCompany = allStartups.find(s => s.company === searchParams.company)
+  const sidebarStartups = (activeCompany || searchParams.search)
+    ? allStartups.filter(as => {
+      const lowerCaseSearch = searchParams.search?.toLowerCase()
+      const matchesLocation = activeCompany === undefined || (
+        as.lat === activeCompany.lat && as.lng === activeCompany.lng
+      )
+      const matchesSearch = lowerCaseSearch === undefined || (
+        as.company
+          .toLowerCase()
+          .includes(lowerCaseSearch) ||
+        as.description
+          .toLowerCase()
+          .includes(lowerCaseSearch) ||
+        as.category
+          .toLowerCase()
+          .includes(lowerCaseSearch) ||
+        as.stage
+          .toLowerCase()
+          .includes(lowerCaseSearch)
+      )
+      return matchesLocation && matchesSearch
+    }) : allStartups
+
+  return (
+    <>
+      <ul className="list-group list-group-flush">
+        {sidebarStartups.map(ss => (
+          <li
+            key={ss.id}
+            className="list-group-item"
+          >
+            <div>
+              <h2 className="h4 mb-1">
+                {ss.company}
+              </h2>
+              <h3 className="h6 mt-1 mb-2">
+                <div>
+                  {ss.description}
+                </div>
+              </h3>
+              <ul>
+                <li>
+                  <span className="label">Type:</span>
+                  {ss.category}
+                </li>
+                <li>
+                  <span className="label">Stage:</span>
+                  {ss.stage}
+                </li>
+                <li>
+                  <a
+                    className="btn btn-sm btn-primary fixed-bottom-right"
+                    href={new RegExp("^https?://").test(ss.website) ? ss.website : "https://" + ss.website}
+                    target="_blank">View</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <button
+        type="button"
+        className="btn btn-sm white full-width"
+        onClick={() => navigate({
+          replace: true,
+          search: (prev) => ({
+            ...prev,
+            company: ''
+          })
+        })}
+      >
+        Show All
+      </button>
+    </>
   )
 }
