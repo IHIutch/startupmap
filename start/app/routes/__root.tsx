@@ -6,7 +6,8 @@ import {
 import { Body, Head, Html, Meta, Scripts } from '@tanstack/start'
 import type { ReactNode } from 'react'
 
-import "../styles/main.scss";
+import globalStyle from "../styles/main.scss?url";
+import nunitoStyle from '@fontsource-variable/nunito?url';
 
 export const Route = createRootRoute({
   meta: () => [
@@ -21,9 +22,16 @@ export const Route = createRootRoute({
       title: 'TanStack Start Starter',
     },
   ],
-  links: () => [{ "rel":"stylesheet", href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
-
-  }],
+  links: () => [
+    {
+      rel: "stylesheet",
+      href: globalStyle
+    },
+    {
+      rel: "stylesheet",
+      href: nunitoStyle
+    }
+  ],
   component: RootComponent,
   notFoundComponent: () => <div><h1>Not found</h1></div>
 })
