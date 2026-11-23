@@ -22,4 +22,4 @@ pnpm build
 pnpm typecheck
 ```
 
-The Worker is named `startupmap-tanstack`. To publish a verified preview, set the Airtable bindings on that Worker and deploy with `pnpm exec cf deploy` from this directory. Switch the public domain after checking the map and confirming that a test submission appears in the Pending view and becomes visible only after approval.
+The TanStack Start app deploys to the existing `startupmap` Worker. Set the Airtable bindings before deploying. Run `pnpm exec cf deploy --dry-run` from this directory to check the build. After deployment, verify that a test submission appears in the Pending view and becomes visible only after approval before switching the public domain.
