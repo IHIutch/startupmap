@@ -1,21 +1,20 @@
 import * as React from 'react'
 import { createFileRoute, Link, stripSearchParams, useNavigate } from '@tanstack/react-router'
-import { getAllStartups } from '../../utils/air-table'
+import { getApprovedStartups } from '../../utils/air-table.server'
 import { Map, Marker } from 'pigeon-maps'
 import { z } from 'zod'
-import { incomingDataSchema } from '../../utils/schemas'
-import { env } from '../../env'
-import { createServerFn } from '@tanstack/start'
+import type { PublicListing } from '../../utils/schemas'
+import { createServerFn } from '@tanstack/react-start'
+import { getRequest } from '@tanstack/react-start/server'
 
-export const serverGetAllStartups = createServerFn('GET', async () => {
-  const allStartups = await getAllStartups()
-  // Throws error if invalid
-  const parsedData = z.array(incomingDataSchema).parse(allStartups)
-  return parsedData
+export const serverGetAllStartups = createServerFn({ method: 'GET' }).handler(async () => {
+  const cacheKey = new Request(new URL('/__startupmap-approved', getRequest().url))
+  return getApprovedStartups(cacheKey)
 })
 
 export const Route = createFileRoute('/')({
   component: Home,
+  errorComponent: () => <main className="container py-5">Startup listings are temporarily unavailable. Please try again later.</main>,
   loader: async () => {
     return {
       allStartups: await serverGetAllStartups()
@@ -39,6 +38,14 @@ export const Route = createFileRoute('/')({
     stages: z.string().array().optional(),
   })
 })
+
+function matchesFilters(listing: PublicListing, search: { search?: string; stages?: string[]; types?: string[] }) {
+  const term = search.search?.trim().toLowerCase()
+  return (!term || [listing.company, listing.description, listing.category, listing.stage]
+    .some(field => field.toLowerCase().includes(term)))
+    && (!search.stages?.length || search.stages.includes(listing.stage))
+    && (!search.types?.length || search.types.includes(listing.category))
+}
 
 function Home() {
   const searchParams = Route.useSearch()
@@ -227,11 +234,11 @@ function Home() {
         }}
       >
         <Map
-          provider={(x, y, z) => `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/${z}/${x}/${y}@2x?access_token=${env.PUBLIC_MAPBOX_KEY}`}
+          provider={(x, y, z) => `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/${z}/${x}/${y}@2x?access_token=${import.meta.env.VITE_MAPBOX_KEY}`}
           defaultCenter={[42.8964, -78.846804]}
           defaultZoom={12}
         >
-          {allStartups.map((d) => (
+          {allStartups.filter(listing => matchesFilters(listing, searchParams)).map((d) => (
             <Marker
               key={d.id}
               anchor={[d.lat, d.lng]}
@@ -280,23 +287,10 @@ const SidebarList = () => {
 
   const activeCompany = allStartups.find(s => s.company === searchParams.company)
 
-  const sidebarStartups = allStartups.filter(as => {
-    const lowerCaseSearch = searchParams.search?.toLowerCase()
-
-    const matchesLocation = !activeCompany || (as.lat === activeCompany.lat && as.lng === activeCompany.lng)
-    const matchesSearch = !lowerCaseSearch || [
-      as.company,
-      as.description,
-      as.category,
-      as.stage
-    ].some(field => field.toLowerCase().includes(lowerCaseSearch))
-
-    const matchesStageOrType = (!searchParams.stages && !searchParams.types)
-      || searchParams.stages?.includes(as.stage)
-      || searchParams.types?.includes(as.category)
-
-    return matchesLocation && matchesSearch && matchesStageOrType;
-  })
+  const sidebarStartups = allStartups.filter(listing =>
+    matchesFilters(listing, searchParams)
+    && (!activeCompany || (listing.lat === activeCompany.lat && listing.lng === activeCompany.lng)),
+  )
 
 
   return (

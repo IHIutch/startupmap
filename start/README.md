@@ -1,0 +1,23 @@
+# Buffalo Startup Map on TanStack Start
+
+The map reads approved Airtable records. The public form keeps address autocomplete and sends submissions to Airtable with `status` set to `Pending`. Reviewers can edit the record in Airtable and set its status to `Approved` to publish it. Keep contact emails in Airtable for review. The map response includes only public listing fields.
+
+## Prepare Airtable
+
+1. Reconcile the live Google Sheet with the existing Startup Map base. Check duplicate or renamed listings and preserve the fields you want to publish.
+2. Add a single-select field named `status` to the existing table, with options `Pending`, `Approved`, and `Rejected`. Mark reviewed existing listings `Approved`.
+3. Add a grid view filtered to `Pending` for reviewers. Create an Airtable personal access token restricted to this base, with `data.records:read` and `data.records:write`.
+
+Approved listings are cached for up to one hour at each Cloudflare location. Airtable's monthly API limit still applies.
+
+## Develop locally
+
+From this directory, run `npm ci`. In `.dev.vars`, supply `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, and `AIRTABLE_TABLE_ID`. Use a test table for form submissions. Set `VITE_GOOGLE_AUTOCOMPLETE_KEY` and `VITE_MAPBOX_KEY` in the build environment or `.env.local`. These two browser keys are included in the client build.
+
+```sh
+npm run dev
+npm run build
+npm run typecheck
+```
+
+The Worker is named `startupmap-tanstack`. To publish a verified preview, set the Airtable bindings on that Worker and deploy with `cf deploy` from this directory. Switch the public domain after checking the map and confirming that a test submission appears in the Pending view and becomes visible only after approval.

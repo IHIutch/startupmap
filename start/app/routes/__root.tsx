@@ -1,16 +1,16 @@
 import {
-  Outlet,
-  ScrollRestoration,
   createRootRoute,
+  HeadContent,
+  Scripts,
 } from '@tanstack/react-router'
-import { Body, Head, Html, Meta, Scripts } from '@tanstack/start'
 import type { ReactNode } from 'react'
 
 import globalStyle from "../styles/main.scss?url";
 import nunitoStyle from '@fontsource-variable/nunito?url';
 
 export const Route = createRootRoute({
-  meta: () => [
+  head: () => ({
+    meta: [
     {
       charSet: 'utf-8',
     },
@@ -19,10 +19,10 @@ export const Route = createRootRoute({
       content: 'width=device-width, initial-scale=1',
     },
     {
-      title: 'TanStack Start Starter',
+      title: 'Buffalo Startup Map',
     },
   ],
-  links: () => [
+  links: [
     {
       rel: "stylesheet",
       href: globalStyle
@@ -32,29 +32,21 @@ export const Route = createRootRoute({
       href: nunitoStyle
     }
   ],
-  component: RootComponent,
+  }),
+  shellComponent: RootDocument,
   notFoundComponent: () => <div><h1>Not found</h1></div>
 })
 
-function RootComponent() {
-  return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
-  )
-}
-
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <Html>
-      <Head>
-        <Meta />
-      </Head>
-      <Body>
+    <html lang="en">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
         {children}
-        <ScrollRestoration />
         <Scripts />
-      </Body>
-    </Html>
+      </body>
+    </html>
   )
 }

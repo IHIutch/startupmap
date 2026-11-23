@@ -1,40 +1,34 @@
 import * as React from 'react'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/start'
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
+import { createServerFn, useServerFn } from '@tanstack/react-start'
 import { GeocoderInput } from '../../components/geocoder-input'
-import { createStartup } from '../../utils/air-table'
-import { stageOptions, startupSchema } from '../../utils/schemas'
+import { submitStartup } from '../../utils/air-table.server'
+import { stageOptions, submissionSchema } from '../../utils/schemas'
 
-const handleSubmit = createServerFn('POST', async (formData: FormData) => {
-  const company = formData.get('company')
-  const stage = formData.get('stage')
-  const category = formData.get('category')
-  const email = formData.get('email')
-  const website = formData.get('website')
-  const description = formData.get('description')
-  const address = formData.get('address')
-
-  const parsedData = startupSchema.parse({
-    company: company?.toString(),
-    stage: stage?.toString(),
-    category: category?.toString(),
-    email: email?.toString(),
-    website: website?.toString(),
-    description: description?.toString(),
-    address: JSON.stringify(JSON.parse(address?.toString() || '').address),
-    lat: Number(JSON.parse(address?.toString() || '').lat),
-    lng: Number(JSON.parse(address?.toString() || '').lng)
+const handleSubmit = createServerFn({ method: 'POST' })
+  .validator((formData: FormData) => {
+    try {
+      const { address, lat, lng } = JSON.parse(String(formData.get('address') ?? ''))
+      const result = submissionSchema.safeParse({
+        ...Object.fromEntries(formData),
+        address,
+        lat,
+        lng,
+      })
+      return result.success ? result.data : null
+    } catch {
+      return null
+    }
   })
-
-  await createStartup(parsedData)
-
-  return new Response('ok', {
-    status: 301,
-    headers: {
-      Location: '/thanks',
-    },
+  .handler(async ({ data }) => {
+    if (!data) return { error: 'Check the form and select an address from the suggestions.' }
+    try {
+      await submitStartup(data)
+      return { error: null }
+    } catch {
+      return { error: 'We could not save your submission. Please try again.' }
+    }
   })
-})
 
 export const Route = createFileRoute('/about')({
   component: RouteComponent,
@@ -43,6 +37,26 @@ export const Route = createFileRoute('/about')({
 function RouteComponent() {
 
   const [addressString, setAddressString] = React.useState('')
+  const [error, setError] = React.useState('')
+  const [saving, setSaving] = React.useState(false)
+  const submit = useServerFn(handleSubmit)
+  const navigate = useNavigate()
+
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    setError('')
+    setSaving(true)
+    try {
+      const result = await submit({ data })
+      if (result.error) setError(result.error)
+      else await navigate({ to: '/thanks' })
+    } catch {
+      setError('We could not save your submission. Please try again.')
+    } finally {
+      setSaving(false)
+    }
+  }
 
   return (
     <div className="container">
@@ -58,15 +72,14 @@ function RouteComponent() {
         <div className="col col-md-6 offset-md-3 mt-5 pt-5 pb-4">
           <h1 className="mt-5">Add a Startup</h1>
           <p>
-            Enter the business information to plot them on the Buffalo Startup
-            Map!
+            Enter the business information for review before it appears on the Buffalo Startup Map.
           </p>
         </div>
       </div>
       <div className="row">
         <div className="col col-md-6 offset-md-3">
           <form
-            action={handleSubmit.url} method="POST" encType="multipart/form-data"
+            onSubmit={onSubmit}
             autoComplete="off"
           >
             <div className="mt-3">
@@ -84,6 +97,7 @@ function RouteComponent() {
 
               <GeocoderInput
                 onPlaceSelect={(val) => setAddressString(JSON.stringify(val))}
+                onChange={() => setAddressString('')}
                 id="autocomplete"
                 className="form-control"
                 autoComplete="off"
@@ -174,16 +188,13 @@ function RouteComponent() {
               />
             </div>
             <div className="text-center mb-5">
+              {error && <p role="alert" className="text-danger">{error}</p>}
               <button
                 type="submit"
                 className="mt-3 mb-5 btn btn-primary"
-              // :disabled="loading"
+                disabled={saving}
               >
-                {/* <span v-if="loading">
-                  <div className="spinner" small></div>
-                  Saving...
-                </span> */}
-                <span>Submit</span>
+                <span>{saving ? 'Submitting…' : 'Submit'}</span>
               </button>
               <p className="lightgrey">
                 By clicking Submit you agree that the information listed above

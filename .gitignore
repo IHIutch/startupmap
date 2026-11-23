@@ -1,5 +1,8 @@
 *.log
 .cache
+.cloudflare/
+.dev.vars
+.dev.vars.*
 .DS_Store
 src/.temp
 node_modules

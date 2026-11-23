@@ -1,15 +1,15 @@
-import { z } from "zod";
+import { z } from 'zod'
 
 export const stageOptions = [
-  "n/a",
-  "Idea",
-  "Seed",
-  "Series A",
-  "Series B",
-  "Series C",
-  "Series D",
-  "Series E",
-]
+  'n/a',
+  'Idea',
+  'Seed',
+  'Series A',
+  'Series B',
+  'Series C',
+  'Series D',
+  'Series E',
+] as const
 
 const addressSchema = z.object({
   street_number: z.string().optional(),
@@ -22,24 +22,27 @@ const addressSchema = z.object({
   postal_code: z.string().optional(),
 })
 
-export const startupSchema = z.object({
-  lat: z.number(),
-  lng: z.number(),
+export const publicListingSchema = z.object({
+  id: z.string(),
+  lat: z.number().min(-90).max(90),
+  lng: z.number().min(-180).max(180),
   description: z.string(),
   category: z.string(),
-  email: z.string().email(),
   website: z.string(),
   company: z.string(),
   stage: z.string(),
-  address: z.string()
-    .transform(data => JSON.parse(data))
-    .pipe(addressSchema)
 })
 
-export const incomingDataSchema = startupSchema.extend({
-  id: z.string(),
-  created: z.string().datetime(),
+export const submissionSchema = publicListingSchema.omit({ id: true }).extend({
+  description: z.string().trim().min(1).max(3000),
+  category: z.string().trim().min(1).max(100),
+  email: z.string().trim().email().max(254),
+  website: z.string().trim().min(1).max(300),
+  company: z.string().trim().min(1).max(150),
+  stage: z.enum(stageOptions),
+  address: addressSchema.refine(address => Boolean(address.route || address.locality)),
 })
 
 export type AddressType = z.infer<typeof addressSchema>
-export type StartupType = z.infer<typeof startupSchema>
+export type PublicListing = z.infer<typeof publicListingSchema>
+export type StartupSubmission = z.infer<typeof submissionSchema>

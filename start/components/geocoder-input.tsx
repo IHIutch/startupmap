@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { APIProvider, useMapsLibrary } from '@vis.gl/react-google-maps';
-import { AddressType } from '../utils/schemas';
-import { env } from '../env';
+import type { AddressType } from '../utils/schemas';
 
 type Place = {
   address: AddressType,
@@ -13,7 +12,15 @@ type GeocoderInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   onPlaceSelect: (place: Place) => void;
 }
 
-export const GeocoderInput = ({ onPlaceSelect, ...inputProps }: GeocoderInputProps) => {
+export function GeocoderInput(props: GeocoderInputProps) {
+  return (
+    <APIProvider apiKey={import.meta.env.VITE_GOOGLE_AUTOCOMPLETE_KEY || ''}>
+      <GeocoderField {...props} />
+    </APIProvider>
+  );
+}
+
+function GeocoderField({ onPlaceSelect, ...inputProps }: GeocoderInputProps) {
   const [placeAutocomplete, setPlaceAutocomplete] =
     React.useState<google.maps.places.Autocomplete | null>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -24,14 +31,14 @@ export const GeocoderInput = ({ onPlaceSelect, ...inputProps }: GeocoderInputPro
 
     setPlaceAutocomplete(new places.Autocomplete(inputRef.current, {
       types: ["geocode"],
-      fields: ["address_component", "geometry"]
+      fields: ["address_components", "geometry"]
     }));
   }, [places]);
 
   React.useEffect(() => {
     if (!placeAutocomplete) return;
 
-    placeAutocomplete.addListener('place_changed', () => {
+    const listener = placeAutocomplete.addListener('place_changed', () => {
       const place = placeAutocomplete.getPlace()
       const address = {
         street_number: '',
@@ -46,7 +53,7 @@ export const GeocoderInput = ({ onPlaceSelect, ...inputProps }: GeocoderInputPro
       if (place.address_components?.length) {
         // Formats Googles getPlace() result into something more manageable
         place.address_components.forEach((component) => {
-          const type = component.types[0];
+          const type = component.types[0] as keyof AddressType;
           if (type in address) {
             address[type] = component.long_name;
           }
@@ -59,22 +66,8 @@ export const GeocoderInput = ({ onPlaceSelect, ...inputProps }: GeocoderInputPro
         address
       });
     });
+    return () => listener.remove();
   }, [onPlaceSelect, placeAutocomplete]);
 
-  return (
-    <Provider>
-      <input
-        {...inputProps}
-        ref={inputRef}
-      />
-    </Provider>
-  );
-};
-
-const Provider = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <APIProvider apiKey={env.PUBLIC_GOOGLE_AUTOCOMPLETE_KEY}>
-      {children}
-    </APIProvider>
-  )
+  return <input {...inputProps} ref={inputRef} />;
 }
