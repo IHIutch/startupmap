@@ -4,11 +4,19 @@ import {
   Scripts,
 } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
+import { createServerFn } from '@tanstack/react-start'
+import { env } from 'cloudflare:workers'
 
 import globalStyle from "../styles/main.scss?url";
 import nunitoStyle from '@fontsource-variable/nunito?url';
 
+const getPublicMapboxToken = createServerFn({ method: 'GET' }).handler(() => {
+  const token = env.MAPBOX_TOKEN
+  return token?.startsWith('pk.') ? token : ''
+})
+
 export const Route = createRootRoute({
+  loader: async () => ({ mapboxToken: await getPublicMapboxToken() }),
   head: () => ({
     meta: [
     {

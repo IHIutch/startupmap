@@ -12,9 +12,9 @@ Approved listings are cached for up to one hour at each Cloudflare location. Air
 
 ## Develop locally
 
-From this directory, run `pnpm install --frozen-lockfile`. In `.dev.vars`, supply `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, `AIRTABLE_TABLE_ID`, `MAPBOX_TILE_TOKEN`, and `MAPBOX_GEOCODING_TOKEN`. Use a test table for form submissions.
+From this directory, run `pnpm install --frozen-lockfile`. In `.dev.vars`, supply `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, `AIRTABLE_TABLE_ID`, and `MAPBOX_TOKEN`. Use a test table for form submissions.
 
-Set the two Mapbox tokens as Cloudflare Worker secrets on deployment. `MAPBOX_TILE_TOKEN` must be a public, read-only token restricted to the site's domains in Mapbox. The browser uses it for direct tile requests. Use a separate least-privilege token for `MAPBOX_GEOCODING_TOKEN` that works from the Worker without a browser referrer. Mapbox Permanent Geocoding must be available on that account to save selected addresses.
+Set `MAPBOX_TOKEN` in Cloudflare Worker settings on deployment. Use a public, read-only Mapbox token. The browser uses it for both tiles and autocomplete. Mapbox Permanent Geocoding must be available on that account to save selected addresses.
 
 ```sh
 pnpm dev

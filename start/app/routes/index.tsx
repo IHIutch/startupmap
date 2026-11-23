@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { createFileRoute, Link, stripSearchParams, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, Link, stripSearchParams, useLoaderData, useNavigate } from '@tanstack/react-router'
 import { getApprovedStartups } from '../../utils/air-table.server'
-import { getPublicTileToken } from '../../utils/mapbox.server'
 import { Map, Marker } from 'pigeon-maps'
 import { z } from 'zod'
 import type { PublicListing } from '../../utils/schemas'
@@ -10,16 +9,17 @@ import { getRequest } from '@tanstack/react-start/server'
 
 export const serverGetAllStartups = createServerFn({ method: 'GET' }).handler(async () => {
   const cacheKey = new Request(new URL('/__startupmap-approved', getRequest().url))
-  return {
-    allStartups: await getApprovedStartups(cacheKey),
-    mapboxTileToken: getPublicTileToken(),
-  }
+  return getApprovedStartups(cacheKey)
 })
 
 export const Route = createFileRoute('/')({
   component: Home,
   errorComponent: () => <main className="container py-5">Startup listings are temporarily unavailable. Please try again later.</main>,
-  loader: () => serverGetAllStartups(),
+  loader: async () => {
+    return {
+      allStartups: await serverGetAllStartups()
+    }
+  },
   shouldReload: false,
   search: {
     middlewares: [
@@ -49,7 +49,8 @@ function matchesFilters(listing: PublicListing, search: { search?: string; stage
 
 function Home() {
   const searchParams = Route.useSearch()
-  const { allStartups, mapboxTileToken } = Route.useLoaderData()
+  const { allStartups } = Route.useLoaderData()
+  const { mapboxToken } = useLoaderData({ from: '__root__' })
   const navigate = useNavigate({ from: Route.fullPath })
 
   const [isStagesMenuOpen, setIsStagesMenuOpen] = React.useState(false)
@@ -233,8 +234,8 @@ function Home() {
           left: 0,
         }}
       >
-        {mapboxTileToken && <Map
-          provider={(x, y, z) => `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/${z}/${x}/${y}@2x?access_token=${encodeURIComponent(mapboxTileToken)}`}
+        {mapboxToken && <Map
+          provider={(x, y, z) => `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/${z}/${x}/${y}@2x?access_token=${encodeURIComponent(mapboxToken)}`}
           defaultCenter={[42.8964, -78.846804]}
           defaultZoom={12}
         >

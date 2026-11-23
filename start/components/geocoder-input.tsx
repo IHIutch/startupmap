@@ -1,20 +1,84 @@
 import * as React from 'react'
+import { useLoaderData } from '@tanstack/react-router'
 import { useCombobox } from 'downshift'
-import { useServerFn } from '@tanstack/react-start'
-import { resolveMapboxAddress, searchMapboxAddresses } from '../app/mapbox'
+import { z } from 'zod'
+import type { AddressType } from '../utils/schemas'
 
-type Suggestion = Awaited<ReturnType<typeof searchMapboxAddresses>>[number]
-type Place = Awaited<ReturnType<typeof resolveMapboxAddress>>
+const collectionSchema = z.object({ features: z.array(z.unknown()) })
+const suggestionSchema = z.object({
+  properties: z.object({
+    mapbox_id: z.string().min(1),
+    full_address: z.string().min(1),
+  }),
+})
+const namedContext = z.object({ name: z.string() }).optional()
+const addressFeatureSchema = z.object({
+  geometry: z.object({
+    type: z.literal('Point'),
+    coordinates: z.tuple([z.number().min(-180).max(180), z.number().min(-90).max(90)]),
+  }),
+  properties: z.object({
+    mapbox_id: z.string(),
+    context: z.object({
+      address: z.object({ address_number: z.string(), street_name: z.string() }),
+      neighborhood: namedContext,
+      place: namedContext,
+      locality: namedContext,
+      district: namedContext,
+      region: namedContext,
+      country: namedContext,
+      postcode: namedContext,
+    }),
+  }),
+})
+
+type Suggestion = z.infer<typeof suggestionSchema>['properties']
+type Place = { address: AddressType; lat: number; lng: number }
 type GeocoderInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   onPlaceSelect: (place: Place) => void
 }
 
+async function geocode(params: Record<string, string>, accessToken: string, signal: AbortSignal) {
+  const url = new URL('https://api.mapbox.com/search/geocode/v6/forward')
+  url.search = new URLSearchParams({ ...params, access_token: accessToken }).toString()
+
+  const response = await fetch(url, {
+    cache: 'no-store',
+    signal: AbortSignal.any([signal, AbortSignal.timeout(10_000)]),
+  })
+  if (!response.ok) throw new Error('Mapbox geocoding failed.')
+
+  return collectionSchema.parse(await response.json()).features
+}
+
+async function resolveAddress(id: string, accessToken: string, signal: AbortSignal): Promise<Place> {
+  const features = await geocode({ q: id, autocomplete: 'false', permanent: 'true', limit: '1' }, accessToken, signal)
+  const { geometry, properties } = addressFeatureSchema.parse(features[0])
+  if (properties.mapbox_id !== id) throw new Error('Mapbox returned a different address.')
+
+  const { context } = properties
+  const [lng, lat] = geometry.coordinates
+  return {
+    lat,
+    lng,
+    address: {
+      street_number: context.address.address_number,
+      route: context.address.street_name,
+      neighborhood: context.neighborhood?.name ?? '',
+      locality: context.place?.name ?? context.locality?.name ?? '',
+      administrative_area_level_2: context.district?.name ?? '',
+      administrative_area_level_1: context.region?.name ?? '',
+      country: context.country?.name ?? '',
+      postal_code: context.postcode?.name ?? '',
+    },
+  }
+}
+
 export function GeocoderInput({ id, onPlaceSelect, onChange, ...inputProps }: GeocoderInputProps) {
+  const { mapboxToken } = useLoaderData({ from: '__root__' })
   const [items, setItems] = React.useState<Suggestion[]>([])
   const [message, setMessage] = React.useState('')
   const resolution = React.useRef<AbortController>()
-  const search = useServerFn(searchMapboxAddresses)
-  const resolve = useServerFn(resolveMapboxAddress)
   const { getInputProps, getMenuProps, getItemProps, isOpen, highlightedIndex, inputValue, selectedItem } =
     useCombobox({
       inputId: id,
@@ -39,10 +103,7 @@ export function GeocoderInput({ id, onPlaceSelect, onChange, ...inputProps }: Ge
         setItems([])
         setMessage('Confirming address…')
         try {
-          const place = await resolve({
-            data: item.mapbox_id,
-            signal: AbortSignal.any([controller.signal, AbortSignal.timeout(10_000)]),
-          })
+          const place = await resolveAddress(item.mapbox_id, mapboxToken, controller.signal)
           if (controller.signal.aborted) return
           onPlaceSelect(place)
           setMessage('')
@@ -56,16 +117,23 @@ export function GeocoderInput({ id, onPlaceSelect, onChange, ...inputProps }: Ge
 
   React.useEffect(() => {
     const query = inputValue.trim()
-    if (!isOpen || selectedItem || query.length < 3) return
+    if (!mapboxToken || !isOpen || selectedItem || query.length < 3) return
 
     const controller = new AbortController()
     const timeout = window.setTimeout(async () => {
       try {
-        const suggestions = await search({
-          data: query,
-          signal: AbortSignal.any([controller.signal, AbortSignal.timeout(10_000)]),
-        })
+        const features = await geocode({
+          q: query,
+          autocomplete: 'true',
+          proximity: '-78.8784,42.8864',
+          types: 'address',
+          limit: '5',
+        }, mapboxToken, controller.signal)
         if (controller.signal.aborted) return
+        const suggestions = features.flatMap(feature => {
+          const parsed = suggestionSchema.safeParse(feature)
+          return parsed.success ? [parsed.data.properties] : []
+        })
         setItems(suggestions)
         setMessage(suggestions.length ? '' : 'No matching addresses.')
       } catch {
@@ -77,7 +145,7 @@ export function GeocoderInput({ id, onPlaceSelect, onChange, ...inputProps }: Ge
       window.clearTimeout(timeout)
       controller.abort()
     }
-  }, [inputValue, isOpen, search, selectedItem])
+  }, [inputValue, isOpen, mapboxToken, selectedItem])
 
   return (
     <div className="position-relative">
