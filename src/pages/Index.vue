@@ -89,6 +89,7 @@
             :options="{ zoomControl: false }"
           >
             <l-tile-layer
+              v-if="mapboxToken"
               :url="
                 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' +
                   mapboxToken
@@ -221,8 +222,7 @@ export default {
   },
   data() {
     return {
-      mapboxToken:
-        "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
+      mapboxToken: process.env.GRIDSOME_MAPBOX_TOKEN,
       popup: {},
       searchQuery: "",
       selectedTypes: [],

@@ -25,6 +25,7 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm build
         env:
+          GRIDSOME_MAPBOX_TOKEN: ${{ secrets.GRIDSOME_MAPBOX_TOKEN }}
           GRIDSOME_GOOGLE_API_KEY_FE: ${{ secrets.GRIDSOME_GOOGLE_API_KEY_FE}}
           GOOGLE_API_KEY_BE: ${{ secrets.GOOGLE_API_KEY_BE }}
 
