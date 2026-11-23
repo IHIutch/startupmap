@@ -9,8 +9,8 @@
   "dependencies": {
     "@fontsource-variable/nunito": "^5.1.0",
     "@tanstack/react-router": "1.170.46",
-    "@vis.gl/react-google-maps": "^1.4.0",
     "bootstrap": "^5.3.3",
+    "downshift": "^9.5.0",
     "pigeon-maps": "^0.21.6",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
@@ -27,7 +27,6 @@
     "cf": "1.0.0-rc.3",
     "@types/node": "^22",
     "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@types/google.maps": "^3.58.1"
+    "@types/react-dom": "^18"
   }
 }

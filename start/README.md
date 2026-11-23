@@ -12,7 +12,7 @@ Approved listings are cached for up to one hour at each Cloudflare location. Air
 
 ## Develop locally
 
-From this directory, run `npm ci`. In `.dev.vars`, supply `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, and `AIRTABLE_TABLE_ID`. Use a test table for form submissions. Set `VITE_GOOGLE_AUTOCOMPLETE_KEY` and `VITE_MAPBOX_KEY` in the build environment or `.env.local`. These two browser keys are included in the client build.
+From this directory, run `npm ci`. In `.dev.vars`, supply `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, and `AIRTABLE_TABLE_ID`. Use a test table for form submissions. Set the public `VITE_MAPBOX_KEY` in the build environment or `.env.local`. The client uses that token for map tiles and autocomplete. Mapbox Permanent Geocoding must be available on the account to save selected addresses.
 
 ```sh
 npm run dev
