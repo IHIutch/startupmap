@@ -12,12 +12,12 @@ Approved listings are cached for up to one hour at each Cloudflare location. Air
 
 ## Develop locally
 
-From this directory, run `npm ci`. In `.dev.vars`, supply `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, and `AIRTABLE_TABLE_ID`. Use a test table for form submissions. Set the public `VITE_MAPBOX_KEY` in the build environment or `.env.local`. The client uses that token for map tiles and autocomplete. Mapbox Permanent Geocoding must be available on the account to save selected addresses.
+From this directory, run `pnpm install --frozen-lockfile`. In `.dev.vars`, supply `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, and `AIRTABLE_TABLE_ID`. Use a test table for form submissions. Set the public `VITE_MAPBOX_KEY` in the build environment or `.env.local`. The client uses that token for map tiles and autocomplete. Mapbox Permanent Geocoding must be available on the account to save selected addresses.
 
 ```sh
-npm run dev
-npm run build
-npm run typecheck
+pnpm dev
+pnpm build
+pnpm typecheck
 ```
 
-The Worker is named `startupmap-tanstack`. To publish a verified preview, set the Airtable bindings on that Worker and deploy with `cf deploy` from this directory. Switch the public domain after checking the map and confirming that a test submission appears in the Pending view and becomes visible only after approval.
+The Worker is named `startupmap-tanstack`. To publish a verified preview, set the Airtable bindings on that Worker and deploy with `pnpm exec cf deploy` from this directory. Switch the public domain after checking the map and confirming that a test submission appears in the Pending view and becomes visible only after approval.

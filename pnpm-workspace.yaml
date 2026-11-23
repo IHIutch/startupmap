@@ -1,0 +1,13 @@
+# Gridsome resolves its webpack loaders from the project root.
+nodeLinker: hoisted
+
+overrides:
+  gridsome>sharp: ^0.30.7
+allowBuilds:
+  bootstrap-vue: false
+  core-js: false
+  cwebp-bin: true
+  fsevents: false
+  mozjpeg: true
+  pngquant-bin: true
+  sharp: true

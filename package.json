@@ -1,6 +1,7 @@
 {
   "name": "startupmap",
   "private": true,
+  "packageManager": "pnpm@12.23.0",
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
@@ -24,10 +25,5 @@
   },
   "vue": {
     "devtools": true
-  },
-  "overrides": {
-    "gridsome": {
-      "sharp": "^0.30.7"
-    }
   }
 }

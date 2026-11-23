@@ -17,10 +17,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Build
         run: |
-          npm i
-          npm run build
+          pnpm install --frozen-lockfile
+          pnpm build
         env:
           GRIDSOME_GOOGLE_API_KEY_FE: ${{ secrets.GRIDSOME_GOOGLE_API_KEY_FE}}
           GOOGLE_API_KEY_BE: ${{ secrets.GOOGLE_API_KEY_BE }}
