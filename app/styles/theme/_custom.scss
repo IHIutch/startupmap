@@ -18,7 +18,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Nunito", sans-serif !important;
+  font-family: "Nunito Variable", sans-serif !important;
   font-weight: 900 !important;
   color: #0000ee;
   letter-spacing: -1px;
@@ -62,9 +62,9 @@ p {
   font-size: 14px;
 }
 
-i span{
-	font-weight: 400;
-	font-size: 18px;
+i span {
+  font-weight: 400;
+  font-size: 18px;
 }
 
 label {
@@ -86,7 +86,7 @@ nav.navbar {
   line-height: 48px;
   color: #0000ee !important;
   white-space: normal !important;
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito Variable", sans-serif;
   font-size: 68px !important;
   line-height: 44px;
   letter-spacing: -3px;
@@ -102,9 +102,6 @@ nav.navbar {
   border: none;
 }
 
-.btn-primary:hover {
-}
-
 .btn-secondary {
   background-color: #fff !important;
   border: 5px solid #0000ee;
@@ -114,77 +111,82 @@ nav.navbar {
   font-weight: 900;
 }
 
-.btn.btn-sm{
-  color:#0000ee;
+.btn.btn-sm {
+  color: #0000ee;
   border-radius: 100px;
   padding: 5px 13px !important;
   font-weight: 900;
   font-size: 14px;
 
-  &.selected{
+  &.selected {
     background-color: #0000ee !important;
-    color:#ffffff;
+    color: #ffffff;
   }
 
-  &.white{
+  &.white {
     background-color: #ffffff;
     color: #0000ee;
   }
-
 }
 
-.full-width{
+.full-width {
   width: 100%;
 }
 
-.btn-sm:hover{
-  color:#0000ee;
+.btn-sm:hover {
+  color: #0000ee;
 }
 
-.btn.btn-link{
+.btn.btn-link {
   font-size: 14px;
-  color:#0000ee;
+  color: #0000ee;
 }
 
-.filters .btn.btn-link{
+.filters .btn.btn-link {
   position: absolute;
-    right: 10px;
-    top: 0px;
+  right: 10px;
+  top: 0px;
 }
 
-.input-group input{
-
-}
-
-.input-group-append{
+.input-group-append {
   position: absolute;
   right: 0px;
-  top:0.5px;
+  top: 0.5px;
   z-index: 9999;
 
-  .btn{
+  .btn {
     margin-right: 0px;
   }
-
 }
 
-.input-group-append .btn{
+.input-group-append .btn {
   background-color: #0000ee !important;
-  color:#fff;
+  color: #fff;
   border-radius: 33px;
-  padding:4px 12px;
-  
+  padding: 4px 12px;
 }
 
-.input-group:not(.has-validation) > .form-control:not(:last-child), .input-group:not(.has-validation) > .custom-select:not(:last-child), .input-group:not(.has-validation) > .custom-file:not(:last-child) .custom-file-label, .input-group:not(.has-validation) > .custom-file:not(:last-child) .custom-file-label::after{
-  border-radius:30px;
+.input-group:not(.has-validation) > .form-control:not(:last-child),
+.input-group:not(.has-validation) > .custom-select:not(:last-child),
+.input-group:not(.has-validation)
+  > .custom-file:not(:last-child)
+  .custom-file-label,
+.input-group:not(.has-validation)
+  > .custom-file:not(:last-child)
+  .custom-file-label::after {
+  border-radius: 30px !important;
 }
 
-.input-group > .input-group-append > .btn, .input-group > .input-group-append > .input-group-text, .input-group > .input-group-prepend:not(:first-child) > .btn, .input-group > .input-group-prepend:not(:first-child) > .input-group-text, .input-group > .input-group-prepend:first-child > .btn:not(:first-child), .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child){
-  border-radius:30px;
+.input-group > .input-group-append > .btn,
+.input-group > .input-group-append > .input-group-text,
+.input-group > .input-group-prepend:not(:first-child) > .btn,
+.input-group > .input-group-prepend:not(:first-child) > .input-group-text,
+.input-group > .input-group-prepend:first-child > .btn:not(:first-child),
+.input-group
+  > .input-group-prepend:first-child
+  > .input-group-text:not(:first-child) {
+  border-radius: 30px !important;
 }
-
-
 
 .nav-item .btn {
   position: absolute;
@@ -215,10 +217,8 @@ nav.navbar {
     from(rgba(0, 0, 0, 1)),
     to(rgba(0, 0, 0, 0))
   );
-  
-  mask-image: linear-gradient(
-    to top, transparent 0%, black 5%
-  );
+
+  mask-image: linear-gradient(to top, transparent 0%, black 5%);
 }
 
 span.label {
@@ -246,84 +246,84 @@ ul {
   margin-bottom: 10px;
   padding: 15px 25px !important;
   box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.2) !important;
-  
+
   p {
     color: red;
   }
 }
 
-.leaflet-popup-content-wrapper{
-	box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.3) !important;
+.leaflet-popup-content-wrapper {
+  box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.3) !important;
 }
 
-.filters{
+.filters {
   color: #0000ee;
-  padding:0px 30px 150px 30px;
-  position:fixed;
-  top:125px;
+  padding: 0px 30px 150px 30px;
+  position: fixed;
+  top: 125px;
   z-index: 9999;
   max-height: 100vh;
   overflow-y: auto;
 }
 
-.filters h3{
-  width:70%;
+.filters h3 {
+  width: 70%;
   margin-bottom: 20px;
 }
 
-.filter-buttons{
+.filter-buttons {
   position: absolute;
-  top:80px;
-  left:0px;
-  padding-left:30px;
-  min-width:100%;
+  top: 80px;
+  left: 0px;
+  padding-left: 30px;
+  min-width: 100%;
   z-index: 999;
 
-    button.btn-sm{
-      background-color: #ffffff !important;
-      margin-right: 10px;
+  button.btn-sm {
+    background-color: #ffffff !important;
+    margin-right: 10px;
+  }
+
+  button,
+  .input-group {
+    float: left;
+  }
+
+  .btn {
+    font-family: "Nunito Variable", sans-serif;
+    font-weight: bold;
+  }
+
+  .input-group {
+    width: 40%;
+
+    input {
+      padding: 0px 15px;
+      margin: 0px 0px;
+      height: 35px;
+      border: none;
     }
 
-    button, .input-group{
-      float:left;
+    input::placeholder {
+      font-size: 14px;
+      font-family: "Nunito Variable", sans-serif;
     }
-
-    .btn{
-      font-family: "Nunito", sans-serif;
-      font-weight: bold;
-    }
-
-    .input-group{
-        width:40%;
-
-        input{
-          padding:0px 15px;
-          margin:0px 0px;
-          height:35px;
-          border: none;
-        }
-
-        input::placeholder{
-          font-size: 14px;
-          font-family: "Nunito", sans-serif;
-        }
-    }
-
+  }
 }
 
 .filters .filter-options {
   padding: 20px 30px; // Adjusted padding for smaller size
   background-color: #fff;
   box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.2) !important;
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito Variable", sans-serif;
   font-weight: bold;
-  max-width:700px;
+  max-width: 700px;
   min-width: 200px;
   margin: 0px auto 0px auto;
   overflow-y: scroll;
 }
 
-.filters .filter-options .custom-control{
+.filters .filter-options .custom-control {
   font-size: 10px;
   text-transform: uppercase;
 
@@ -333,41 +333,34 @@ ul {
   line-height: 12px;
 }
 
-.custom-control-label{
-  padding-top:1px;
+.custom-control-label {
+  padding-top: 1px;
 }
 
-.custom-control-label::before, .custom-control-label::after{
-top:0px;
+.custom-control-label::before,
+.custom-control-label::after {
+  top: 0px;
 }
 
-.custom-checkbox{
+.custom-checkbox {
   vertical-align: middle;
 
-  .label{
+  .label {
     flex-grow: 1;
   }
-
 }
-
 
 .text-blue {
   color: #0000ee;
 }
 
 .font-nunito {
-  font-family: "Nunito", sans-serif !important;
+  font-family: "Nunito Variable", sans-serif !important;
 }
-
-
-
 
 .d-none {
   display: none !important;
 }
-
-
-
 
 /*------POPOVER SYTLES-----------*/
 
@@ -384,12 +377,14 @@ a.leaflet-popup-close-button {
   width: 21px !important;
   height: 35px !important;
   padding: 10px 30px 33px 20px !important;
-  font: 22px/14px Tahoma, Verdana, sans-serif !important;
+  font:
+    22px/14px Tahoma,
+    Verdana,
+    sans-serif !important;
   color: #c3c3c3;
 }
 
-
-.leaflet-control-attribution{
+.leaflet-control-attribution {
   display: none;
 }
 /*------MEDIA QUERIES-----------*/
@@ -414,7 +409,6 @@ a.leaflet-popup-close-button {
     margin-left: 0px;
     margin-right: 0px;
     padding: 5px 100px 0px 0px;
-  
   }
 
   .btn-primary.small {
@@ -438,42 +432,33 @@ a.leaflet-popup-close-button {
     left: 8px;
     z-index: 9999;
     font-size: 14px;
-    opacity: .8;
+    opacity: 0.8;
   }
 
-  .filters{
-    top:90px;
-    padding:15px 15px;
+  .filters {
+    top: 90px;
+    padding: 15px 15px;
 
     .filter-options {
       max-height: 380px;
       overflow-y: scroll;
-      padding:15px 20px;
-      
+      padding: 15px 20px;
     }
-
   }
 
-  .filter-buttons .input-group{
-    width:42%;
+  .filter-buttons .input-group {
+    width: 42%;
   }
 
-  .filter-buttons{
-    top:60px;
-    right:0px;
-    padding-left:15px;
-  
-    & button.btn-sm{
+  .filter-buttons {
+    top: 60px;
+    right: 0px;
+    padding-left: 15px;
+
+    & button.btn-sm {
       margin-right: 5px;
     }
-
   }
-  
-
 }
 
-
-
 //END MEDIA QUERY
-
-

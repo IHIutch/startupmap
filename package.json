@@ -1,33 +1,33 @@
 {
   "name": "startupmap",
-  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.23.0",
   "scripts": {
-    "build": "gridsome build",
-    "develop": "gridsome develop",
-    "explore": "gridsome explore"
+    "dev": "vite dev",
+    "build": "vite build",
+    "typecheck": "cf workers types && tsc --noEmit"
   },
   "dependencies": {
-    "@fontsource/nunito": "^4.2.2",
-    "@gridsome/cli": "^0.3.4",
-    "@gridsome/plugin-sitemap": "^0.2.3",
-    "bootstrap": "^4.5.0",
-    "bootstrap-vue": "^2.15.0",
-    "gridsome": "^0.7.23",
-    "gridsome-plugin-gtm": "^0.1.1",
-    "gridsome-source-google-sheets-v2": "^1.0.4",
-    "leaflet": "^1.6.0",
-    "vue-script2": "^2.1.0",
-    "vue2-leaflet": "^2.5.2"
+    "@fontsource-variable/nunito": "^5.1.0",
+    "@tanstack/react-router": "1.170.46",
+    "bootstrap": "^5.3.3",
+    "downshift": "^9.5.0",
+    "pigeon-maps": "^0.21.6",
+    "react": "^18.3.1",
+    "react-bootstrap": "^2.10.5",
+    "react-dom": "^18.3.1",
+    "zod": "^3.23.8",
+    "@tanstack/react-start": "1.169.7"
   },
   "devDependencies": {
-    "sass-loader": "^8.0.2"
-  },
-  "vue": {
-    "devtools": true
-  },
-  "overrides": {
-    "gridsome": {
-      "sharp": "^0.30.7"
-    }
+    "@vitejs/plugin-react": "6.3.0",
+    "@cloudflare/vite-plugin": "2.0.0-rc.3",
+    "vite": "8.3.8",
+    "typescript": "5.9.3",
+    "sass": "1.100.0",
+    "cf": "1.0.0-rc.3",
+    "@types/node": "^22",
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
   }
 }
