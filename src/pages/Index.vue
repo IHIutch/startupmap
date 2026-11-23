@@ -89,10 +89,8 @@
             :options="{ zoomControl: false }"
           >
             <l-tile-layer
-              :url="
-                'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' +
-                  mapboxToken
-              "
+              url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             ></l-tile-layer>
             <l-feature-group ref="features">
               <l-popup>
@@ -180,7 +178,6 @@ query {
     edges {
       node {
         id,
-        email,
         company,
         description,
         address,
@@ -221,8 +218,6 @@ export default {
   },
   data() {
     return {
-      mapboxToken:
-        "pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA",
       popup: {},
       searchQuery: "",
       selectedTypes: [],
